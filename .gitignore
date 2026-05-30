@@ -1,0 +1,19 @@
+# Obsidian
+.obsidian/
+
+# Ambiente
+.env
+.env.*
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Node (caso scripts auxiliares sejam adicionados futuramente)
+node_modules/
+
+# Python (idem)
+__pycache__/
+*.pyc
+.venv/
