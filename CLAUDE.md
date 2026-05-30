@@ -6,7 +6,13 @@ Leia este arquivo no início de **toda** sessão antes de qualquer outra ação.
 
 ## O que é este projeto
 
-Vault de conhecimento para um projeto de consultoria de IA voltado a um **escritório de advocacia no Brasil**. O objetivo final é alimentar um agente de atendimento ao cliente que responda dúvidas institucionais e de fluxo, **sem** nunca oferecer orientação jurídica concreta.
+Consultoria de IA para um **escritório de advocacia no Brasil**. O projeto entrega **três outputs**:
+
+| # | Output | Canal | Nota principal |
+|---|--------|-------|---------------|
+| 1 | Agente de atendimento (chatbot texto) | WhatsApp / Site | [[escopo-e-outputs]] |
+| 2 | Conteúdo para redes sociais (imagem + legenda) | Instagram / LinkedIn | [[estrategia-editorial]] |
+| 3 | Avatar com voz clonada (vídeo) | Reels / YouTube / Site | [[identidade-do-avatar]] |
 
 Este repositório é exclusivamente de **conhecimento em Markdown**. Não contém código de aplicação.
 
@@ -86,8 +92,21 @@ Mensagens em PT-BR, modo imperativo, linha de assunto ≤ 72 caracteres.
 
 ## Navegação rápida
 
+**Configuração**
 - [`README.md`](README.md) — visão geral do padrão LLM Wiki
-- [`SCHEMA.md`](SCHEMA.md) — regras do bibliotecário
+- [`SCHEMA.md`](SCHEMA.md) — regras do bibliotecário (inclui guardrails OAB texto e audiovisual)
+
+**Conteúdo público (agente de atendimento)**
 - [`wiki/publico/_index.md`](wiki/publico/_index.md) — MOC do conteúdo público
+
+**Estratégia e produção (interno)**
+- [`wiki/interno/_index.md`](wiki/interno/_index.md) — MOC interno completo
+- [`wiki/interno/escopo-e-outputs.md`](wiki/interno/escopo-e-outputs.md) — os 3 entregáveis mapeados
+- [`wiki/interno/identidade-do-avatar.md`](wiki/interno/identidade-do-avatar.md) — avatar + voz
+- [`wiki/interno/consentimento-voz-clonada.md`](wiki/interno/consentimento-voz-clonada.md) — ⚠️ pré-requisito legal
+- [`wiki/interno/fluxo-de-aprovacao.md`](wiki/interno/fluxo-de-aprovacao.md) — governança de publicação
+- [`wiki/interno/roteiro-padrao-video.md`](wiki/interno/roteiro-padrao-video.md) — template obrigatório de vídeo
+
+**Raw**
 - [`raw/publico/README.md`](raw/publico/README.md) — o que entra no raw público
 - [`raw/interno/README.md`](raw/interno/README.md) — o que entra no raw interno

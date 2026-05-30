@@ -94,6 +94,32 @@ Se houver dúvida, o conteúdo vai para `wiki/interno/` ou `raw/` e aguarda revi
 
 ---
 
+## 4B. Guardrails OAB — Conteúdo Audiovisual (vídeo, imagem, avatar)
+
+As mesmas regras do Provimento 205/2021 se aplicam a **todo** conteúdo audiovisual.
+Checklist específico para vídeos e posts visuais:
+
+| ❌ Proibido | ✅ Permitido |
+|------------|-------------|
+| Avatar ou locutor afirmar "no seu caso você deve..." | Explicar conceitos gerais ("a lei prevê que em situações assim...") |
+| Thumbnail com promessa de resultado ("Ganhe sua causa!") | Thumbnail informativa ("Entenda seus direitos em caso de X") |
+| Legenda com honorário como atrativo | Legenda com CTA para consulta |
+| Vídeo que simule uma consulta jurídica | Vídeo educativo com redirecionamento para consulta |
+| Avatar se apresentar como humano (advogado real) | Avatar identificado como IA em toda aparição |
+| Usar voz clonada sem consentimento registrado | Usar voz clonada com [[consentimento-voz-clonada]] assinado |
+| Publicar vídeo sem aprovação do titular da voz | Publicar apenas após aprovação — ver [[fluxo-de-aprovacao]] |
+| Depoimento de cliente sem autorização escrita | Conteúdo institucional geral |
+
+**Checklist audiovisual adicional ao lint:**
+- [ ] O avatar é identificado como IA no vídeo?
+- [ ] A legenda do post tem alguma orientação jurídica concreta?
+- [ ] A thumbnail usa linguagem sensacionalista?
+- [ ] O [[consentimento-voz-clonada]] está assinado e o uso está dentro do escopo autorizado?
+- [ ] O roteiro seguiu o template [[roteiro-padrao-video]]?
+- [ ] A aprovação foi registrada conforme [[fluxo-de-aprovacao]]?
+
+---
+
 ## 5. Notas sobre o agente de atendimento (futuro)
 
 Quando o agente de atendimento for implementado, ele deverá:
