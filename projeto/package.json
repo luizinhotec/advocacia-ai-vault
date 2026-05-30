@@ -1,0 +1,16 @@
+{
+  "name": "projeto",
+  "version": "1.0.0",
+  "description": "Esta pasta é reservada para **documentos de gestão do projeto** que não se encaixam nas camadas wiki/ ou raw/.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "pdfkit": "^0.18.0"
+  }
+}
