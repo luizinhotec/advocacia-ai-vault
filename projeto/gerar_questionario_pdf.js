@@ -4,198 +4,226 @@ const path = require('path');
 
 const OUTPUT = path.join(__dirname, 'questionario-reuniao-inicial.pdf');
 
-// ── Cores ──────────────────────────────────────────────────────────────────────
 const COR = {
-  dark:    '#1a1a2e',
-  accent:  '#2d5986',
-  light:   '#e8f0fb',
-  gray:    '#6b7280',
-  line:    '#cbd5e1',
-  warnBg:  '#fef9c3',
-  warnBd:  '#ca8a04',
-  white:   '#ffffff',
-  textHint:'#9ca3af',
+  dark:      '#1a1a2e',
+  accent:    '#2d5986',
+  light:     '#e8f0fb',
+  gray:      '#6b7280',
+  line:      '#cbd5e1',
+  warnBg:    '#fef9c3',
+  warnBd:    '#ca8a04',
+  white:     '#ffffff',
+  hint:      '#9ca3af',
+  azulClaro: '#bfdbfe',
+  azulEsc:   '#93c5fd',
+  laranjaEsc:'#713f12',
 };
 
-const PAGE_W = 595.28;   // A4
-const PAGE_H = 841.89;
-const MARGIN = 45;
-const CONTENT_W = PAGE_W - MARGIN * 2;
+const MARGIN    = 45;
+const PAGE_W    = 595.28;
+const PAGE_H    = 841.89;
+const CW        = PAGE_W - MARGIN * 2;   // largura útil
+const BOTTOM    = PAGE_H - 52;           // limite inferior antes do rodapé
 
-const doc = new PDFDocument({ size: 'A4', margin: MARGIN, bufferPages: true });
+// margin bottom = 0 para desativar quebra automática do pdfkit
+const doc = new PDFDocument({
+  size: 'A4',
+  margins: { top: MARGIN, left: MARGIN, right: MARGIN, bottom: 0 },
+  bufferPages: true,
+  autoFirstPage: true,
+});
 doc.pipe(fs.createWriteStream(OUTPUT));
 
-// ── Helpers ────────────────────────────────────────────────────────────────────
-let y = MARGIN;
+// ── cursor manual ──────────────────────────────────────────────────────────────
+let Y = MARGIN;   // cursor Y exclusivo — NUNCA ler doc.y
 
-function checkPage(needed = 60) {
-  if (y + needed > PAGE_H - 60) {
-    doc.addPage();
-    y = MARGIN;
-  }
+function novaP() {
+  doc.addPage();
+  Y = MARGIN;
 }
 
-function hr(color = COR.line, thickness = 0.5) {
-  doc.save().moveTo(MARGIN, y).lineTo(PAGE_W - MARGIN, y)
-    .lineWidth(thickness).strokeColor(color).stroke().restore();
-  y += 8;
+/** Garante `h` pixels disponíveis; se não couber, quebra página. */
+function need(h) {
+  if (Y + h > BOTTOM) novaP();
 }
 
-function espaco(h = 8) { y += h; }
+function sp(h = 8) { Y += h; }
 
-function linhasResposta(n = 2) {
-  for (let i = 0; i < n; i++) {
-    checkPage(14);
-    y += 11;
-    doc.save().moveTo(MARGIN, y).lineTo(PAGE_W - MARGIN, y)
-      .lineWidth(0.4).strokeColor(COR.line).dash(1, { space: 3 }).stroke().restore();
-  }
-  espaco(6);
+// ── primitivos ─────────────────────────────────────────────────────────────────
+function textH(txt, size, w) {
+  doc.fontSize(size);
+  return doc.heightOfString(txt, { width: w });
 }
 
-function rodape(pageNum) {
+function hrLine(color = COR.line, thick = 0.4) {
+  need(8);
   doc.save()
-    .fontSize(7.5).fillColor(COR.gray).font('Helvetica')
-    .text('Uso interno — Projeto de Consultoria de IA | Escritório de Advocacia',
-      MARGIN, PAGE_H - 28, { width: CONTENT_W * 0.7 })
-    .text(`Página ${pageNum}`, MARGIN, PAGE_H - 28,
-      { width: CONTENT_W, align: 'right' })
-    .restore();
+     .moveTo(MARGIN, Y).lineTo(PAGE_W - MARGIN, Y)
+     .lineWidth(thick).strokeColor(color).stroke()
+     .restore();
+  Y += 8;
 }
 
-// ── Cabeçalho do documento ────────────────────────────────────────────────────
+function linhaResp() {
+  Y += 10;
+  doc.save()
+     .moveTo(MARGIN, Y).lineTo(PAGE_W - MARGIN, Y)
+     .lineWidth(0.4).strokeColor(COR.line)
+     .dash(1, { space: 3 }).stroke()
+     .restore();
+}
+
+function linhas(n) {
+  for (let i = 0; i < n; i++) { need(14); linhaResp(); }
+  Y += 6;
+}
+
+// ── rodapé (aplicado no final em todas as páginas) ────────────────────────────
+function desenhaRodape(num) {
+  doc.save()
+     .font('Helvetica').fontSize(7.5).fillColor(COR.gray)
+     .text('Uso interno — Projeto de Consultoria de IA | Escritório de Advocacia',
+           MARGIN, PAGE_H - 26, { width: CW * 0.75, lineBreak: false })
+     .text(`Página ${num}`, MARGIN, PAGE_H - 26,
+           { width: CW, align: 'right', lineBreak: false })
+     .restore();
+}
+
+// ── cabeçalho do documento ─────────────────────────────────────────────────────
 doc.font('Helvetica-Bold').fontSize(22).fillColor(COR.dark)
-  .text('Questionário', MARGIN, y, { width: CONTENT_W });
-y += 28;
+   .text('Questionário', MARGIN, Y, { lineBreak: false });
+Y += 30;
 
 doc.font('Helvetica-Bold').fontSize(15).fillColor(COR.accent)
-  .text('Reunião Inicial com a Advogada', MARGIN, y, { width: CONTENT_W });
-y += 24;
+   .text('Reunião Inicial com a Advogada', MARGIN, Y, { width: CW, lineBreak: false });
+Y += 22;
 
-// Tabela de metadados
-const meta = [
-  ['Objetivo:', 'Coletar informações para preencher o vault e iniciar a produção de conteúdo'],
-  ['Duração estimada:', '90 minutos'],
-  ['Quem conduz:', 'Consultoria (engenheiro / produtor de conteúdo)'],
-  ['Quem responde:', 'Advogada responsável pelo escritório'],
-  ['Gravação:', 'Sim — obter consentimento verbal antes de iniciar (ver protocolo)'],
-  ['Data da reunião:', '_____ / _____ / __________'],
-  ['Local / plataforma:', '_'.repeat(42)],
+// metadados
+const META = [
+  ['Objetivo:',           'Coletar informações para preencher o vault e iniciar a produção de conteúdo'],
+  ['Duração estimada:',   '90 minutos'],
+  ['Quem conduz:',        'Consultoria (engenheiro / produtor de conteúdo)'],
+  ['Quem responde:',      'Advogada responsável pelo escritório'],
+  ['Gravação:',           'Sim — obter consentimento verbal antes de iniciar (ver protocolo)'],
+  ['Data da reunião:',    '_____ / _____ / __________'],
+  ['Local / plataforma:', '_'.repeat(44)],
 ];
-const col1 = 105;
-
-meta.forEach(([k, v]) => {
-  checkPage(16);
+const COL1 = 108;
+META.forEach(([k, v]) => {
+  const h = Math.max(
+    textH(k, 9, COL1),
+    textH(v, 9, CW - COL1 - 4)
+  ) + 3;
+  need(h);
   doc.font('Helvetica-Bold').fontSize(9).fillColor(COR.gray)
-    .text(k, MARGIN, y, { width: col1 });
+     .text(k, MARGIN, Y, { width: COL1, lineBreak: false });
   doc.font('Helvetica').fontSize(9).fillColor(COR.dark)
-    .text(v, MARGIN + col1 + 4, y, { width: CONTENT_W - col1 - 4 });
-  y += 14;
+     .text(v, MARGIN + COL1 + 4, Y, { width: CW - COL1 - 4, lineBreak: false });
+  Y += h;
 });
 
-espaco(12);
-hr(COR.accent, 0.8);
-espaco(4);
+Y += 8;
+hrLine(COR.accent, 0.8);
+Y += 4;
 
-// ── Caixa de instrução ────────────────────────────────────────────────────────
-const instrucao =
+// caixa instrução
+const instrTxt =
   'Este questionário é um roteiro, não um formulário rígido. Deixe a advogada falar ' +
-  'livremente — as perguntas são gatilhos. Sinalize quando ela cobrir um item ' +
-  'espontaneamente e não repita a pergunta. Ao final de cada bloco, pergunte: ' +
+  'livremente — as perguntas são gatilhos. Ao final de cada bloco pergunte: ' +
   '"Tem algo neste tema que você gostaria de adicionar antes de avançarmos?"';
+const instrH = textH(instrTxt, 8.5, CW - 20) + 20;
+need(instrH + 10);
+doc.save()
+   .roundedRect(MARGIN, Y, CW, instrH, 4).fillColor(COR.warnBg).fill()
+   .roundedRect(MARGIN, Y, CW, instrH, 4).lineWidth(0.8).strokeColor(COR.warnBd).stroke()
+   .restore();
+doc.font('Helvetica-Bold').fontSize(8.5).fillColor(COR.laranjaEsc)
+   .text('Instrução:  ', MARGIN + 10, Y + 10, { continued: true, width: CW - 20 });
+doc.font('Helvetica').text(instrTxt, { width: CW - 20, lineBreak: false });
+Y += instrH + 12;
 
-const instrH = 52;
-doc.save().roundedRect(MARGIN, y, CONTENT_W, instrH, 4)
-  .fillColor(COR.warnBg).fill()
-  .roundedRect(MARGIN, y, CONTENT_W, instrH, 4)
-  .lineWidth(0.8).strokeColor(COR.warnBd).stroke().restore();
-
-doc.font('Helvetica-Bold').fontSize(8.5).fillColor('#713f12')
-  .text('Instrução ao entrevistador:  ', MARGIN + 10, y + 10, { continued: true, width: CONTENT_W - 20 });
-doc.font('Helvetica').fontSize(8.5).text(instrucao, { width: CONTENT_W - 20 });
-y += instrH + 14;
-
-// ── Função de bloco ───────────────────────────────────────────────────────────
+// ── bloco ──────────────────────────────────────────────────────────────────────
 function bloco(num, titulo, tempo, alimenta) {
-  checkPage(80);
+  need(60);
+  Y += 8;
+  const BH = 30, FAH = 14;
 
-  // Barra azul escura (número)
-  doc.save().rect(MARGIN, y, 42, 32).fillColor(COR.dark).fill().restore();
-  doc.font('Helvetica-Bold').fontSize(9).fillColor(COR.white)
-    .text(`BLOCO`, MARGIN, y + 4, { width: 42, align: 'center' });
+  // lado escuro (número)
+  doc.save().rect(MARGIN, Y, 44, BH).fillColor(COR.dark).fill().restore();
+  doc.font('Helvetica-Bold').fontSize(7).fillColor(COR.white)
+     .text('BLOCO', MARGIN, Y + 4, { width: 44, align: 'center', lineBreak: false });
   doc.font('Helvetica-Bold').fontSize(13).fillColor(COR.white)
-    .text(`${num}`, MARGIN, y + 14, { width: 42, align: 'center' });
+     .text(`${num}`, MARGIN, Y + 14, { width: 44, align: 'center', lineBreak: false });
 
-  // Barra azul médio (título + tempo)
-  doc.save().rect(MARGIN + 42, y, CONTENT_W - 42, 32).fillColor(COR.accent).fill().restore();
+  // lado azul (título + tempo)
+  doc.save().rect(MARGIN + 44, Y, CW - 44, BH).fillColor(COR.accent).fill().restore();
   doc.font('Helvetica-Bold').fontSize(11).fillColor(COR.white)
-    .text(titulo, MARGIN + 52, y + 7, { width: CONTENT_W - 42 - 70, continued: false });
-  doc.font('Helvetica').fontSize(9).fillColor('#bfdbfe')
-    .text(tempo, PAGE_W - MARGIN - 65, y + 10, { width: 60, align: 'right' });
+     .text(titulo, MARGIN + 54, Y + 9, { width: CW - 44 - 70, lineBreak: false });
+  doc.font('Helvetica').fontSize(9).fillColor(COR.azulClaro)
+     .text(tempo, MARGIN + 44, Y + 11, { width: CW - 44 - 6, align: 'right', lineBreak: false });
 
-  // Faixa de "alimenta"
-  doc.save().rect(MARGIN, y + 32, CONTENT_W, 14).fillColor(COR.dark).fill().restore();
-  doc.font('Helvetica-Oblique').fontSize(7.5).fillColor('#93c5fd')
-    .text(`  Alimenta: ${alimenta}`, MARGIN + 8, y + 35, { width: CONTENT_W });
+  // faixa alimenta
+  doc.save().rect(MARGIN, Y + BH, CW, FAH).fillColor(COR.dark).fill().restore();
+  doc.font('Helvetica-Oblique').fontSize(7.5).fillColor(COR.azulEsc)
+     .text(`  Alimenta: ${alimenta}`, MARGIN + 8, Y + BH + 3,
+           { width: CW - 16, lineBreak: false });
 
-  y += 52;
-  espaco(6);
+  Y += BH + FAH + 8;
 }
 
-// ── Função de pergunta ────────────────────────────────────────────────────────
-function pergunta(num, texto, hint, linhas = 2) {
-  const hintH = hint ? 14 : 0;
-  const totalH = 20 + hintH + linhas * 14 + 10;
-  checkPage(totalH);
+// ── pergunta ───────────────────────────────────────────────────────────────────
+function pergunta(num, texto, hint, nLinhas = 2) {
+  const tH  = textH(texto, 10, CW - 22);
+  const hH  = hint ? textH(hint, 8.5, CW - 22) + 4 : 0;
+  const tot = tH + hH + nLinhas * 14 + 22;
+  need(tot);
 
-  // Número
+  // número
   doc.font('Helvetica-Bold').fontSize(9).fillColor(COR.accent)
-    .text(`${num}.`, MARGIN, y, { width: 18, continued: false });
-
-  // Texto da pergunta
+     .text(`${num}.`, MARGIN, Y, { width: 18, lineBreak: false });
+  // texto
   doc.font('Helvetica-Bold').fontSize(10).fillColor(COR.dark)
-    .text(texto, MARGIN + 20, y, { width: CONTENT_W - 20 });
-  y += doc.currentLineHeight() + 2;
+     .text(texto, MARGIN + 20, Y, { width: CW - 20, lineBreak: false });
+  Y += tH + 3;
 
   if (hint) {
-    doc.font('Helvetica-Oblique').fontSize(8.5).fillColor(COR.textHint)
-      .text(hint, MARGIN + 20, y, { width: CONTENT_W - 20 });
-    y += 13;
+    doc.font('Helvetica-Oblique').fontSize(8.5).fillColor(COR.hint)
+       .text(hint, MARGIN + 20, Y, { width: CW - 20, lineBreak: false });
+    Y += hH;
   }
-
-  linhasResposta(linhas);
+  linhas(nLinhas);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// BLOCOS
+// CONTEÚDO
 // ═══════════════════════════════════════════════════════════════════════════════
 
 bloco(1, 'O Escritório', '15 min', 'nota: institucional');
-pergunta(1,  'Qual é o nome completo do escritório?', 'razão social e nome de fantasia, se houver', 1);
-pergunta(2,  'Em que ano o escritório foi fundado? Como surgiu?', 'história, motivação, trajetória', 3);
-pergunta(3,  'Quem são os sócios ou advogados principais?', 'nomes, número OAB, formação, especialização — apenas o que for público', 3);
-pergunta(4,  'Como você definiria a missão do escritório em duas ou três frases?', 'sem jargão, como você explicaria para um cliente leigo', 3);
-pergunta(5,  'Quais são os valores que guiam o trabalho de vocês?', 'ex: escuta ativa, transparência, celeridade...', 2);
-pergunta(6,  'O que diferencia este escritório — na sua visão — do ponto de vista da experiência que o cliente tem?', 'não "somos os melhores", mas o que é concreto e observável', 3);
-pergunta(7,  'Vocês têm alguma certificação, especialização ou atuação em tribunal relevante para apresentar publicamente?', null, 2);
+pergunta(1, 'Qual é o nome completo do escritório?', 'razão social e nome de fantasia, se houver', 1);
+pergunta(2, 'Em que ano o escritório foi fundado? Como surgiu?', 'história, motivação, trajetória', 3);
+pergunta(3, 'Quem são os sócios ou advogados principais?', 'nomes, OAB, formação — apenas o que for público', 3);
+pergunta(4, 'Como você definiria a missão do escritório em duas ou três frases?', 'sem jargão, como você explicaria para um cliente leigo', 3);
+pergunta(5, 'Quais são os valores que guiam o trabalho de vocês?', 'ex: escuta ativa, transparência, celeridade...', 2);
+pergunta(6, 'O que diferencia este escritório do ponto de vista da experiência que o cliente tem?', 'não "somos os melhores" — o que é concreto e observável', 3);
+pergunta(7, 'Vocês têm certificação, especialização ou atuação em tribunal relevante para apresentar publicamente?', null, 2);
 
 bloco(2, 'Áreas de Atuação', '20 min', 'nota: areas-de-atuacao');
 pergunta(8,  'Quais são as áreas jurídicas em que o escritório atua?', 'lista completa — não pule nenhuma', 4);
-pergunta(9,  'Qual é a área principal — aquela que representa a maior parte dos casos?', null, 2);
-pergunta(10, 'Para cada área, qual é a situação mais comum que leva um cliente a buscar vocês?', 'pense em exemplos genéricos, sem identificar pessoas', 4);
-pergunta(11, 'Existe alguma área que vocês preferem NÃO atender mais, ou que estão deixando de atender?', 'importante para não prometer algo que não se entrega', 2);
+pergunta(9,  'Qual é a área principal — a que representa a maior parte dos casos?', null, 2);
+pergunta(10, 'Para cada área, qual é a situação mais comum que leva um cliente a buscar vocês?', 'exemplos genéricos, sem identificar pessoas', 4);
+pergunta(11, 'Existe alguma área que vocês preferem NÃO atender mais?', 'importante para não prometer algo que não se entrega', 2);
 pergunta(12, 'Para o cliente leigo, como você explicaria cada área em uma frase?', 'vamos usar isso no conteúdo educativo — linguagem simples é o objetivo', 4);
 
 bloco(3, 'Público-Alvo e Canais', '15 min', 'notas: personas-e-canais, estrategia-editorial');
-pergunta(13, 'Quem é o cliente típico do escritório?', 'faixa etária aproximada, perfil, situação de vida — sem dados reais', 3);
+pergunta(13, 'Quem é o cliente típico do escritório?', 'faixa etária, perfil, situação de vida — sem dados reais', 3);
 pergunta(14, 'Como a maioria dos clientes chega até vocês hoje?', 'indicação, Google, redes sociais, OAB, outro', 2);
-pergunta(15, 'Quais redes sociais o escritório já usa ou quer usar?', 'Instagram, LinkedIn, YouTube, TikTok, outro — e qual a prioridade', 2);
-pergunta(16, 'O escritório já tem seguidores/audiência formada em algum canal? Quantos, aproximadamente?', null, 2);
+pergunta(15, 'Quais redes sociais o escritório já usa ou quer usar?', 'Instagram, LinkedIn, YouTube, TikTok — e qual a prioridade', 2);
+pergunta(16, 'O escritório já tem seguidores/audiência formada em algum canal? Quantos?', null, 1);
 pergunta(17, 'Qual canal você acredita que seu público mais usa no dia a dia?', null, 1);
 pergunta(18, 'Como os clientes entram em contato hoje para dúvidas rápidas?', 'WhatsApp pessoal? E-mail? Telefone? Nenhum canal estruturado?', 2);
 
 bloco(4, 'Fluxo de Atendimento', '10 min', 'nota: fluxo-de-atendimento');
-pergunta(19, 'Descreva o caminho de um novo cliente: desde o primeiro contato até a assinatura do contrato.', 'passo a passo real, sem idealizar — como é hoje, não como deveria ser', 4);
+pergunta(19, 'Descreva o caminho de um novo cliente: do primeiro contato até a assinatura do contrato.', 'como é hoje, sem idealizar', 4);
 pergunta(20, 'Quem responde o primeiro contato hoje? Você mesma, uma assistente, ninguém?', null, 2);
 pergunta(21, 'Qual é o tempo médio de resposta ao primeiro contato?', null, 1);
 pergunta(22, 'A primeira consulta é presencial, online ou ambos?', null, 1);
@@ -216,40 +244,31 @@ pergunta(32, 'O que os clientes mais temem ou têm dúvida antes da primeira con
 
 bloco(7, 'Avatar, Voz e Presença em Vídeo', '10 min', 'notas: identidade-do-avatar, consentimento-voz-clonada');
 pergunta(33, 'Você tem interesse em aparecer pessoalmente nos vídeos, ou prefere um avatar?', 'ambos são possíveis — explorar a preferência dela', 2);
-pergunta(34, 'Se usarmos um avatar com sua voz: você se sente confortável com isso?', 'explicar claramente o que é clonagem de voz antes de perguntar', 2);
+pergunta(34, 'Se usarmos um avatar com sua voz: você se sente confortável com isso?', 'explicar o que é clonagem de voz antes de perguntar', 2);
 pergunta(35, 'Que tipo de vídeo você imagina para o escritório? Educativo, institucional, os dois?', null, 2);
 pergunta(36, 'Tem referências de canais jurídicos ou advogados que você admira na comunicação?', 'links, nomes — para calibrar estilo sem copiar', 2);
-pergunta(37, 'Tem referências de canais que você NÃO quer parecer?', 'igualmente útil', 2);
+pergunta(37, 'Tem referências de canais que você NÃO quer parecer?', null, 2);
 pergunta(38, 'Como você descreveria o tom de voz ideal para representar o escritório?', 'ex: séria e direta / acolhedora e didática / equilibrada...', 2);
 
 bloco(8, 'Identidade Visual', '5 min', 'nota: identidade-visual');
-pergunta(39, 'O escritório já tem logo?', 'se sim: pedir os arquivos ao final da reunião — SVG ou PNG de alta resolução', 1);
+pergunta(39, 'O escritório já tem logo?', 'se sim: pedir SVG ou PNG de alta resolução ao final da reunião', 1);
 pergunta(40, 'Tem paleta de cores ou manual de marca definido?', null, 1);
-pergunta(41, 'Tem preferência de estilo visual para os posts?', 'ex: limpo e minimalista / mais colorido / usa muito foto pessoal / prefere ilustrações', 2);
-pergunta(42, 'Tem alguma cor, estilo ou elemento que definitivamente não quer no conteúdo?', null, 2);
+pergunta(41, 'Tem preferência de estilo visual para os posts?', 'ex: minimalista / colorido / foto pessoal / ilustrações', 2);
+pergunta(42, 'Tem alguma cor ou elemento que definitivamente não quer no conteúdo?', null, 2);
 
 bloco(9, 'Governança e Aprovação', '5 min', 'nota: fluxo-de-aprovacao');
-pergunta(43, 'Quem vai aprovar os conteúdos antes de publicar? Você mesma, ou tem mais alguém?', null, 2);
+pergunta(43, 'Quem vai aprovar os conteúdos antes de publicar?', null, 2);
 pergunta(44, 'Qual canal prefere usar para receber e aprovar conteúdos?', 'WhatsApp, e-mail, Google Drive, Notion...', 1);
-pergunta(45, 'Qual prazo você consegue se comprometer para dar feedback em rascunhos?', '24h? 48h? A pergunta é importante para o fluxo de produção', 1);
-pergunta(46, 'Tem algum período do mês em que você está mais ocupada e seria difícil aprovar conteúdos?', 'para o calendário editorial respeitar sua agenda', 2);
+pergunta(45, 'Qual prazo você consegue se comprometer para dar feedback em rascunhos?', '24h? 48h?', 1);
+pergunta(46, 'Tem algum período do mês em que seria difícil aprovar conteúdos?', 'para o calendário editorial respeitar sua agenda', 2);
 
 bloco(10, 'Encerramento', '5 min', '—');
-pergunta(47, 'Tem alguma coisa sobre o escritório ou sobre o projeto que você acha importante a gente saber e que ainda não perguntamos?', null, 3);
+pergunta(47, 'Tem alguma coisa importante sobre o escritório ou o projeto que ainda não perguntamos?', null, 3);
 pergunta(48, 'Qual é a sua maior expectativa com este projeto de IA e conteúdo?', null, 3);
 pergunta(49, 'Qual é o seu maior medo ou preocupação com relação a isso?', 'pergunta valiosa — mostra respeito e ajuda a calibrar a entrega', 3);
 
-// ── Checklist pós-reunião ─────────────────────────────────────────────────────
-checkPage(160);
-espaco(10);
-hr(COR.accent, 1);
-espaco(6);
-
-doc.font('Helvetica-Bold').fontSize(11).fillColor(COR.dark)
-  .text('Checklist pós-reunião', MARGIN, y, { width: CONTENT_W });
-y += 18;
-
-const checkItems = [
+// ── checklist pós-reunião ──────────────────────────────────────────────────────
+const CHECKS = [
   'Gravação salva conforme protocolo de gravação',
   'Arquivos solicitados recebidos: logo, paleta, referências visuais',
   'Decisão sobre voz clonada registrada',
@@ -258,33 +277,35 @@ const checkItems = [
   'Depositar transcrição em raw/interno/YYYY-MM-DD_reuniao-inicial.md',
   'Iniciar compilação das notas-semente no vault',
 ];
-
-const checkH = 14 * checkItems.length + 20;
-doc.save().rect(MARGIN, y, CONTENT_W, checkH).fillColor(COR.light).fill()
-  .rect(MARGIN, y, CONTENT_W, checkH).lineWidth(0.5).strokeColor(COR.accent).stroke().restore();
-
-let cy = y + 10;
-checkItems.forEach(item => {
+const CKH = CHECKS.length * 15 + 24;
+need(CKH + 50);
+Y += 12;
+hrLine(COR.accent, 1);
+Y += 6;
+doc.font('Helvetica-Bold').fontSize(11).fillColor(COR.dark)
+   .text('Checklist pós-reunião', MARGIN, Y, { width: CW, lineBreak: false });
+Y += 16;
+doc.save()
+   .rect(MARGIN, Y, CW, CKH).fillColor(COR.light).fill()
+   .rect(MARGIN, Y, CW, CKH).lineWidth(0.5).strokeColor(COR.accent).stroke()
+   .restore();
+Y += 10;
+CHECKS.forEach(item => {
   doc.font('Helvetica').fontSize(9.5).fillColor(COR.dark)
-    .text(`☐  ${item}`, MARGIN + 12, cy, { width: CONTENT_W - 24 });
-  cy += 14;
+     .text(`☐  ${item}`, MARGIN + 12, Y, { width: CW - 24, lineBreak: false });
+  Y += 15;
 });
-y = cy + 10;
-
-espaco(16);
+Y += 14;
 doc.font('Helvetica').fontSize(7.5).fillColor(COR.gray)
-  .text(
-    'Documento de uso interno — Projeto de Consultoria de IA para Escritório de Advocacia  ·  ' +
-    'Não contém dados de clientes  ·  Gerado em 2026-05-30',
-    MARGIN, y, { width: CONTENT_W, align: 'center' }
-  );
+   .text('Documento de uso interno — Projeto de Consultoria de IA  ·  Não contém dados de clientes  ·  2026-05-30',
+         MARGIN, Y, { width: CW, align: 'center', lineBreak: false });
 
-// ── Rodapés em todas as páginas ───────────────────────────────────────────────
-const total = doc.bufferedPageRange().count;
-for (let i = 0; i < total; i++) {
-  doc.switchToPage(i);
-  rodape(i + 1);
+// ── rodapés em todas as páginas ────────────────────────────────────────────────
+const range = doc.bufferedPageRange();
+for (let i = 0; i < range.count; i++) {
+  doc.switchToPage(range.start + i);
+  desenhaRodape(i + 1);
 }
 
 doc.end();
-console.log(`PDF gerado: ${OUTPUT}`);
+console.log(`PDF gerado com ${range.count} páginas: ${OUTPUT}`);
