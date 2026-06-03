@@ -17,3 +17,18 @@ node_modules/
 __pycache__/
 *.pyc
 .venv/
+
+# Mídia binária — vive em armazenamento externo (ver wiki/interno/assets-de-midia.md)
+*.ogg
+*.mp3
+*.wav
+*.m4a
+*.mp4
+*.mov
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.pdf
+*.ai
+*.psd
