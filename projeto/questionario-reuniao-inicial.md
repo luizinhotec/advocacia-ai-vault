@@ -56,6 +56,29 @@ tags:
 
 ---
 
+## BLOCO 1B — Estado Atual de IA, Skills e Infraestrutura (15 min)
+*Novo — adicionado em 2026-06-03. Alimenta: [[escopo-e-outputs]], [[decisoes-de-projeto]], `projeto/atualizacao-formulario-jotform.md`*
+*Espelha as perguntas novas do Jotform. Perguntar cedo — define o tamanho da implantação.*
+
+7A. **Quais ferramentas de IA ou agentes você já usa no escritório hoje?**
+   *(ferramenta, para quê, há quanto tempo — ela disse "já tenho algumas IAs")*
+
+7B. **Você já tem skills, prompts ou automações prontas? Consegue trazer os arquivos?**
+   *(ela disse ter "várias skills prontas" — pedir export/anexo na reunião)*
+
+7C. **Quais agentes você quer ter funcionando, e quais são prioridade?**
+   *(ela citou: marketing, atendimento, protocolo nos tribunais, peticionamento)*
+
+7D. **Há preferência de ferramenta/plataforma de IA?**
+   *(ela declarou preferir Claude, todas as versões, com skills e extensões — confirmar)*
+
+7E. **Infraestrutura:** SO e nº de máquinas, contas Claude existentes, ponto focal de TI, CRM/software jurídico em uso, como o WhatsApp é operado e por quem.
+
+7F. **Você toparia automatizar tarefas que envolvem dados de processos/clientes?**
+   *(toca sigilo e LGPD — frente "em avaliação", não prometer nada; só coletar)*
+
+---
+
 ## BLOCO 2 — Áreas de Atuação (20 min)
 *Alimenta: [[areas-de-atuacao]]*
 

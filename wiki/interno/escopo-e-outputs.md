@@ -1,9 +1,11 @@
 ---
 titulo: "Escopo do Projeto e Outputs Entregáveis"
 camada: interno
-status: semente
-fontes: []
-atualizado_em: "2026-05-30"
+status: rascunho
+fontes:
+  - raw/interno/2026-05-30_anuncio-vaga-consultor-ia.md
+  - raw/interno/2026-05-30_audio-primeiro-contato.md
+atualizado_em: "2026-06-03"
 tags:
   - escopo
   - outputs
@@ -13,6 +15,62 @@ tags:
 # Escopo do Projeto e Outputs Entregáveis
 
 Esta nota é o **mapa central do que vamos entregar**. Toda decisão de conteúdo, tecnologia ou produção deve ser confrontada com este documento.
+
+---
+
+## Contexto ampliado — atualização 2026-06-03
+
+> O escopo abaixo nasceu modelado como **consultoria de conteúdo/marketing** (3 outputs).
+> O anúncio da vaga e o áudio de primeiro contato da advogada revelaram um pedido **mais
+> amplo**, cujo centro de gravidade é **implantação de produtividade com IA + capacitação
+> presencial da equipe** — e não a produção de conteúdo isolada.
+> Fontes: [[2026-05-30_anuncio-vaga-consultor-ia]], [[2026-05-30_audio-primeiro-contato]].
+
+O que mudou no entendimento:
+
+1. **Eixo transversal novo:** implantar e configurar IA **no escritório, presencialmente**, e
+   **treinar a equipe** a operar — ver eixo abaixo. A cliente foi explícita: *"não quero
+   aprender a fazer, quero que alguém implante e oriente."*
+2. **Stack definida pela cliente:** ecossistema **Claude** (todas as versões) + **skills** +
+   **extensões**. Ela **já tem skills prontas** e **já roda algumas IAs** no escritório
+   (não é greenfield). Registrado como decisão a validar em [[decisoes-de-projeto]].
+3. **Frente de automação interna** (jurídica + administrativa) entrou em pauta — ver seção
+   "Frente em avaliação" abaixo. Há tensão com o que hoje está "fora de escopo".
+4. **Relação continuada:** atendimento presencial na Região Serrana/RJ com **visitas
+   periódicas**, não um projeto pontual.
+
+---
+
+## Eixo transversal — Implantação Claude + Capacitação
+
+**O que é:** instalar, configurar e operacionalizar o ecossistema Claude no escritório, e
+treinar a equipe para usar no dia a dia. É o pedido central da cliente e atravessa os 3 outputs.
+
+**Inclui:**
+- Implantação do Claude (Desktop / Code / .ai) nas máquinas e contas do escritório
+- Configuração de **skills** (inventariar as que a cliente já tem) e **extensões/MCP**
+- **Treinamento presencial** da equipe: como fazer pedidos corretos, prompt, skill
+- Orientação estratégica recorrente sobre o que aplicar e como
+
+**Pré-requisito de descoberta:** inventário do estado atual (IAs/skills já existentes,
+sistemas em uso — CRM, WhatsApp, máquinas, SO). Coletado na reunião inicial / formulário de
+descoberta — ver `projeto/atualizacao-formulario-jotform.md`.
+
+**Status:** a validar tecnicamente — ver [[decisoes-de-projeto]].
+
+---
+
+## Frente em avaliação — Automação interna (jurídica + administrativa)
+
+A cliente citou querer espelhar agentes que viu em um curso: **marketing, atendimento,
+protocolo nos tribunais e peticionamento**. O anúncio reforça *"automação de tarefas
+administrativas e jurídicas"* e *"integração com WhatsApp, CRM e demais ferramentas"*.
+
+> ⚠️ **Tensão a resolver.** Peticionamento, protocolo e gestão de casos lidam com **dados
+> sensíveis, número de processo e sigilo profissional** (art. 34, VII, EOAB) — hoje listados
+> em "O que está fora do escopo" e vetados no `SCHEMA.md`. Decidir se entram (e com qual
+> governança de dados/LGPD) é **questão aberta** para a reunião inicial — ver
+> [[decisoes-de-projeto]]. **Não decidir unilateralmente.**
 
 ---
 
@@ -113,8 +171,10 @@ Esta nota é o **mapa central do que vamos entregar**. Toda decisão de conteúd
 
 ## O que está fora do escopo
 
-- Gestão de casos jurídicos ou documentos processuais
-- CRM ou sistema de agenda próprio *(integração pode ser avaliada separadamente)*
+- Gestão de casos jurídicos ou documentos processuais — **em revisão:** a cliente pediu
+  automação de peticionamento/protocolo; ver "Frente em avaliação" acima e [[decisoes-de-projeto]]
+- CRM ou sistema de agenda próprio *(integração pode ser avaliada separadamente — a cliente
+  pediu integração com o CRM existente)*
 - Suporte técnico ao cliente final
 - Produção de conteúdo pago (tráfego pago / mídia)
 
