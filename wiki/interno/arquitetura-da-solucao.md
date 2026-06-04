@@ -1,9 +1,10 @@
 ---
 titulo: "Arquitetura da Solução"
 camada: interno
-status: em-revisao
+status: rascunho
 fontes:
   - raw/interno/2026-06-03_respostas-questionario.md
+  - raw/interno/2026-06-03_curatela-ferramentas.md
   - projeto/plano-curatela-criacao.md
 atualizado_em: "2026-06-04"
 tags:

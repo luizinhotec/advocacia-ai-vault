@@ -1,9 +1,10 @@
 ---
 titulo: "Identidade do Avatar"
 camada: interno
-status: semente
-fontes: []
-atualizado_em: "2026-05-30"
+status: rascunho
+fontes:
+  - "raw/interno/2026-06-03_respostas-questionario.md"
+atualizado_em: "2026-06-04"
 tags:
   - avatar
   - voz-clonada
@@ -24,8 +25,8 @@ Define quem é o avatar, como ele se apresenta e quais são seus limites de uso.
 | Campo | Detalhe |
 |-------|---------|
 | Nome do avatar | *(a definir com o escritório)* |
-| Baseado em pessoa real? | *(sim/não — se sim, qual advogado(a)?)* |
-| Apresentado como IA ao público? | *(obrigatório declarar — sim)* |
+| Baseado em pessoa real? | **Sim** — Dra. Hyvana Ribeiro Abreu (ela topa aparecer pessoalmente e como avatar — Bloco 7) |
+| Apresentado como IA ao público? | **Sim** (obrigatório declarar em toda aparição) |
 
 > **Obrigação legal e ética:** o avatar **deve ser identificado como IA** em todo conteúdo
 > onde apareça. Nunca simular que é uma pessoa humana respondendo em tempo real.
@@ -50,12 +51,12 @@ Define quem é o avatar, como ele se apresenta e quais são seus limites de uso.
 
 | Campo | Detalhe |
 |-------|---------|
-| Voz baseada em pessoa real? | *(sim/não)* |
-| Titular da voz (se sim) | *(nome — manter apenas em interno)* |
-| Termo de autorização assinado? | *(sim/não — ver [[consentimento-voz-clonada]])* |
-| Ferramenta de clonagem | *(a definir — ex: ElevenLabs / Play.ht / outro)* |
+| Voz baseada em pessoa real? | **Sim** — voz da Dra. Hyvana (ela aceitou clonagem de voz — Bloco 7) |
+| Titular da voz (se sim) | Hyvana Ribeiro Abreu *(manter apenas em interno)* |
+| Termo de autorização assinado? | **Não ainda** — ela respondeu "Sim" ao interesse; formalizar antes de produzir (ver [[consentimento-voz-clonada]]) |
+| Ferramenta de clonagem | *(a definir — ElevenLabs / Play.ht / Humanitech — ver build vs buy na [[arquitetura-da-solucao]])* |
 | ID/slug da voz na ferramenta | *(a preencher após configuração)* |
-| Tom de voz | *(a definir — ex: calmo, confiante, acessível, sem pressa)* |
+| Tom de voz | **Acolhedor e didático** (palavras dela, Bloco 7) |
 | Velocidade de fala | *(a definir — ex: 0.9x da velocidade padrão)* |
 
 ---

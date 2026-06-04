@@ -21,6 +21,11 @@ Define **para quem** comunicamos em cada canal e qual é o tom adequado para cad
 
 ---
 
+> ⚠️ **Lacuna de persona (Bloco 3):** a cliente respondeu *"não tenho estes dados"* sobre o
+> perfil do cliente típico, e *"todos"* sobre audiência (sem métricas). A persona abaixo **não
+> está definida** — trabalhar com a cliente (ou inferir de dados do RaviCRM/WhatsApp quando
+> houver acesso). Os **canais**, ao contrário, já estão confirmados (ver tabela mais abaixo).
+
 ## Personas do cliente do escritório
 
 ### Persona 1 — Cidadão com questão previdenciária
@@ -69,13 +74,18 @@ Define **para quem** comunicamos em cada canal e qual é o tom adequado para cad
 
 ## Mapeamento de canais × personas × output
 
+**Canais confirmados pela cliente (Bloco 3):** WhatsApp é o canal que o público mais usa e o
+principal de contato/dúvidas rápidas. A maioria chega por **indicação** e **redes sociais**.
+Redes que usa/quer: Instagram, LinkedIn, YouTube, TikTok, Facebook.
+
 | Canal | Persona principal | Output associado | Tom |
 |-------|------------------|-----------------|-----|
 | WhatsApp (agente) | Todas — ponto de entrada principal | Output 1 — Agente de atendimento | Acolhedor, direto, sem jargão |
 | Instagram | Persona 3 (consumidor) + Persona 2 (família) | Output 2 — Redes sociais | Educativo, visual, empático |
 | LinkedIn | Profissionais liberais, empresas | Output 2 — Redes sociais | Técnico-informativo, profissional |
-| YouTube / Reels | Todas — descoberta orgânica | Output 3 — Avatar vídeo | Didático, acolhedor |
-| Site | Todas — pesquisa direta | Output 1 e/ou 3 | Institucional, informativo |
+| YouTube / TikTok / Reels | Todas — descoberta orgânica | Output 3 — Avatar vídeo | Didático, acolhedor |
+| Facebook | *(persona a definir)* | Output 2 — Redes sociais | Acolhedor e didático |
+| Site (chat ou vídeo de boas-vindas) | Todas — pesquisa direta | Output 1 e/ou 3 | Institucional, informativo |
 
 ---
 

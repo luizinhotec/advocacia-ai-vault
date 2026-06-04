@@ -1,9 +1,10 @@
 ---
 titulo: "Identidade Visual"
 camada: interno
-status: semente
-fontes: []
-atualizado_em: "2026-05-30"
+status: rascunho
+fontes:
+  - "raw/interno/2026-06-03_respostas-questionario.md"
+atualizado_em: "2026-06-04"
 tags:
   - identidade-visual
   - branding
@@ -13,6 +14,18 @@ tags:
 # Identidade Visual
 
 Define os elementos gráficos que devem ser respeitados em todo conteúdo produzido — posts, vídeos, thumbnails e materiais do avatar.
+
+---
+
+## O que a cliente já informou (Bloco 8)
+
+- **Já tem logo** e **manual de marca/paleta** — arquivos **pendentes de envio** (SVG/PNG + manual). `[RECEBER]`
+- **Estilo visual:** marcou *todas* as opções (minimalista, colorido, foto, ilustração) —
+  **refinar** com ela; ainda não é uma direção utilizável.
+- **Restrição declarada:** nada de tom reclamando do Judiciário, dos clientes ou da vida; **não
+  fazer piadas com a dor do cliente**. (Vale para copy e para o visual.)
+
+> Os campos abaixo só serão preenchidos com precisão após receber os arquivos de marca.
 
 ---
 

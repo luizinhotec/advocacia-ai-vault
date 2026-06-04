@@ -60,7 +60,7 @@ Elementos obrigatórios:
 | "Quais áreas vocês atendem?" | Lista as áreas de atuação | [[areas-de-atuacao]] |
 | "Onde fica o escritório?" | Endereço e horários | [[logistica]] |
 | "Quanto custa uma consulta?" | Redireciona para consulta (sem valor) | [[faq]] |
-| "Tenho uma dúvida jurídica" | Orienta a buscar consulta, não responde | [[guardrail OAB]] |
+| "Tenho uma dúvida jurídica" | Orienta a buscar consulta, não responde | `SCHEMA.md` §4 (guardrails OAB) |
 | "Quero falar com a advogada" | Direciona para canal humano | *(a definir)* |
 | Intenção não reconhecida | *(a definir — fallback)* | |
 
