@@ -1,9 +1,9 @@
 ---
 titulo: "Índice — Conteúdo Público"
 camada: publico
-status: semente
+status: rascunho
 fontes: []
-atualizado_em: "2026-05-30"
+atualizado_em: "2026-06-04"
 tags:
   - indice
   - moc

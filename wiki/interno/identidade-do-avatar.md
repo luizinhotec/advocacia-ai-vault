@@ -42,7 +42,7 @@ Define quem é o avatar, como ele se apresenta e quais são seus limites de uso.
 | Gênero de apresentação | *(a definir)* |
 | Faixa etária aparente | *(a definir)* |
 | Vestimenta padrão | *(a definir — ex: terno/blazer sóbrio, cores alinhadas à [[identidade-visual]])* |
-| Ferramenta de geração | *(a definir — ex: HeyGen / D-ID / Synthesia / outro)* |
+| Ferramenta de geração | **HeyGen** — decisão registrada em [[decisoes-de-projeto]] |
 | Arquivo do modelo base | *(a inserir — ver [[assets-de-midia]])* |
 
 ---
@@ -54,7 +54,7 @@ Define quem é o avatar, como ele se apresenta e quais são seus limites de uso.
 | Voz baseada em pessoa real? | **Sim** — voz da Dra. Hyvana (ela aceitou clonagem de voz — Bloco 7) |
 | Titular da voz (se sim) | Hyvana Ribeiro Abreu *(manter apenas em interno)* |
 | Termo de autorização assinado? | **Não ainda** — ela respondeu "Sim" ao interesse; formalizar antes de produzir (ver [[consentimento-voz-clonada]]) |
-| Ferramenta de clonagem | *(a definir — ElevenLabs / Play.ht / Humanitech — ver build vs buy na [[arquitetura-da-solucao]])* |
+| Ferramenta de clonagem | **ElevenLabs** — decisão registrada em [[decisoes-de-projeto]] |
 | ID/slug da voz na ferramenta | *(a preencher após configuração)* |
 | Tom de voz | **Acolhedor e didático** (palavras dela, Bloco 7) |
 | Velocidade de fala | *(a definir — ex: 0.9x da velocidade padrão)* |

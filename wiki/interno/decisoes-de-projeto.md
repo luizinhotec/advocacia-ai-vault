@@ -6,7 +6,7 @@ fontes:
   - raw/interno/2026-05-30_anuncio-vaga-consultor-ia.md
   - raw/interno/2026-05-30_audio-primeiro-contato.md
   - raw/interno/2026-06-03_respostas-questionario.md
-atualizado_em: "2026-06-03"
+atualizado_em: "2026-06-04"
 tags:
   - decisoes
   - projeto

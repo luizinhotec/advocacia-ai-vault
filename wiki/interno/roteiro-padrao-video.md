@@ -1,7 +1,7 @@
 ---
 titulo: "Roteiro Padrão de Vídeo"
 camada: interno
-status: semente
+status: rascunho
 fontes: []
 atualizado_em: "2026-05-30"
 tags:

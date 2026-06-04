@@ -80,7 +80,7 @@ administrativas e jurídicas"* e *"integração com WhatsApp, CRM e demais ferra
 
 **O que é:** Agente conversacional que responde dúvidas institucionais e de fluxo via chat (WhatsApp e/ou site).
 
-**Canal(is):** *(a definir — WhatsApp Business API / widget no site / ambos)*
+**Canal(is):** WhatsApp Business API (Meta Cloud) como canal primário. Widget no site avaliado na Fase 2. Ver [[decisoes-de-projeto]].
 
 **Fonte de conhecimento:** `wiki/publico/` — apenas notas com `status: revisado`
 
@@ -95,7 +95,11 @@ administrativas e jurídicas"* e *"integração com WhatsApp, CRM e demais ferra
 
 **Conformidade:** Guardrails OAB (texto) — ver `SCHEMA.md` seção 4
 
-**Status de desenvolvimento:** *(a preencher — backlog / em construção / em produção)*
+**Design do agente:** [[agente-recepcao-leads]] — foco em recepção e conversão de leads de campanha.
+
+**System prompt:** [[system-prompt-v1]] — aguardando decisões 1.1 (CTA) e 1.4 (escalada).
+
+**Status de desenvolvimento:** em design — system prompt rascunhado, aguardando decisões técnicas.
 
 ---
 

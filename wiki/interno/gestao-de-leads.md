@@ -1,7 +1,7 @@
 ---
 titulo: "Gestão de Leads e Funil de Novos Clientes"
 camada: interno
-status: semente
+status: rascunho
 fontes:
   - raw/interno/2026-06-03_respostas-questionario.md
 atualizado_em: "2026-06-04"
