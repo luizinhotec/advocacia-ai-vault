@@ -3,8 +3,8 @@ titulo: "Arquitetura da Solução"
 camada: interno
 status: em-revisao
 fontes:
-  - raw/interno/AAAA-MM-DD_reuniao-inicial-ribeiro-abreu.md
   - raw/interno/2026-06-03_respostas-questionario.md
+  - projeto/plano-curatela-criacao.md
 atualizado_em: "2026-06-04"
 tags:
   - arquitetura

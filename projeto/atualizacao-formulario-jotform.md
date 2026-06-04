@@ -17,9 +17,10 @@ tags:
 > alterações abaixo. O autor desta PR (LimaDevBTC) **não tem acesso de edição** ao form
 > (ele pertence a outra conta), por isso a mudança vem como spec, não como edição direta.
 
-- **Form:** Questionário de Descoberta
-- **Form ID:** `261524820131042`
-- **Link de submissão:** https://submit.jotform.com/261524820131042
+- **Form:** Questionário — Reunião Inicial
+- **Form ID:** `261534929391061`
+- **Link de submissão:** https://submit.jotform.com/261534929391061
+- **Form anterior (descartado):** `261524820131042` — substituído por versão com 81 perguntas
 - **Motivo da atualização:** o áudio de primeiro contato e o anúncio da vaga revelaram que o
   escritório **não é greenfield** — já roda IAs e já tem skills prontas — e que o pedido
   central é **implantação Claude + treinamento**, incluindo possível automação jurídica
