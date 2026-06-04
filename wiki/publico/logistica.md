@@ -1,30 +1,31 @@
 ---
 titulo: "Logística — Contato, Endereço e Agendamento"
 camada: publico
-status: semente
-fontes: []
-atualizado_em: "2026-05-30"
+status: rascunho
+fontes:
+  - raw/publico/2026-06-03_briefing-institucional-publico.md
+atualizado_em: "2026-06-04"
 tags:
   - logistica
   - contato
   - agendamento
+  - ribeiro-abreu
 ---
 
 # Logística
 
-> **Nota para o bibliotecário:** Preencha com as informações públicas do escritório.
-> Esta nota é de alto risco de desatualização — sempre verificar com o escritório antes de marcar `revisado`.
-> Atenção: telefone e e-mail do escritório são dados públicos e podem entrar aqui; CPF/dados de clientes, nunca.
+> **Status `rascunho`:** compilado das respostas da cliente. Números de telefone/WhatsApp,
+> e-mail e @ exatos ainda precisam ser preenchidos com os dados oficiais (`[PREENCHER]`).
 
 ---
 
 ## Endereço
 
-*(a preencher)*
+Av. Salles Abreu, 12/102 — São Dimas, Carmo — Rio de Janeiro/RJ
 
-CEP: *(a preencher)*
+CEP: 28640-000
 
-Referência / como chegar: *(a preencher)*
+Referência: Região Serrana do Rio de Janeiro.
 
 ---
 
@@ -32,9 +33,9 @@ Referência / como chegar: *(a preencher)*
 
 | Dia | Horário |
 |-----|---------|
-| Segunda a sexta | *(a preencher)* |
-| Sábado | *(a preencher / não atende)* |
-| Domingo | *(a preencher / não atende)* |
+| Segunda a sexta | 8h às 18h |
+| Sábado | Não atende |
+| Domingo | Não atende |
 
 ---
 
@@ -42,28 +43,22 @@ Referência / como chegar: *(a preencher)*
 
 | Canal | Endereço/Número | Observação |
 |-------|----------------|------------|
-| WhatsApp | *(a preencher)* | *(horário de resposta)* |
-| Telefone | *(a preencher)* | |
-| E-mail | *(a preencher)* | *(prazo de resposta)* |
-| Site | *(a preencher)* | |
-| Instagram | *(a preencher)* | |
-| LinkedIn | *(a preencher)* | |
+| WhatsApp | *(preencher número oficial)* | Canal principal — resposta rápida |
+| Telefone | *(preencher)* | |
+| E-mail | *(preencher)* | |
+| Site | www.ribeiroabreuadvogados.com | |
+| Instagram | @ribeiroabreuadv | |
 
 ---
 
 ## Como agendar uma consulta
 
-*(a preencher — passo a passo simples)*
+O agendamento é feito a partir do contato pelo WhatsApp, e a consulta é marcada na agenda do
+escritório (Google Agenda). Ver o passo a passo completo em [[fluxo-de-atendimento]].
 
-**Atendimento online disponível?** *(sim/não — a preencher)*
+**Atendimento online disponível?** Sim — por videoconferência.
 
-**Plataforma usada para reuniões online:** *(a preencher)*
-
----
-
-## Acessibilidade
-
-*(a preencher — andar, elevador, vaga de estacionamento, etc.)*
+**Atendimento presencial?** Sim — no endereço acima, em horário comercial.
 
 ---
 
@@ -71,3 +66,4 @@ Referência / como chegar: *(a preencher)*
 
 - [[fluxo-de-atendimento]]
 - [[faq]]
+- [[institucional]]

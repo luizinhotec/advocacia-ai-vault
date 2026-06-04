@@ -1,49 +1,70 @@
 ---
 titulo: "Institucional — O Escritório"
 camada: publico
-status: semente
-fontes: []
-atualizado_em: "2026-05-30"
+status: rascunho
+fontes:
+  - raw/publico/2026-06-03_briefing-institucional-publico.md
+atualizado_em: "2026-06-04"
 tags:
   - institucional
   - sobre-nos
+  - ribeiro-abreu
 ---
 
 # Institucional
 
-> **Nota para o bibliotecário:** Esta nota está com `status: semente`. Preencha os campos
-> abaixo a partir de documentos depositados em `raw/publico/` e atualize o frontmatter.
-> Não publique ao agente de atendimento enquanto o status não for `revisado`.
+> **Status `rascunho`:** conteúdo compilado das respostas da cliente. Aguardando revisão
+> humana antes de virar `revisado` e alimentar o agente de atendimento.
 
 ---
 
 ## Nome do escritório
 
-*(a preencher)*
+**Ribeiro Abreu Advogados** (razão social: Ribeiro Abreu Sociedade Individual de Advocacia).
 
-## Ano de fundação
+## Localização
 
-*(a preencher)*
+Carmo — Rio de Janeiro/RJ, na Região Serrana do estado. Ver [[logistica]].
 
-## Localização (cidade/estado)
+## História e fundação
 
-*(a preencher)*
+Escritório fundado e liderado pela advogada Hyvana Ribeiro Abreu.
+*(História completa a ser extraída do site www.ribeiroabreuadvogados.com — `[CONFIRMAR]`.)*
 
 ## Missão
 
-*(a preencher — tom sóbrio, sem promessas de resultado)*
+A Ribeiro Abreu Advogados existe para garantir que pessoas e famílias conheçam e exerçam seus
+direitos de forma simples, segura e acessível. O trabalho do escritório busca transformar
+problemas jurídicos em soluções práticas, com atendimento próximo, humano e transparente do
+início ao fim.
 
 ## Valores
 
-*(a preencher)*
+Humanização · Transparência · Excelência técnica · Comprometimento · Acessibilidade ·
+Agilidade e eficiência · Ética e integridade · Inovação · Empatia e escuta ativa ·
+Responsabilidade social.
 
-## Perfil dos advogados / sócios
+## Perfil da advogada responsável
 
-*(a preencher — apenas informações públicas: nome, número OAB, formação, áreas de atuação)*
+- **Dra. Hyvana Gabriela Ribeiro de Salles Abreu** — OAB/RJ 146.227.
+- Advogada há 18 anos, especialista em Direito Civil e Processual Civil.
+- Pós-graduada em Direito Civil, Processo Civil e Didática.
+- Atuação pública: Subprocuradora Municipal e ex-advogada do RPPS de Carmo.
 
 ## Distinções e trajetória
 
-*(a preencher — certificações, especializações, atuação em tribunais, sem comparativos com outros escritórios)*
+Mais de 18 anos de atuação e ampla experiência multidisciplinar, com forte presença educativa
+e conhecimento da realidade local.
+
+<!-- LINT (OAB): a cliente citou "~2.000 processos". Citar volume de casos pode ser lido como
+autopromoção sob o Provimento 205/2021. Omitido do texto por precaução — reincluir só se o
+revisor/advogada confirmar que está confortável com a divulgação. Fonte do dado no raw interno. -->
+
+
+## O que diferencia o atendimento
+
+Linguagem simples e acessível, atendimento próximo e humanizado, uso de tecnologia,
+transparência, atuação educativa e visão multidisciplinar.
 
 ---
 
@@ -52,3 +73,4 @@ tags:
 - [[areas-de-atuacao]]
 - [[fluxo-de-atendimento]]
 - [[logistica]]
+- [[tom-de-voz-e-conteudo]]

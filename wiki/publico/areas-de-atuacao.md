@@ -1,49 +1,64 @@
 ---
 titulo: "Áreas de Atuação"
 camada: publico
-status: semente
-fontes: []
-atualizado_em: "2026-05-30"
+status: rascunho
+fontes:
+  - raw/publico/2026-06-03_briefing-institucional-publico.md
+atualizado_em: "2026-06-04"
 tags:
   - areas-de-atuacao
   - servicos
+  - ribeiro-abreu
 ---
 
 # Áreas de Atuação
 
-> **Nota para o bibliotecário:** Preencha cada área a partir de documentos em `raw/publico/`.
-> Use linguagem informativa e descritiva — nunca prometa resultados nem descreva estratégias jurídicas concretas.
-> Cada área pode virar uma nota separada se o conteúdo crescer.
+> **Status `rascunho`:** compilado das respostas da cliente. As descrições por área e os
+> exemplos de situações ainda precisam ser detalhados/validados com a advogada (`[CONFIRMAR]`).
+> Linguagem informativa — nunca prometer resultado nem descrever estratégia jurídica concreta.
 
 ---
 
-## Instruções de preenchimento
-
-Para cada área de atuação, descreva:
-- O que é a área (definição geral, sem jargão excessivo)
-- Quais situações do cotidiano do cliente se enquadram nela
-- Por que buscar um advogado especializado nessa área
-- **Não** descrever teses jurídicas, estratégias processuais ou chances de êxito
+O Ribeiro Abreu Advogados é um escritório **multidisciplinar**. As áreas principais são
+**Cível** e **Previdenciário**, com atuação também em Família e Sucessões, Imobiliário e
+Tributário, entre outras.
 
 ---
 
-## Áreas identificadas
+## Área principal — Direito Cível
 
-*(a preencher com base no briefing do escritório)*
+**O que é:** trata das relações entre pessoas e empresas no dia a dia — contratos,
+responsabilidade civil, cobranças, indenizações e questões patrimoniais.
 
-### Área 1 — *(nome a preencher)*
+**Situações comuns:** conflitos contratuais, cobranças indevidas, danos e prejuízos, disputas
+de consumo. *(detalhar com a cliente — `[CONFIRMAR]`)*
 
-**O que é:** *(a preencher)*
-
-**Situações comuns:** *(a preencher)*
-
-**Por que buscar orientação jurídica:** *(a preencher)*
+**Por que buscar orientação:** cada situação tem particularidades; uma análise individual ajuda
+a entender os direitos envolvidos. O caminho é agendar uma consulta — ver [[fluxo-de-atendimento]].
 
 ---
 
-### Área 2 — *(nome a preencher)*
+## Área principal — Direito Previdenciário
 
-*(idem)*
+**O que é:** trata da relação do cidadão com a Previdência (INSS e regimes próprios) —
+aposentadorias, benefícios e revisões.
+
+**Situações comuns:** dúvidas sobre aposentadoria, benefícios por incapacidade, benefício
+assistencial e revisões. *(detalhar com a cliente — `[CONFIRMAR]`)*
+
+**Por que buscar orientação:** as regras previdenciárias são técnicas e mudam com frequência;
+a orientação ajuda a entender o que se aplica a cada situação.
+
+---
+
+## Outras áreas
+
+- **Família e Sucessões** — questões familiares e de herança/inventário.
+  *(detalhar — `[CONFIRMAR]`)*
+- **Imobiliário** — questões envolvendo imóveis.
+- **Tributário** — questões relacionadas a tributos.
+
+<!-- LINT: divórcio está sendo descontinuado pelo escritório (briefing interno). Não promover divórcio como serviço; descrever Família e Sucessões em termos gerais. -->
 
 ---
 
