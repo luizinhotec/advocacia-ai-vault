@@ -1,7 +1,7 @@
 ---
 titulo: "Fluxo Conversacional do Agente de Atendimento"
 camada: interno
-status: semente
+status: rascunho
 fontes:
   - raw/interno/2026-06-03_respostas-questionario.md
 atualizado_em: "2026-06-04"
@@ -13,6 +13,10 @@ tags:
 ---
 
 # Fluxo Conversacional do Agente de Atendimento
+
+> **Foco primário — recepção de leads de campanha.** O design detalhado do agente
+> (persona, estágios, objeções, modelo LLM) está em [[agente-recepcao-leads]].
+> Esta nota descreve o fluxo técnico macro e os casos secundários (FAQ, FAQ operacional).
 
 Define como o agente se comporta em cada etapa da conversa — do primeiro contato ao encerramento.
 

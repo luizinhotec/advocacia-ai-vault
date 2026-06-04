@@ -30,7 +30,8 @@ Documentação do projeto de consultoria de IA. Este conteúdo **nunca** aliment
 |------|-------------|--------|
 | [[arquitetura-da-solucao]] | Stack técnica completa — agente, conteúdo, avatar, infra | semente |
 | [[custos-e-orcamento]] | Custos certificados, a cotar, economia gerada pelas eliminações | rascunho |
-| [[fluxo-conversacional]] | Design da conversa do agente: abertura, intenções, escalada, fallback | semente |
+| [[agente-recepcao-leads]] | Design completo do agente: persona, fluxo de conversão, objeções, modelo LLM | rascunho |
+| [[fluxo-conversacional]] | Fluxo técnico macro do agente: abertura, intenções, escalada, fallback | rascunho |
 | [[pipeline-conteudo]] | Geração, armazenamento, agendamento e publicação de posts e vídeos | semente |
 | [[gestao-de-leads]] | Funil de novos clientes, CRM, follow-up, fontes de entrada | semente |
 | [[dashboard-advogada]] | Métricas e visibilidade do negócio para a advogada | semente |
