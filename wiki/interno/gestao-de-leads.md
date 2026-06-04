@@ -54,12 +54,15 @@ Contratação
 
 ## Ferramenta de CRM
 
+> **Decisão tomada (2026-06-04):** RaviCRM será eliminado — ver [[decisoes-de-projeto]].
+> O CRM de substituição precisa ser escolhido antes do lançamento da Fase 1.
+
 | Decisão | Opções | Escolhido |
 |---------|--------|-----------|
-| Usar CRM? | Sim / Não (planilha) | *(a decidir)* |
-| Ferramenta | HubSpot (gratuito) / Pipedrive / Notion / Google Planilhas / outro | *(a decidir)* |
-| Quem alimenta | Automatizado (via agente) / Manual pela advogada / Consultoria | *(a decidir)* |
-| Integração com agente WhatsApp? | Sim (API) / Não | *(a decidir)* |
+| Ferramenta | HubSpot (gratuito) / Pipedrive / Notion / Google Planilhas / CRM próprio no n8n+PostgreSQL | *(a decidir com a cliente)* |
+| Quem alimenta | n8n automaticamente a partir das conversas do agente | Preferência — minimiza trabalho manual |
+| Integração com agente WhatsApp? | Sim — n8n grava lead ao detectar novo contato | DECIDIDO (consequência da eliminação do Ravi) |
+| Migração do Ravi | Exportar leads existentes antes de cancelar | *(a executar antes do desligamento)* |
 
 ---
 

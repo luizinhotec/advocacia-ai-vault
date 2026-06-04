@@ -144,27 +144,29 @@ Fase 1 sem bloquear o lançamento.
 
 ---
 
-### [YYYY-MM-DD] QUESTÃO ABERTA — RaviCRM × agente Claude no WhatsApp
+### [2026-06-04] Substituir RaviCRM por n8n + Claude
 
-**Contexto:** O RaviCRM já opera IA própria no WhatsApp com a Meta Cloud API. O Output 1
-do projeto também usa Claude + n8n no WhatsApp. Dois sistemas não podem controlar o mesmo
-número simultaneamente.
+**Contexto:** O RaviCRM já operava IA própria no WhatsApp via Meta Cloud API, criando conflito
+direto com o agente Claude do Output 1. Dois sistemas não podem controlar o mesmo número
+WhatsApp simultaneamente.
 
-**Decisão:** **EM ABERTO — levar à próxima reunião com a cliente.**
+**Decisão:** **Eliminar o RaviCRM.** O n8n + Claude assume integralmente o WhatsApp —
+atendimento, triagem, funil e CRM.
 
-**Opções:**
-- **A (substituir):** n8n+Claude assume; RaviCRM desativado. Controle total, sem custo duplo.
-- **B (integrar):** RaviCRM recebe, repassa via webhook ao n8n+Claude. Mantém pipeline Kanban.
-- **C (dois números):** Ravi no número 1, Claude no número 2. Evita conflito técnico mas confunde o cliente.
+**Motivo:** Controle total da experiência do cliente, sem custo duplo (R$497–897/mês do Ravi),
+sem latência extra de webhook intermediário, e stack unificado no ecossistema Claude.
 
-**Perguntas para a cliente:**
-- Quão dependente é do pipeline Kanban e do CRM do Ravi?
-- Quer manter o Ravi ou está aberta a substituir?
-- Qual é o plano atual do Ravi (Starter/Pro/Advanced)?
+**Alternativas descartadas:**
+- Integrar via webhook (mantinha custo duplo e complexidade)
+- Dois números separados (confuso para o cliente final)
 
-**Consequências:** A decisão aqui define a arquitetura do canal WhatsApp inteiro.
+**Consequências:**
+- O funil/pipeline Kanban do RaviCRM precisa ser replicado no n8n (ou em ferramenta CRM leve).
+- Dados de leads hoje no Ravi precisam ser migrados antes do desligamento.
+- A conta RaviCRM pode ser cancelada após migração validada.
+- [[gestao-de-leads]] precisa mapear o novo CRM de substituição.
 
-**Decidido por:** *(pendente — reunião com a cliente)*
+**Decidido por:** Consultoria + gestor do projeto (2026-06-04) — confirmar com a cliente
 
 ---
 

@@ -22,7 +22,7 @@
 | **WhatsApp Business** | Canal | Atendimento (2 números) | Meta Cloud API ✅ — node n8n nativo | **Canal principal do Output 1** |
 | **ZapSign** | Assinatura digital | Contratos de honorários | API REST ✅ — node n8n nativo, MCP server | **Integrar na Fase 1** |
 | **Jusbrasil** | Jurídico (processual) | Consulta/monitoramento de processos | API enterprise ⚠️ — usar DataJud (CNJ) grátis | **DataJud como primário** |
-| **RaviCRM** | CRM / WhatsApp + IA | Leads, funil, atendimento com IA 24/7 | ⚠️ API + webhook (planos Pro R$497/mês e Advanced R$897/mês) — docs não públicas, requer contato | **⚠️ CONFLITO ARQUITETURAL** — ver nota abaixo |
+| **RaviCRM** | CRM / WhatsApp + IA | Leads, funil, atendimento com IA 24/7 | API + webhook (Pro R$497/mês) — docs não públicas | **ELIMINAR** — substituído por n8n+Claude. Migrar dados de leads antes de cancelar. |
 | **Astrea (Aurum)** | ERP jurídico | Processos, prazos, back-office | ❌ Sem API pública | Fase 1: manual; Fase 2: substituir |
 | **LegalMail** | Intimações / petições | Peticionar + capturar intimações | ⚠️ Portal dev em `app.legalmail.com.br/dev/` — verificar acesso | Mapear se automação de intimações é escopo |
 | **Manus** | Agente autônomo | Tarefas gerais com IA | Compatível com MCP — **adquirida pela Meta** | Coexistir; consolidar no Claude |
