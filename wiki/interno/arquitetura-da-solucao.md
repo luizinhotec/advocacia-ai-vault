@@ -34,7 +34,7 @@ Estratégia: **integrar → coexistir → substituir, gradualmente.** O orquestr
 | Decisão | Escolhido | Status | Justificativa |
 |---------|-----------|--------|---------------|
 | Canal | WhatsApp Business API (oficial) | DECIDIDO | É por onde os contatos chegam; resolve a dor da cliente. |
-| Provedor WhatsApp API | Meta Cloud API (oficial) | DECIDIDO | Evita risco de banimento de soluções não-oficiais. Avaliar BSP (360dialog) só se precisar de onboarding mais fácil. |
+| Provedor WhatsApp API | Meta Cloud API (oficial) | DECIDIDO ✅ | Node n8n nativo (`n8n-nodes-base.whatsapp` + WhatsApp Trigger via OAuth2). Setup: Meta for Developers → verificação de negócio → Phone Number ID + Access Token. Guias 2026 disponíveis. |
 | Widget no site | Fase posterior | A DECIDIR | Foco inicial é WhatsApp. |
 
 ### Orquestração e LLM

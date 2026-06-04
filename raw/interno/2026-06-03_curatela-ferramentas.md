@@ -16,18 +16,20 @@
 
 ## Ferramentas em uso hoje (declaradas pela cliente)
 
-| Ferramenta | Categoria | Para que ela usa (declarado/inferido) | Postura do projeto |
-|-----------|-----------|----------------------------------------|--------------------|
-| **Claude** | LLM | Uso geral; é a preferência declarada (skills, extensões, templates) | **Cérebro/LLM oficial** (ver arquitetura) |
-| ChatGPT | LLM | Uso geral | Coexistir; consolidar no Claude |
-| Gemini | LLM | Uso geral | Coexistir; consolidar no Claude |
-| Manus | Agente/automação | Tarefas gerais com IA | Avaliar sobreposição |
-| **Jusbrasil** | Jurídico (processual) | Consulta/monitoramento de processos | Integrar via API (DECIDIDO) |
-| **RaviCRM** | CRM | Relacionamento, leads, funil, WhatsApp | Hub front-office — confirmar API/webhook |
-| Adapta | Plataforma de IA | Agentes/conteúdo | Avaliar sobreposição |
-| LegalMail | Comunicação jurídica | E-mail/intimações jurídicas | Mapear função exata |
-| Humanitech | Conteúdo/avatar/voz | Clone e produção de conteúdo | ⚠️ Build vs buy do Output 3 (avatar/voz) |
-| Astrea (Aurum) | ERP jurídico | Processos/prazos (back-office) | Sem API pública aparente — candidato a substituição |
+| Ferramenta | Categoria | Para que ela usa | API / Integração | Postura do projeto |
+|-----------|-----------|-----------------|------------------|--------------------|
+| **Claude** | LLM | Preferência declarada — skills, extensões, templates | API Anthropic ✅ | **Cérebro/LLM oficial** |
+| **WhatsApp Business** | Canal | Atendimento (2 números) | Meta Cloud API ✅ — node n8n nativo | **Canal principal do Output 1** |
+| **ZapSign** | Assinatura digital | Contratos de honorários | API REST ✅ — node n8n nativo, MCP server | **Integrar na Fase 1** |
+| **Jusbrasil** | Jurídico (processual) | Consulta/monitoramento de processos | API enterprise ⚠️ — usar DataJud (CNJ) grátis | **DataJud como primário** |
+| **RaviCRM** | CRM / WhatsApp | Leads, funil, atendimento | ❓ Não encontrado publicamente | Confirmar nome/URL com a cliente |
+| **Astrea (Aurum)** | ERP jurídico | Processos, prazos, back-office | ❌ Sem API pública | Fase 1: manual; Fase 2: substituir |
+| **LegalMail** | Intimações / petições | Peticionar + capturar intimações | ⚠️ Portal dev em `app.legalmail.com.br/dev/` — verificar acesso | Mapear se automação de intimações é escopo |
+| **Manus** | Agente autônomo | Tarefas gerais com IA | Compatível com MCP — **adquirida pela Meta** | Coexistir; consolidar no Claude |
+| **Adapta** | Agregador de LLMs | Interface unificada Claude/GPT/Gemini | ❌ Sem API de integração externa (só interface web) | Coexistir; cliente migra para Claude direto |
+| **Humanitech** | Avatar / voz clonada | Clone e produção de conteúdo | ❓ Não encontrado publicamente | ⚠️ Build vs buy Output 3 — confirmar com cliente |
+| ChatGPT | LLM | Uso geral | API OpenAI ✅ | Coexistir; consolidar no Claude |
+| Gemini | LLM | Uso geral | API Google ✅ | Coexistir; consolidar no Claude |
 
 *(Lista não exaustiva — a cliente citou "dentre outras". Completar conforme o acesso for concedido.)*
 
