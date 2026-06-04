@@ -1,9 +1,9 @@
 ---
 titulo: "Arquitetura da Solução"
 camada: interno
-status: semente
-fontes: []
-atualizado_em: "2026-05-30"
+status: em-revisao
+fontes: [reuniao-inicial-ribeiro-abreu, plano-curatela-criacao, curatela-ferramentas]
+atualizado_em: 2026-06-04
 tags:
   - arquitetura
   - tecnico
@@ -12,7 +12,15 @@ tags:
 
 # Arquitetura da Solução
 
-Mapa das decisões técnicas da solução completa. Cada item em aberto deve ser decidido antes do início do desenvolvimento.
+Mapa das decisões técnicas da solução. Atualizado com as decisões já tomadas na estratégia (Claude-first + n8n) e na curatela de ferramentas. Itens ainda em aberto dependem de confirmação da cliente ou de fornecedor.
+
+Legenda de status: **DECIDIDO** · **A CONFIRMAR (cliente/fornecedor)** · **A DECIDIR**
+
+---
+
+## Princípio da arquitetura: orquestrador único
+
+Estratégia: **integrar → coexistir → substituir, gradualmente.** O orquestrador entra como camada que conecta o que a cliente já usa (não substitui de cara). Ver [[plano-curatela-criacao]].
 
 ---
 
@@ -20,75 +28,99 @@ Mapa das decisões técnicas da solução completa. Cada item em aberto deve ser
 
 ### Canal de entrada
 
-| Decisão | Opções | Escolhido | Justificativa |
-|---------|--------|-----------|---------------|
-| Canal | WhatsApp Business API / Widget no site / Ambos | *(a decidir)* | |
-| Provedor WhatsApp API | Meta direto / Twilio / 360dialog / Wati / outro | *(a decidir)* | |
+| Decisão | Escolhido | Status | Justificativa |
+|---------|-----------|--------|---------------|
+| Canal | WhatsApp Business API (oficial) | DECIDIDO | É por onde os contatos chegam; resolve a dor da cliente. |
+| Provedor WhatsApp API | Meta Cloud API (oficial) | DECIDIDO | Evita risco de banimento de soluções não-oficiais. Avaliar BSP (360dialog) só se precisar de onboarding mais fácil. |
+| Widget no site | Fase posterior | A DECIDIR | Foco inicial é WhatsApp. |
 
 ### Orquestração e LLM
 
-| Decisão | Opções | Escolhido | Justificativa |
-|---------|--------|-----------|---------------|
-| Orquestrador | n8n / Make / Langchain / LlamaIndex / custom | *(a decidir)* | |
-| Modelo de linguagem | Claude (Anthropic) / GPT-4o / Gemini / outro | *(a decidir)* | |
-| Como o agente lê o vault | RAG (embeddings) / contexto direto / híbrido | *(a decidir)* | |
-| Base de embeddings | Pinecone / Weaviate / pgvector / outro | *(a decidir — só se RAG)* | |
+| Decisão | Escolhido | Status | Justificativa |
+|---------|-----------|--------|---------------|
+| Orquestrador | n8n | DECIDIDO | Encanamento/automação; conecta canais e ferramentas. |
+| Cérebro / LLM | Claude (Anthropic) | DECIDIDO | Raciocínio, triagem, redação. A própria cliente prefere Claude (Bloco 1B). |
+| Roteamento de modelos | Haiku = filtro/triagem · Sonnet = atendente · Opus = tarefas pesadas/raras | DECIDIDO | Controle de custo por tarefa. |
+| Como o agente lê o vault | Contexto direto (sem banco de vetores) | DECIDIDO | Padrão LLM Wiki; vault pequeno cabe no contexto. Reavaliar só se passar de ~100 notas/~80k tokens. |
+| Base de embeddings | Não usar (por ora) | DECIDIDO | Consequência da decisão acima. Se precisar, Voyage AI + pgvector. |
+
+### Integrações via API (orquestráveis) — ver [[plano-curatela-criacao]]
+
+| Ferramenta | Função | Status | Observação |
+|-----------|--------|--------|------------|
+| ZapSign | Assinatura de contratos | DECIDIDO (caixa verde) | API pública, auth Bearer, cria doc via Markdown/PDF/base64, webhooks gratuitos, envio por WhatsApp. |
+| Jusbrasil | Consulta/monitoramento processual | DECIDIDO (caixa verde) | API REST documentada; não retorna segredo de justiça. Fallback gratuito: DataJud (CNJ). |
+| RaviCRM | CRM de relacionamento (leads/funil/WhatsApp) | A CONFIRMAR (fornecedor) | Hub de front-office se tiver API/webhook. |
+| Astrea | ERP jurídico (processos/prazos) | A CONFIRMAR (fornecedor) | Back-office; sem API pública aparente — integrar "como der"; candidato a substituição. |
 
 ### Integração de agenda
 
-| Decisão | Opções | Escolhido | Justificativa |
-|---------|--------|-----------|---------------|
-| Ferramenta de agendamento | Calendly / Cal.com / Google Calendar + link / manual | *(a decidir)* | |
-| Integração automática? | Sim (API) / Não (link externo) | *(a decidir)* | |
+| Decisão | Escolhido | Status |
+|---------|-----------|--------|
+| Ferramenta de agendamento | A definir (Google Calendar + link / Cal.com) | A DECIDIR |
+| Integração automática | Preferir via API | A DECIDIR |
 
 ### Hospedagem e infra
 
-| Decisão | Opções | Escolhido | Justificativa |
-|---------|--------|-----------|---------------|
-| Onde roda o agente | Railway / Render / VPS / serverless (Vercel, Lambda) | *(a decidir)* | |
-| Banco de dados | PostgreSQL / SQLite / sem banco | *(a decidir)* | |
-| Repositório de código | GitHub (repo separado deste vault) | *(a confirmar)* | |
+| Decisão | Escolhido | Status | Observação |
+|---------|-----------|--------|------------|
+| Onde roda o n8n | A decidir (VPS / Railway / self-host) | A DECIDIR | Confirmar infra da cliente (Bloco 1B). |
+| Banco de dados | PostgreSQL (se precisar de estado/CRM próprio) | A DECIDIR | Pode não ser necessário na Fase 1. |
+| Repositório de código | GitHub, repo SEPARADO deste vault | DECIDIDO | Vault só com conhecimento; código não entra aqui (CLAUDE.md). |
+| Conta(s) Claude | A confirmar com a cliente | A CONFIRMAR (cliente) | Bloco 1B: ela já usa Claude e tem skills prontas. |
 
 ---
 
 ## Conteúdo para Redes Sociais (Output 2)
 
-| Decisão | Opções | Escolhido |
-|---------|--------|-----------|
-| Geração de artes | Canva (manual) / Adobe Express / IA generativa (DALL-E, Midjourney, Ideogram) | *(a decidir)* |
-| Ferramenta de agendamento | Buffer / Later / Meta Business Suite / manual | *(a decidir)* |
-| Armazenamento de assets | Google Drive / Dropbox / Notion | *(a decidir)* |
-| Quem publica | Consultoria / Escritório / Ferramenta automatizada | *(a decidir)* |
+Fase 3. Sobreposição com Humanitech (clone/conteúdo) e Ferpin (agência atual) — decisão build vs buy. Ver [[pipeline-conteudo]] e [[plano-curatela-criacao]].
+
+| Decisão | Status |
+|---------|--------|
+| Geração de artes (Canva / IA) | A DECIDIR |
+| Agendamento (Buffer / Meta Suite) | A DECIDIR |
+| Armazenamento de assets (Drive) | A DECIDIR |
+| Quem publica | A DECIDIR |
 
 ---
 
 ## Avatar com Voz Clonada (Output 3)
 
-| Decisão | Opções | Escolhido |
-|---------|--------|-----------|
-| Ferramenta de avatar | HeyGen / D-ID / Synthesia / Runway / outro | *(a decidir)* |
-| Ferramenta de voz | ElevenLabs / Play.ht / Azure Speech / outro | *(a decidir)* |
-| Hospedagem dos vídeos | YouTube (privado/público) / Google Drive / Vimeo | *(a decidir)* |
+Fase 3. Atenção: a cliente está negociando com a Humanitech justamente isso — decidir build (ElevenLabs/HeyGen) vs buy (Humanitech) antes de investir.
+
+| Decisão | Opções | Status |
+|---------|--------|--------|
+| Ferramenta de avatar | HeyGen / D-ID / Synthesia | A DECIDIR |
+| Ferramenta de voz | ElevenLabs / Play.ht | A DECIDIR |
+| Hospedagem de vídeos | YouTube / Drive | A DECIDIR |
+| Consentimento de voz | Obrigatório explicar e autorizar antes | DECIDIDO (regra) |
 
 ---
 
-## Custos estimados (a preencher)
+## Custos estimados (a preencher na proposta da Fase 1)
 
-| Item | Ferramenta | Plano | Custo/mês estimado |
-|------|-----------|-------|-------------------|
-| WhatsApp API | *(a decidir)* | | |
-| LLM (tokens) | *(a decidir)* | | |
-| Orquestrador | *(a decidir)* | | |
-| Avatar | *(a decidir)* | | |
-| Voz clonada | *(a decidir)* | | |
-| Hospedagem | *(a decidir)* | | |
-| **Total estimado** | | | |
+| Item | Ferramenta | Status |
+|------|-----------|--------|
+| WhatsApp API | Meta Cloud API | a cotar |
+| LLM (tokens) | Claude (Haiku/Sonnet/Opus) | a estimar por volume |
+| Orquestrador | n8n (self-host ou cloud) | a cotar |
+| Assinatura | ZapSign | a cotar (plano + R$/envio WhatsApp) |
+| Processual | Jusbrasil API | a cotar (por volume) / DataJud grátis |
+| Avatar + voz | (Fase 3) | a cotar |
+| Hospedagem | (infra n8n) | a cotar |
 
 ---
+
+## O que falta decidir (resumo)
+
+- Cliente: infra (máquinas/contas Claude), agenda, confirmar Ravi/Astrea.
+- Fornecedor: API do RaviCRM e do Astrea.
+- Projeto: ferramenta de agendamento, hospedagem do n8n, build vs buy do conteúdo/avatar.
 
 ## Notas relacionadas
 
-- [[escopo-e-outputs]]
+- [[plano-curatela-criacao]]
 - [[fluxo-conversacional]]
-- [[infraestrutura-e-custos]]
-- [[decisoes-de-projeto]]
+- [[conformidade-lgpd-chatbot]]
+- [[gestao-de-leads]]
+- [[dashboard-advogada]]
