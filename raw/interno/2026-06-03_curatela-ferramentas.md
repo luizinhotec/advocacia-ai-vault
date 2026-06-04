@@ -22,7 +22,7 @@
 | **WhatsApp Business** | Canal | Atendimento (2 números) | Meta Cloud API ✅ — node n8n nativo | **Canal principal do Output 1** |
 | **ZapSign** | Assinatura digital | Contratos de honorários | API REST ✅ — node n8n nativo, MCP server | **Integrar na Fase 1** |
 | **Jusbrasil** | Jurídico (processual) | Consulta/monitoramento de processos | API enterprise ⚠️ — usar DataJud (CNJ) grátis | **DataJud como primário** |
-| **RaviCRM** | CRM / WhatsApp | Leads, funil, atendimento | ❓ Não encontrado publicamente | Confirmar nome/URL com a cliente |
+| **RaviCRM** | CRM / WhatsApp + IA | Leads, funil, atendimento com IA 24/7 | ⚠️ API + webhook (planos Pro R$497/mês e Advanced R$897/mês) — docs não públicas, requer contato | **⚠️ CONFLITO ARQUITETURAL** — ver nota abaixo |
 | **Astrea (Aurum)** | ERP jurídico | Processos, prazos, back-office | ❌ Sem API pública | Fase 1: manual; Fase 2: substituir |
 | **LegalMail** | Intimações / petições | Peticionar + capturar intimações | ⚠️ Portal dev em `app.legalmail.com.br/dev/` — verificar acesso | Mapear se automação de intimações é escopo |
 | **Manus** | Agente autônomo | Tarefas gerais com IA | Compatível com MCP — **adquirida pela Meta** | Coexistir; consolidar no Claude |
@@ -32,6 +32,23 @@
 | Gemini | LLM | Uso geral | API Google ✅ | Coexistir; consolidar no Claude |
 
 *(Lista não exaustiva — a cliente citou "dentre outras". Completar conforme o acesso for concedido.)*
+
+---
+
+## ⚠️ Conflito arquitetural — RaviCRM × agente Claude no WhatsApp
+
+O RaviCRM já opera **IA própria no WhatsApp usando a Meta Cloud API oficial**. O Output 1 do projeto
+também usa WhatsApp + Claude via n8n. Dois sistemas não podem controlar o mesmo número de WhatsApp
+simultaneamente. A decisão precisa ser tomada antes da Fase 1:
+
+| Opção | Descrição | Prós | Contras |
+|-------|-----------|------|---------|
+| **A — Substituir o RaviCRM** | n8n + Claude assume o WhatsApp; RaviCRM é desativado | Controle total, sem duplicação, custo menor | Perda de funcionalidades de CRM/pipeline do Ravi |
+| **B — Integrar Claude dentro do RaviCRM** | RaviCRM recebe a mensagem; repassa via webhook ao n8n+Claude; devolve a resposta | Mantém o CRM e o pipeline; sem troca de ferramenta | Latência extra; depende de webhook do Ravi; custo duplo |
+| **C — Ravi no número 1, Claude no número 2** | Cada IA em um número diferente | Sem conflito técnico | Confuso para o cliente final; divide a audiência |
+
+**Recomendação provisória:** Opção A (substituir o RaviCRM pelo n8n+Claude) ou Opção B se a
+advogada depender fortemente do pipeline Kanban do Ravi. **Decidir com a cliente na próxima reunião.**
 
 ## Infraestrutura declarada (Bloco 1B)
 

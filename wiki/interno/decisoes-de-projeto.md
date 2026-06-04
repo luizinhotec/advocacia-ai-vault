@@ -144,6 +144,30 @@ Fase 1 sem bloquear o lançamento.
 
 ---
 
+### [YYYY-MM-DD] QUESTÃO ABERTA — RaviCRM × agente Claude no WhatsApp
+
+**Contexto:** O RaviCRM já opera IA própria no WhatsApp com a Meta Cloud API. O Output 1
+do projeto também usa Claude + n8n no WhatsApp. Dois sistemas não podem controlar o mesmo
+número simultaneamente.
+
+**Decisão:** **EM ABERTO — levar à próxima reunião com a cliente.**
+
+**Opções:**
+- **A (substituir):** n8n+Claude assume; RaviCRM desativado. Controle total, sem custo duplo.
+- **B (integrar):** RaviCRM recebe, repassa via webhook ao n8n+Claude. Mantém pipeline Kanban.
+- **C (dois números):** Ravi no número 1, Claude no número 2. Evita conflito técnico mas confunde o cliente.
+
+**Perguntas para a cliente:**
+- Quão dependente é do pipeline Kanban e do CRM do Ravi?
+- Quer manter o Ravi ou está aberta a substituir?
+- Qual é o plano atual do Ravi (Starter/Pro/Advanced)?
+
+**Consequências:** A decisão aqui define a arquitetura do canal WhatsApp inteiro.
+
+**Decidido por:** *(pendente — reunião com a cliente)*
+
+---
+
 ### [YYYY-MM-DD] Ferramenta de avatar
 
 *(a preencher quando a ferramenta for escolhida)*
