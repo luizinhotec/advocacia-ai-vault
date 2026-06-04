@@ -101,17 +101,9 @@ Fase 3. Atenção: a cliente está negociando com a Humanitech justamente isso �
 
 ---
 
-## Custos estimados (a preencher na proposta da Fase 1)
+## Custos estimados
 
-| Item | Ferramenta | Status |
-|------|-----------|--------|
-| WhatsApp API | Meta Cloud API | a cotar |
-| LLM (tokens) | Claude (Haiku/Sonnet/Opus) | a estimar por volume |
-| Orquestrador | n8n (self-host ou cloud) | a cotar |
-| Assinatura | ZapSign | a cotar (plano + R$/envio WhatsApp) |
-| Processual | Jusbrasil API | a cotar (por volume) / DataJud grátis |
-| Avatar + voz | (Fase 3) | a cotar |
-| Hospedagem | (infra n8n) | a cotar |
+Ver nota dedicada: [[custos-e-orcamento]]
 
 ---
 
