@@ -170,27 +170,52 @@ sem latência extra de webhook intermediário, e stack unificado no ecossistema 
 
 ---
 
-### [2026-06-04] Build próprio para avatar e voz — substituir Humanitech
+### [2026-06-04] Eliminar Humanitech — sobreposição com Output 1
 
-**Contexto:** A cliente estava negociando com a Humanitech para o Output 3 (avatar + voz
-clonada). Humanitech não tem API conhecida — modelo de serviço gerenciado, sem automação.
+**Contexto:** A cliente usava a Humanitech acreditando ser uma solução de avatar/voz clonada.
+Verificação do site (`humanitech.com.br`) revelou que é um **chatbot WhatsApp com IA** —
+sobreposição direta com o Output 1 do projeto (n8n + Claude no WhatsApp).
 
-**Decisão:** **Build próprio com HeyGen (avatar) + ElevenLabs (voz).** Eliminar Humanitech.
+**Planos Humanitech verificados:**
+- Starter: R$ 397/mês (400 conversas)
+- Pro: R$ 719/mês (800 conversas)
+- Business: R$ 1.599/mês (2.000 conversas)
+- Extras: CRM R$ 49/mês, WhatsApp Pro R$ 140/mês
 
-**Motivo:** Controle total do pipeline de produção. Ambas as ferramentas têm API, permitem
-automação via n8n e integração com o restante do stack. Sem dependência de terceiro para
-cada vídeo produzido.
+**Custo estimado atual da cliente:** ~R$ 1.788/mês (Business + CRM + WhatsApp Pro).
 
-**Ferramentas escolhidas:**
-- **HeyGen** — geração de avatar em vídeo. API disponível. Plano Creator $29/mês; API a partir de $5.
-- **ElevenLabs** — clonagem de voz + TTS. API disponível. Planos flexíveis por caractere/mês.
+**Decisão:** **Eliminar Humanitech.** n8n + Claude assume integralmente o atendimento WhatsApp.
 
-**Alternativa descartada:** Humanitech (serviço gerenciado, sem API, custo e controle desconhecidos).
+**Motivo:** Sobreposição total de função. Claude com o vault do escritório entrega qualidade
+de atendimento superior à IA genérica da Humanitech. Economia estimada: **~R$ 1.688/mês**
+(R$ 20.256/ano).
+
+**Consequências:**
+- Confirmar com a cliente o plano atual do Humanitech antes de cancelar.
+- Exportar histórico de conversas/leads antes do desligamento.
+- **Output 3 (avatar + voz):** a Humanitech nunca foi fornecedora disso — cliente pode ter
+  confundido. Confirmar com ela quem (se alguém) estava cotando para avatar/voz. Ferramentas
+  escolhidas para build próprio: HeyGen + ElevenLabs.
+
+**Decidido por:** Consultoria + gestor do projeto (2026-06-04) — confirmar com a cliente
+
+---
+
+### [2026-06-04] Build próprio para avatar e voz — HeyGen + ElevenLabs
+
+**Contexto:** Output 3 (avatar + voz clonada) precisava de ferramentas com API para automação.
+
+**Decisão:** **HeyGen** (avatar em vídeo) + **ElevenLabs** (clonagem de voz + TTS).
+
+**Ferramentas:**
+- HeyGen: API disponível, plano Creator $29/mês (~R$ 165), API a partir de $5.
+- ElevenLabs: API TTS + clonagem. Planos flexíveis por caractere/mês.
+- Total estimado Output 3: ~R$ 200–300/mês.
 
 **Consequências:**
 - Provisionar contas HeyGen e ElevenLabs antes da Fase 3.
-- Clonar a voz da Dra. Hyvana no ElevenLabs **somente após** termo formal assinado — ver [[consentimento-voz-clonada]].
-- Roteiro de vídeo segue o template obrigatório — ver [[roteiro-padrao-video]].
+- Clonar voz da Dra. Hyvana **somente após** termo formal assinado — ver [[consentimento-voz-clonada]].
+- Roteiro segue template obrigatório — ver [[roteiro-padrao-video]].
 
 **Decidido por:** Consultoria + gestor do projeto (2026-06-04) — confirmar com a cliente
 
