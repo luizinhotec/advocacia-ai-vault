@@ -34,10 +34,11 @@ advogada Dra. Hyvana Ribeiro Abreu e formado por uma equipe de advogadas especia
 atuação aprofundada e atualizada em suas áreas. O atendimento é oferecido de forma online e
 presencial, adaptando-se às necessidades de cada cliente.
 
-<!-- LINT: o site indica "17 anos de existência"; a cliente informou "18 anos" (de carreira) no
-questionário — reconciliar (existência do escritório vs. carreira da advogada). A origem/história
-de fundação (como surgiu, ano exato, trajetória) não está publicada no site — coletar com a
-advogada antes de marcar `revisado`. Fontes: raw/publico/2026-06-04_extracao-site.md. -->
+<!-- LINT: divergência reconciliada — 17 anos = existência do escritório (site); 18 anos =
+carreira da advogada (questionário). São coisas distintas e não contraditórias. Texto atual
+usa "mais de 17 anos de existência" alinhado com o site. PENDENTE: ano exato de fundação e
+história de origem — não publicados no site nem fornecidos no questionário. Coletar com a
+advogada antes de marcar `revisado`. -->
 
 
 ## Missão

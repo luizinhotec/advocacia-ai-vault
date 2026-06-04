@@ -1,9 +1,10 @@
 ---
 titulo: "Consentimento para Uso de Voz Clonada"
 camada: interno
-status: semente
-fontes: []
-atualizado_em: "2026-05-30"
+status: rascunho
+fontes:
+  - raw/interno/2026-06-03_respostas-questionario.md
+atualizado_em: "2026-06-04"
 tags:
   - voz-clonada
   - lgpd
@@ -39,11 +40,12 @@ alinhadas com o Código de Ética da OAB (art. 34 e Provimento 205/2021).
 
 | Campo | Detalhe |
 |-------|---------|
-| Titular da voz | *(nome — manter interno, nunca expor em wiki/publico)* |
-| Data de assinatura do termo | *(a preencher)* |
-| Termo arquivado em | *(a preencher — pasta física / GDrive / outro — NÃO no Git)* |
-| Validação jurídica por | *(nome do advogado ou escritório que revisou o termo)* |
-| Status | *(pendente / assinado / revogado)* |
+| Titular da voz | Dra. Hyvana Gabriela Ribeiro de Salles Abreu — OAB/RJ 146.227 |
+| Consentimento verbal/digital | 2026-06-03, via questionário Jotform (Bloco 7) — "Sim" |
+| Data de assinatura do termo formal | *(pendente — obter antes de qualquer produção de voz)* |
+| Termo arquivado em | *(a preencher — NÃO no Git)* |
+| Validação jurídica por | *(a preencher)* |
+| Status | **consentimento verbal registrado — termo formal escrito pendente** |
 
 ---
 
@@ -51,11 +53,12 @@ alinhadas com o Código de Ética da OAB (art. 34 e Provimento 205/2021).
 
 Preencher com base no termo assinado. Marcar apenas o que foi **explicitamente autorizado**.
 
-- [ ] Vídeos institucionais do escritório
-- [ ] Vídeos educativos em redes sociais (Instagram, LinkedIn, YouTube)
-- [ ] Vídeo de boas-vindas no agente de atendimento
-- [ ] Conteúdo de datas comemorativas
-- [ ] *(outros — especificar)*
+- [x] Vídeos institucionais do escritório *(confirmado — questionário Bloco 7)*
+- [x] Vídeos educativos em redes sociais (Instagram, LinkedIn, YouTube) *(confirmado)*
+- [x] Reels com avatar *(confirmado — "Os dois: pessoal e avatar")*
+- [ ] Vídeo de boas-vindas no agente de atendimento *(a confirmar no termo formal)*
+- [ ] Conteúdo de datas comemorativas *(a confirmar no termo formal)*
+- [ ] *(outros — especificar no termo formal)*
 
 ---
 

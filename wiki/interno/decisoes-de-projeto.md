@@ -59,21 +59,22 @@ declarou querer usar *"o Claude, todas as versões"*, *"muito bom para advocacia
 *"com as extensões, com as skills"* — e afirmou **já ter várias skills prontas** e **já rodar
 algumas IAs** no escritório.
 
-**Decisão:** *(PROPOSTA — a validar tecnicamente na reunião inicial)* Adotar o ecossistema
-**Claude (Desktop / Code / .ai) + skills + extensões/MCP** como stack central da implantação.
+**Decisão:** Adotar o ecossistema **Claude (Desktop / Code / .ai) + skills + extensões/MCP**
+como stack central da implantação, orquestrado por **n8n**.
 
-**Motivo:** É a preferência explícita da cliente, reduz curva de adoção (ela já conhece) e
-aproveita as skills que ela já possui.
+**Motivo:** Preferência explícita da cliente (questionário Bloco 1B: "Claude, todas as versões,
+com skills e extensões"). Reduz curva de adoção (ela já usa) e aproveita skills existentes.
+Confirmado pelo questionário de 2026-06-03.
 
-**Alternativas descartadas:** *(a registrar após validação — ex: plataformas no-code de
-agentes, outros LLMs)*. Não descartar formalmente antes de inventariar o que já existe.
+**Alternativas descartadas:** outros LLMs (ChatGPT, Gemini) — a cliente tem preferência
+declarada pelo Claude. Plataformas no-code puras — limitam customização do agente.
 
-**Consequências:**
-- Inventariar **as skills prontas** da cliente e **as IAs já em uso** (pedir export/arquivos).
-- Levantar infraestrutura: SO e máquinas da equipe, contas Claude, ponto focal de TI.
-- Definir como o ecossistema Claude se integra ao **CRM/software jurídico** e ao **WhatsApp**.
+**Consequências confirmadas pós-questionário:**
+- Cliente ainda não tem conta Claude paga — adquirir antes da implantação.
+- 5 computadores, 2 números de WhatsApp de atendimento.
+- Skills prontas existem — a cliente ofereceu acesso; coletar antes de redesenhar o que já funciona.
 
-**Decidido por:** *(pendente — proposta da consultoria a confirmar com a cliente e o gestor do projeto)*
+**Decidido por:** Consultoria + cliente (confirmado em 2026-06-03 via questionário)
 
 ---
 
@@ -96,6 +97,25 @@ escopo**, e com o `SCHEMA.md`, que **veda** número de processo, peças e dados 
 [[escopo-e-outputs]]. Resolver gera novas notas de governança de dados.
 
 **Decidido por:** *(pendente — reunião inicial com a advogada e o gestor do projeto)*
+
+---
+
+### [2026-06-04] Volume de processos — omitir do conteúdo público
+
+**Contexto:** A cliente citou "~2.000 processos" no questionário (Bloco 1). O site menciona
+"mais de 800 processos com sucesso". Há divergência entre as duas fontes.
+
+**Decisão:** **Não publicar nenhum dos números** no conteúdo público (wiki/publico, posts, vídeos).
+
+**Motivo:** Citar volume de processos pode ser lido como autopromoção sob o Provimento 205/2021
+da OAB. Além disso, a afirmação "com sucesso" (site) insinua resultado — vedado pelo Código de
+Ética. A divergência entre 800 e 2.000 também levanta questão de precisão.
+
+**Consequências:** Substituir por afirmações de experiência sem número: "mais de 18 anos de
+atuação", "ampla experiência multidisciplinar". Se a advogada quiser incluir um número após
+validação jurídica, registrar a autorização explícita aqui antes de publicar.
+
+**Decidido por:** Consultoria (2026-06-04) — sujeito à confirmação da advogada
 
 ---
 

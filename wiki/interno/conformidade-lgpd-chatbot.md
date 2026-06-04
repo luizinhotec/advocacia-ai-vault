@@ -70,6 +70,22 @@ Obrigações legais específicas para o atendimento digital (chatbot, redes soci
 
 ---
 
+## Fronteira de dados — sistemas externos vs. vault
+
+**Princípio:** este vault Git contém **exclusivamente** conhecimento institucional e documentação do projeto. Dados de casos concretos e dados pessoais de clientes transitam apenas nos sistemas operacionais externos e **nunca** são gravados aqui.
+
+| Sistema | Dados que transita | Entra no vault? |
+|---------|-------------------|-----------------|
+| Jusbrasil API | Consulta e monitoramento processual | ❌ Nunca |
+| Astrea / software jurídico | Prazos, peças, dados do processo | ❌ Nunca |
+| RaviCRM | Dados de leads e clientes | ❌ Nunca |
+| n8n / orquestrador | Logs de conversa, dados em trânsito | ❌ Nunca |
+| Este vault | Conhecimento institucional público + documentação interna | ✅ Sim — sem dados pessoais |
+
+Esta fronteira é inegociável e decorre de: LGPD art. 5º/37, sigilo profissional (EOAB art. 34, VII) e CLAUDE.md.
+
+---
+
 ## Sigilo profissional (EOAB art. 34, VII)
 
 O chatbot pode receber relatos de situações jurídicas sensíveis dos usuários. Regras:
