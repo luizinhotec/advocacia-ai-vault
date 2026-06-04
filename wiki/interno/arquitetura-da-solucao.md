@@ -48,12 +48,13 @@ Estratégia: **integrar → coexistir → substituir, gradualmente.** O orquestr
 
 ### Integrações via API (orquestráveis) — ver [[plano-curatela-criacao]]
 
-| Ferramenta | Função | Status | Observação |
-|-----------|--------|--------|------------|
-| ZapSign | Assinatura de contratos | DECIDIDO (caixa verde) | API pública, auth Bearer, cria doc via Markdown/PDF/base64, webhooks gratuitos, envio por WhatsApp. |
-| Jusbrasil | Consulta/monitoramento processual | DECIDIDO (caixa verde) | API REST documentada; não retorna segredo de justiça. Fallback gratuito: DataJud (CNJ). |
-| RaviCRM | CRM de relacionamento (leads/funil/WhatsApp) | A CONFIRMAR (fornecedor) | Hub de front-office se tiver API/webhook. |
-| Astrea | ERP jurídico (processos/prazos) | A CONFIRMAR (fornecedor) | Back-office; sem API pública aparente — integrar "como der"; candidato a substituição. |
+| Ferramenta | Função | Status | Verificação de API |
+|-----------|--------|--------|--------------------|
+| ZapSign | Assinatura de contratos | DECIDIDO ✅ | API REST pública documentada (`docs.zapsign.com.br`). Auth Bearer. Sandbox disponível. **Node n8n nativo** (`n8n-nodes-zapsign`) e integração Make.com. MCP server oficial no GitHub. |
+| Jusbrasil | Consulta/monitoramento processual | DECIDIDO ⚠️ | API existe (`api.jusbrasil.com.br/docs`) mas requer contrato enterprise — não é acesso aberto. **Usar DataJud (CNJ) como fallback primário:** gratuito, +80 M processos, 90 tribunais, auth por chave pública, sem custo. |
+| DataJud (CNJ) | Fallback processual gratuito | DECIDIDO ✅ | API REST pública, gratuita, documentada em `datajud-wiki.cnj.jus.br`. Cobre todos os tribunais obrigados a reportar ao CNJ. |
+| RaviCRM | CRM de relacionamento (leads/funil/WhatsApp) | A CONFIRMAR ❓ | **Não encontrado em buscas públicas** — pode ser nome informal ou regional. Confirmar com a cliente o nome correto / URL do sistema. |
+| Astrea | ERP jurídico (processos/prazos) | A CONFIRMAR ❌ | **Confirmado: sem API pública.** Tem integração nativa apenas com Clieent CRM (parceria Aurum). Candidato a substituição na Fase 2. Na Fase 1: passo manual + notificação via n8n. |
 
 ### Integração de agenda
 

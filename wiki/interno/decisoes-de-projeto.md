@@ -119,6 +119,31 @@ validação jurídica, registrar a autorização explícita aqui antes de public
 
 ---
 
+### [2026-06-04] Procedimento padrão para integração sem API oficial
+
+**Contexto:** Algumas ferramentas do stack (RaviCRM, Astrea) podem não ter API pública
+documentada. É necessário um critério claro de decisão antes de verificar cada uma.
+
+**Decisão:** Seguir a ordem abaixo. Parar no primeiro nível que for viável.
+
+| Nível | Abordagem | Viabilidade |
+|-------|-----------|-------------|
+| 1 | **API oficial documentada** | Melhor caso — usar diretamente no n8n |
+| 2 | **API interna não-documentada** | Inspecionar tráfego de rede da ferramenta; frágil mas funcional |
+| 3 | **Webhooks ou triggers por e-mail** | Suficiente para o n8n reagir a eventos |
+| 4 | **Integração nativa** (Zapier / Make / n8n node) | Verificar catálogo de integrações da ferramenta |
+| 5 | **Automação de browser** (Playwright/Puppeteer via n8n) | Último recurso técnico; quebra com atualizações de UI |
+| 6 | **Passo manual + notificação** | Aceitar a etapa como humana; n8n notifica e registra |
+| 7 | **Substituir a ferramenta** | Quando a integração é crítica e nenhum nível acima funciona |
+
+**Critério de substituição:** só substituir se a integração for no caminho crítico do Output 1
+(agente de atendimento). Ferramentas de back-office (ex: Astrea) podem permanecer manuais na
+Fase 1 sem bloquear o lançamento.
+
+**Decidido por:** Consultoria (2026-06-04)
+
+---
+
 ### [YYYY-MM-DD] Ferramenta de avatar
 
 *(a preencher quando a ferramenta for escolhida)*
