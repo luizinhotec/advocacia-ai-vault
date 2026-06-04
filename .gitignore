@@ -18,6 +18,12 @@ __pycache__/
 *.pyc
 .venv/
 
+# Scripts auxiliares de geração (código vai em repositório separado)
+projeto/gerar_questionario_pdf.js
+projeto/gerar_questionario_pdf.py
+projeto/package.json
+projeto/package-lock.json
+
 # Mídia binária — vive em armazenamento externo (ver wiki/interno/assets-de-midia.md)
 *.ogg
 *.mp3
