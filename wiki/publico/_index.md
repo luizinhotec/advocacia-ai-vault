@@ -23,6 +23,7 @@ Todas as notas listadas aqui devem ter `status: revisado` antes de serem usadas 
 - [[faq]] — Perguntas frequentes de clientes (tom informativo, sem orientação concreta)
 - [[fluxo-de-atendimento]] — Como funciona o processo desde o primeiro contato até a consulta
 - [[logistica]] — Endereço, horários, formas de contato e agendamento
+- [[tom-de-voz-e-conteudo]] — Tom de voz da marca para conteúdo e agente
 
 ---
 
@@ -30,11 +31,16 @@ Todas as notas listadas aqui devem ter `status: revisado` antes de serem usadas 
 
 | Nota | Status |
 |------|--------|
-| [[institucional]] | semente |
-| [[areas-de-atuacao]] | *(a criar)* |
-| [[faq]] | *(a criar)* |
-| [[fluxo-de-atendimento]] | *(a criar)* |
-| [[logistica]] | *(a criar)* |
+| [[institucional]] | rascunho |
+| [[areas-de-atuacao]] | rascunho |
+| [[faq]] | rascunho |
+| [[fluxo-de-atendimento]] | rascunho |
+| [[logistica]] | rascunho |
+| [[tom-de-voz-e-conteudo]] | rascunho |
+
+> Compiladas a partir das respostas da cliente (Jotform 2026-06-03) — fonte:
+> `raw/publico/2026-06-03_briefing-institucional-publico.md`. Nenhuma está `revisado`:
+> aguardam aprovação humana antes de alimentar o agente de atendimento.
 
 ---
 
