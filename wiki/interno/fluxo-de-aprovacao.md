@@ -2,8 +2,9 @@
 titulo: "Fluxo de Aprovação de Conteúdo"
 camada: interno
 status: semente
-fontes: []
-atualizado_em: "2026-05-30"
+fontes:
+  - raw/interno/2026-06-03_respostas-questionario.md
+atualizado_em: "2026-06-04"
 tags:
   - aprovacao
   - governanca

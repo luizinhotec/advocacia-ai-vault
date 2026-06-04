@@ -2,8 +2,10 @@
 titulo: "Arquitetura da Solução"
 camada: interno
 status: em-revisao
-fontes: [reuniao-inicial-ribeiro-abreu, plano-curatela-criacao, curatela-ferramentas]
-atualizado_em: 2026-06-04
+fontes:
+  - raw/interno/AAAA-MM-DD_reuniao-inicial-ribeiro-abreu.md
+  - raw/interno/2026-06-03_respostas-questionario.md
+atualizado_em: "2026-06-04"
 tags:
   - arquitetura
   - tecnico
@@ -120,6 +122,7 @@ Fase 3. Atenção: a cliente está negociando com a Humanitech justamente isso �
 ## Notas relacionadas
 
 - [[plano-curatela-criacao]]
+- [[decisoes-de-projeto]]
 - [[fluxo-conversacional]]
 - [[conformidade-lgpd-chatbot]]
 - [[gestao-de-leads]]
