@@ -59,7 +59,7 @@ Contratação
 
 | Decisão | Opções | Escolhido |
 |---------|--------|-----------|
-| Ferramenta | HubSpot (gratuito) / Pipedrive / Notion / Google Planilhas / CRM próprio no n8n+PostgreSQL | *(a decidir com a cliente)* |
+| Ferramenta | PostgreSQL (instância do orquestrador) | **DECIDIDO** |
 | Quem alimenta | n8n automaticamente a partir das conversas do agente | Preferência — minimiza trabalho manual |
 | Integração com agente WhatsApp? | Sim — n8n grava lead ao detectar novo contato | DECIDIDO (consequência da eliminação do Ravi) |
 | Migração do Ravi | Exportar leads existentes antes de cancelar | *(a executar antes do desligamento)* |

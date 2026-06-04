@@ -161,10 +161,10 @@ sem latência extra de webhook intermediário, e stack unificado no ecossistema 
 - Dois números separados (confuso para o cliente final)
 
 **Consequências:**
-- O funil/pipeline Kanban do RaviCRM precisa ser replicado no n8n (ou em ferramenta CRM leve).
+- CRM de substituição: **PostgreSQL** na mesma instância do orquestrador (já provisionada). n8n grava/lê leads nativamente via node Postgres.
 - Dados de leads hoje no Ravi precisam ser migrados antes do desligamento.
 - A conta RaviCRM pode ser cancelada após migração validada.
-- [[gestao-de-leads]] precisa mapear o novo CRM de substituição.
+- Tabela `usuarios` já existe no banco — mapear schema de leads a partir daí.
 
 **Decidido por:** Consultoria + gestor do projeto (2026-06-04) — confirmar com a cliente
 
