@@ -87,7 +87,7 @@ Regra de arquitetura inegociável, para evitar qualquer dúvida:
 |---------|-------------------|-----------------|
 | Jusbrasil / DataJud | Consulta e monitoramento processual | ❌ Nunca |
 | Astrea / software jurídico | Prazos, peças, dados do processo | ❌ Nunca |
-| RaviCRM | Dados de leads e clientes | ❌ Nunca |
+| PostgreSQL (VPS da cliente) | CRM de leads — dados em trânsito no orquestrador | ❌ Nunca |
 | n8n / orquestrador | Logs de conversa, dados em trânsito | ❌ Nunca |
 | Credenciais / tokens | Segredos de sistema | ❌ Nunca |
 | Este vault | Conhecimento institucional público + documentação interna | ✅ Apenas Markdown |

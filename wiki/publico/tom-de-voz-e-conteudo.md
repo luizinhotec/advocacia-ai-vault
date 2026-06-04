@@ -1,10 +1,20 @@
 ---
-titulo: Tom de Voz e Conteúdo
+titulo: "Tom de Voz e Conteúdo"
 camada: publico
 status: rascunho
-fontes: [site-ribeiroabreuadvogados.com, blog, facebook-ribeiroabreuadvogados, instagram-ribeiroabreuadv, raw/publico/2026-06-03_briefing-institucional-publico.md]
-atualizado_em: 2026-06-04
-tags: [tom-de-voz, conteudo, marca, ribeiro-abreu, bloco-7]
+fontes:
+  - site-ribeiroabreuadvogados.com
+  - blog
+  - facebook-ribeiroabreuadvogados
+  - instagram-ribeiroabreuadv
+  - raw/publico/2026-06-03_briefing-institucional-publico.md
+atualizado_em: "2026-06-04"
+tags:
+  - tom-de-voz
+  - conteudo
+  - marca
+  - ribeiro-abreu
+  - bloco-7
 ---
 
 # Tom de Voz e Conteúdo — Ribeiro Abreu Advogados

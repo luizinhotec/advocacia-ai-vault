@@ -144,7 +144,7 @@ administrativas e jurídicas"* e *"integração com WhatsApp, CRM e demais ferra
 - Nunca usar o avatar para simular uma consulta ou triagem
 - Nunca publicar sem aprovação do(a) titular da voz
 
-**Tecnologia:** *(a definir — HeyGen / D-ID / ElevenLabs + ferramenta de avatar / outro)*
+**Tecnologia:** HeyGen (avatar em vídeo) + ElevenLabs (clonagem de voz + TTS). Decisão registrada em [[decisoes-de-projeto]].
 
 **Autorização:** obrigatória — ver [[consentimento-voz-clonada]]
 

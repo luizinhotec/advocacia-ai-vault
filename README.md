@@ -82,6 +82,6 @@ feat:  nova nota ou nova seção de conteúdo relevante
 
 - [`SCHEMA.md`](SCHEMA.md) — regras do bibliotecário LLM
 - [`wiki/publico/_index.md`](wiki/publico/_index.md) — mapa do conteúdo público
-- [`wiki/interno/_index.md`](wiki/interno/_index.md) — mapa do conteúdo interno *(a criar)*
+- [`wiki/interno/_index.md`](wiki/interno/_index.md) — mapa do conteúdo interno
 - [`raw/publico/README.md`](raw/publico/README.md) — o que entra no raw público
 - [`raw/interno/README.md`](raw/interno/README.md) — o que entra no raw interno

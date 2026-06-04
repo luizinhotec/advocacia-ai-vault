@@ -5,6 +5,7 @@ status: rascunho
 fontes:
   - raw/interno/2026-05-30_anuncio-vaga-consultor-ia.md
   - raw/interno/2026-05-30_audio-primeiro-contato.md
+  - raw/interno/2026-06-03_respostas-questionario.md
 atualizado_em: "2026-06-03"
 tags:
   - decisoes
@@ -283,9 +284,19 @@ Obter acesso às docs ao contratar o plano.
 
 ---
 
-### [YYYY-MM-DD] Canal principal do agente de atendimento
+### [2026-06-04] Canal principal do agente de atendimento
 
-*(a preencher — WhatsApp Business API / widget no site / outro)*
+**Contexto:** Precisávamos definir o canal de entrada do Output 1.
+
+**Decisão:** **WhatsApp Business API (Meta Cloud API oficial)** como canal primário. Widget no site avaliado na Fase 2.
+
+**Motivo:** É o canal onde os contatos já chegam hoje. Resolve a dor central da cliente sem mudar o comportamento dos usuários.
+
+**Alternativas descartadas:** Widget no site como canal primário — foco inicial é WhatsApp; site pode ser adicionado depois.
+
+**Consequências:** Requer verificação de negócio pela Meta (processo pode levar semanas — iniciar cedo). Número de WhatsApp Business da cliente deve ser migrado para a API.
+
+**Decidido por:** Consultoria + confirmado pela cliente no questionário (2026-06-03) e arquitetura (2026-06-04). Ver [[arquitetura-da-solucao]].
 
 ---
 
