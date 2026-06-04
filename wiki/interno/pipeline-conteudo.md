@@ -54,9 +54,9 @@ Define como um conteúdo vai da ideia à publicação — ferramentas, responsá
 
 | Decisão | Opções | Escolhido |
 |---------|--------|-----------|
-| Ferramenta de design | Canva / Adobe Express / Figma / IA generativa | *(a decidir)* |
+| Ferramenta de design | Canva / Adobe Express / IA generativa | *(a definir após [[identidade-visual]])* |
 | Template base | *(a criar após [[identidade-visual]] estar definida)* | |
-| Quem cria | Consultoria / Escritório / Ambos | *(a decidir)* |
+| Quem cria | Consultoria | **DECIDIDO** |
 
 ### Vídeos com avatar
 
@@ -96,9 +96,9 @@ Estrutura de pastas: *(a definir — ex: `/YYYY-MM/canal/tipo/nome-do-post`)*
 
 | Decisão | Opções | Escolhido |
 |---------|--------|-----------|
-| Ferramenta de agendamento | Buffer / Later / Meta Business Suite / manual | *(a decidir)* |
-| Quem agenda | Consultoria / Escritório | *(a decidir)* |
-| Quem publica | Ferramenta automatizada / Manual | *(a decidir)* |
+| Ferramenta de agendamento | Buffer / Meta Business Suite | *(a definir)* |
+| Quem agenda | Consultoria | **DECIDIDO** |
+| Quem publica | Consultoria (ferramenta automatizada) | **DECIDIDO** |
 
 ---
 

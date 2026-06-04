@@ -36,6 +36,36 @@ Toda decisão técnica ou de produto relevante é registrada aqui no formato ADR
 
 ## Decisões registradas
 
+### [2026-06-04] Consultoria constrói, implanta e opera tudo
+
+**Contexto:** O modelo de entrega precisava ser definido — a cliente faz sozinha, a consultoria
+entrega e a cliente opera, ou a consultoria opera continuamente?
+
+**Decisão:** **A consultoria constrói, implanta e opera todo o stack.** A cliente não precisa
+saber fazer — ela aprova, usa e recebe os resultados.
+
+**Motivo:** A cliente foi explícita no áudio de primeiro contato: *"não quero aprender a fazer,
+quero que alguém implante e oriente."* Relação continuada com visitas presenciais periódicas
+na Região Serrana/RJ.
+
+**O que a consultoria faz:**
+- Configura e opera n8n, PostgreSQL, integrações (WhatsApp, ZapSign, DataJud)
+- Constrói e mantém o agente de atendimento (Output 1)
+- Produz todo o conteúdo para redes sociais (Output 2) — pauta, texto, arte, agendamento
+- Gera e edita os vídeos com avatar (Output 3) — roteiro, geração HeyGen, publicação
+- Mantém e evolui o vault de conhecimento
+- Treina a equipe presencialmente no uso do Claude Desktop/skills
+
+**O que fica com a cliente (escritório):**
+- Aprovar conteúdo antes de publicar (SLA 48h, canal WhatsApp, evitar segundas)
+- Fornecer briefings, informações novas e feedback
+- Assinar termos (DPA, consentimento de voz)
+- Decisões jurídicas e estratégicas do negócio
+
+**Decidido por:** Consultoria + confirmado pela cliente no áudio de primeiro contato
+
+---
+
 ### [2026-05-30] Uso do padrão LLM Wiki para o vault
 
 **Contexto:** Precisávamos de uma estrutura de conhecimento versionada, navegável no Obsidian e consumível por agentes LLM.

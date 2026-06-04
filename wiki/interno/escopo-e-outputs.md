@@ -161,7 +161,7 @@ administrativas e jurídicas"* e *"integração com WhatsApp, CRM e demais ferra
 | Fornecer briefing e conteúdo bruto | **R** (responsável) | A (apoia) |
 | Compilar vault e criar roteiros | A (apoia) | **R** (responsável) |
 | Aprovar conteúdo antes de publicar | **R** (responsável) | — |
-| Publicar nas redes sociais | *(a definir)* | *(a definir)* |
+| Publicar nas redes sociais | — | **R** (responsável) |
 | Manutenção do vault | A (apoia) | **R** (responsável) |
 | Treinamento do agente de atendimento | A (apoia) | **R** (responsável) |
 

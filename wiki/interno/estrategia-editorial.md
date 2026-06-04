@@ -67,7 +67,7 @@ Todo conteúdo produzido deve se encaixar em um dos pilares abaixo. Isso garante
    Nenhum conteúdo é publicado sem aprovação do responsável.
 
 5. PUBLICAÇÃO
-   *(a definir — quem publica: escritório ou consultoria?)*
+   **Consultoria publica** — escritório aprova antes (SLA 48h via WhatsApp)
 
 6. ANÁLISE
    Métricas revisadas *(a definir — mensal? quinzenal?)* e vault atualizado se necessário.
