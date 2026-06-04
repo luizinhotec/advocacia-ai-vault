@@ -1,9 +1,10 @@
 ---
 titulo: "Estratégia Editorial"
 camada: interno
-status: semente
-fontes: []
-atualizado_em: "2026-05-30"
+status: rascunho
+fontes:
+  - "raw/interno/2026-06-03_respostas-questionario.md"
+atualizado_em: "2026-06-04"
 tags:
   - editorial
   - conteudo
@@ -33,11 +34,15 @@ Todo conteúdo produzido deve se encaixar em um dos pilares abaixo. Isso garante
 
 ## Frequência por canal
 
+**Canais que a cliente usa/quer (Bloco 3):** Instagram, LinkedIn, YouTube, TikTok, Facebook.
+**Canal prioritário do público:** WhatsApp. Frequências ainda **a definir** com a cliente.
+
 | Canal | Frequência | Formato prioritário |
 |-------|-----------|---------------------|
 | Instagram | *(a definir — ex: 3x/semana)* | Carrossel educativo + Reels com avatar |
 | LinkedIn | *(a definir — ex: 2x/semana)* | Post longo + artigo ocasional |
-| YouTube / Reels | *(a definir)* | Vídeo curto com avatar (60–90s) |
+| YouTube / TikTok / Reels | *(a definir)* | Vídeo curto com avatar (60–90s) |
+| Facebook | *(a definir)* | Repost de Instagram / institucional |
 | WhatsApp (broadcast) | *(a definir)* | Texto + link para conteúdo |
 
 ---

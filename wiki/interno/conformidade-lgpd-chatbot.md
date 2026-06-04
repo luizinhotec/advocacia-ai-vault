@@ -69,6 +69,21 @@ Obrigações legais específicas para o atendimento digital (chatbot, redes soci
 
 ---
 
+## Fronteira de dados — o que nunca entra no vault Git
+
+Regra de arquitetura inegociável, para evitar qualquer dúvida:
+
+- **Dados processuais** (andamentos, números de processo, peças, consultas via Jusbrasil/DataJud)
+  transitam **somente** no orquestrador (n8n) e nas ferramentas (CRM/ERP) — **nunca** neste
+  repositório Git.
+- **Dados de leads/clientes** (nome, telefone, conteúdo de conversa) vivem no CRM/orquestrador,
+  **nunca** no vault.
+- **Credenciais e tokens** ficam em gestão de segredos fora do repositório — nunca versionados.
+- O vault Git contém **apenas conhecimento institucional e de projeto** (Markdown), conforme
+  `CLAUDE.md`. Ver também [[arquitetura-da-solucao]] e [[gestao-de-leads]].
+
+---
+
 ## Sigilo profissional (EOAB art. 34, VII)
 
 O chatbot pode receber relatos de situações jurídicas sensíveis dos usuários. Regras:
