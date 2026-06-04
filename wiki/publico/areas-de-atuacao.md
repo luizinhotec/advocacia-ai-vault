@@ -4,6 +4,7 @@ camada: publico
 status: rascunho
 fontes:
   - raw/publico/2026-06-03_briefing-institucional-publico.md
+  - raw/publico/2026-06-04_extracao-site.md
 atualizado_em: "2026-06-04"
 tags:
   - areas-de-atuacao
@@ -53,8 +54,11 @@ a orientação ajuda a entender o que se aplica a cada situação.
 
 ## Outras áreas
 
-- **Família e Sucessões** — questões familiares e de herança/inventário.
-  *(detalhar — `[CONFIRMAR]`)*
+- **Família e Sucessões** — questões familiares e de herança/inventário (o escritório mantém
+  uma vertical dedicada à área de família). *(detalhar — `[CONFIRMAR]`)*
+- **Direito do Consumidor — transporte aéreo** — defesa do consumidor em problemas com voos:
+  cancelamento, atraso, overbooking, perda de conexão e extravio ou dano de bagagem.
+  *(área divulgada no site do escritório)*
 - **Imobiliário** — questões envolvendo imóveis.
 - **Tributário** — questões relacionadas a tributos.
 

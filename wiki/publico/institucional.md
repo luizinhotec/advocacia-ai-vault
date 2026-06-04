@@ -4,6 +4,7 @@ camada: publico
 status: rascunho
 fontes:
   - raw/publico/2026-06-03_briefing-institucional-publico.md
+  - raw/publico/2026-06-04_extracao-site.md
 atualizado_em: "2026-06-04"
 tags:
   - institucional
@@ -28,8 +29,16 @@ Carmo — Rio de Janeiro/RJ, na Região Serrana do estado. Ver [[logistica]].
 
 ## História e fundação
 
-Escritório fundado e liderado pela advogada Hyvana Ribeiro Abreu.
-*(História completa a ser extraída do site www.ribeiroabreuadvogados.com — `[CONFIRMAR]`.)*
+O Ribeiro Abreu Advogados é um escritório com mais de 17 anos de existência, liderado pela
+advogada Dra. Hyvana Ribeiro Abreu e formado por uma equipe de advogadas especializadas, com
+atuação aprofundada e atualizada em suas áreas. O atendimento é oferecido de forma online e
+presencial, adaptando-se às necessidades de cada cliente.
+
+<!-- LINT: o site indica "17 anos de existência"; a cliente informou "18 anos" (de carreira) no
+questionário — reconciliar (existência do escritório vs. carreira da advogada). A origem/história
+de fundação (como surgiu, ano exato, trajetória) não está publicada no site — coletar com a
+advogada antes de marcar `revisado`. Fontes: raw/publico/2026-06-04_extracao-site.md. -->
+
 
 ## Missão
 
@@ -64,7 +73,8 @@ revisor/advogada confirmar que está confortável com a divulgação. Fonte do d
 ## O que diferencia o atendimento
 
 Linguagem simples e acessível, atendimento próximo e humanizado, uso de tecnologia,
-transparência, atuação educativa e visão multidisciplinar.
+transparência, atuação educativa e visão multidisciplinar. O escritório atende tanto online
+quanto presencialmente, adaptando-se às necessidades de cada cliente.
 
 ---
 
