@@ -24,7 +24,7 @@
 | **Jusbrasil** | Jurídico (processual) | Consulta/monitoramento de processos | API enterprise ⚠️ — usar DataJud (CNJ) grátis | **DataJud como primário** |
 | **RaviCRM** | CRM / WhatsApp + IA | Leads, funil, atendimento com IA 24/7 | API + webhook (Pro R$497/mês) — docs não públicas | **ELIMINAR** — substituído por n8n+Claude. Migrar dados de leads antes de cancelar. |
 | **Astrea (Aurum)** | ERP jurídico | Processos, prazos, back-office | ❌ Sem API pública | Fase 1: manual; Fase 2: substituir |
-| **LegalMail** | Intimações / petições | Peticionar + capturar intimações | ⚠️ Portal dev em `app.legalmail.com.br/dev/` — verificar acesso | Mapear se automação de intimações é escopo |
+| **LegalMail** | Intimações / petições | Peticionar + capturar intimações | ✅ API (portal dev autenticado) — obter docs após contratar | **INTEGRAR** — automação de intimações e peticionamento. Plano VIP ~R$997/mês. |
 | **Manus** | Agente autônomo | Tarefas gerais com IA | Compatível com MCP — **adquirida pela Meta** | Coexistir; consolidar no Claude |
 | **Adapta** | Agregador de LLMs | Interface unificada Claude/GPT/Gemini | ❌ Sem API de integração externa (só interface web) | Coexistir; cliente migra para Claude direto |
 | **Humanitech** | Chatbot WhatsApp IA (≠ avatar/voz) | Atendimento WhatsApp 24h, leads, CRM | API + n8n nativos | **ELIMINAR** — sobreposição total com Output 1 (n8n+Claude). Economia ~R$1.688/mês. |

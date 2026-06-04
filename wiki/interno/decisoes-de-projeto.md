@@ -234,6 +234,35 @@ de atendimento superior à IA genérica da Humanitech. Economia estimada: **~R$ 
 
 ---
 
+### [2026-06-04] Incluir LegalMail — automação de intimações e peticionamento
+
+**Contexto:** A cliente citou "como está o meu processo?" como a pergunta que mais cansa de
+responder. O LegalMail captura intimações judiciais automaticamente e centraliza o
+peticionamento — elimina o monitoramento manual de tribunais. É a frente de automação
+jurídica interna que estava "em avaliação" em [[escopo-e-outputs]].
+
+**Decisão:** **Incluir o LegalMail no stack.** Integrar ao n8n para automação de:
+- Recebimento e notificação de intimações (aviso automático à advogada)
+- Peticionamento centralizado (sem acessar cada tribunal individualmente)
+- Notificação ao cliente sobre andamento processual via WhatsApp
+  *(apenas o que a advogada autorizar a compartilhar — nunca dado sigiloso raw)*
+
+**Plano provável:** VIP (2.000 processos) — R$ 997/mês.
+Confirmar volume real de processos ativos com a cliente antes de contratar.
+
+**API:** portal dev existe (`app.legalmail.com.br/dev/`) — documentação acessível após autenticação.
+Obter acesso às docs ao contratar o plano.
+
+**Consequências:**
+- Frente de automação jurídica interna confirmada — [[escopo-e-outputs]] atualizado.
+- Governança de dados processual a definir antes do lançamento — ver [[conformidade-lgpd-chatbot]].
+- O Astrea passa a candidato a substituição mais forte (LegalMail cobre parte da sua função).
+- Custo adicionado: ~R$ 997/mês — ver [[custos-e-orcamento]].
+
+**Decidido por:** Consultoria + gestor do projeto (2026-06-04) — confirmar plano com a cliente
+
+---
+
 ### [2026-06-04] Build próprio para avatar e voz — HeyGen + ElevenLabs
 
 **Contexto:** Output 3 (avatar + voz clonada) precisava de ferramentas com API para automação.

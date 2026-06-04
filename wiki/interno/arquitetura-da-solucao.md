@@ -55,7 +55,8 @@ Estratégia: **integrar → coexistir → substituir, gradualmente.** O orquestr
 | Jusbrasil | Consulta/monitoramento processual | DECIDIDO ⚠️ | API existe (`api.jusbrasil.com.br/docs`) mas requer contrato enterprise — não é acesso aberto. **Usar DataJud (CNJ) como fallback primário:** gratuito, +80 M processos, 90 tribunais, auth por chave pública, sem custo. |
 | DataJud (CNJ) | Fallback processual gratuito | DECIDIDO ✅ | API REST pública, gratuita, documentada em `datajud-wiki.cnj.jus.br`. Cobre todos os tribunais obrigados a reportar ao CNJ. |
 | RaviCRM | CRM de relacionamento (leads/funil/WhatsApp) | **ELIMINAR** ❌ | Conflito direto: Ravi já tem IA própria no WhatsApp via Meta Cloud API. Decisão: substituir por n8n+Claude. Cancelar conta após migração dos dados de leads. Ver [[decisoes-de-projeto]]. |
-| Astrea | ERP jurídico (processos/prazos) | A CONFIRMAR ❌ | **Confirmado: sem API pública.** Tem integração nativa apenas com Clieent CRM (parceria Aurum). Candidato a substituição na Fase 2. Na Fase 1: passo manual + notificação via n8n. |
+| LegalMail | Peticionamento + intimações judiciais | DECIDIDO ✅ | API existe (portal dev autenticado). Plano VIP R$997/mês (2.000 processos). Integrar ao n8n para notificações automáticas e resposta de andamento ao cliente. |
+| Astrea | ERP jurídico (processos/prazos) | SUBSTITUIR ❌ | Sem API pública. LegalMail cobre parte da sua função com API. Candidato a substituição completa na Fase 2. Na Fase 1: desligar gradualmente. |
 
 ### Integração de agenda
 

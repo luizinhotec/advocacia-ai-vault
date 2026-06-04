@@ -66,11 +66,11 @@ A cliente citou querer espelhar agentes que viu em um curso: **marketing, atendi
 protocolo nos tribunais e peticionamento**. O anúncio reforça *"automação de tarefas
 administrativas e jurídicas"* e *"integração com WhatsApp, CRM e demais ferramentas"*.
 
-> ⚠️ **Tensão a resolver.** Peticionamento, protocolo e gestão de casos lidam com **dados
-> sensíveis, número de processo e sigilo profissional** (art. 34, VII, EOAB) — hoje listados
-> em "O que está fora do escopo" e vetados no `SCHEMA.md`. Decidir se entram (e com qual
-> governança de dados/LGPD) é **questão aberta** para a reunião inicial — ver
-> [[decisoes-de-projeto]]. **Não decidir unilateralmente.**
+> **Decisão (2026-06-04):** automação de intimações e peticionamento **entra no escopo**
+> via LegalMail + n8n. Ferramenta: LegalMail (plano VIP ~R$997/mês).
+> Dados processuais transitam apenas no orquestrador e no LegalMail — **nunca** neste vault.
+> Governança de dados a definir antes do lançamento — ver [[conformidade-lgpd-chatbot]]
+> e [[decisoes-de-projeto]].
 
 ---
 

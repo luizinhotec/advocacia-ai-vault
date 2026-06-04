@@ -33,6 +33,14 @@ Atualizar sempre que um valor for confirmado ou uma ferramenta for adicionada/re
 
 ---
 
+## Custos confirmados — Automação jurídica interna
+
+| Item | Ferramenta | Valor | Periodicidade | Observação |
+|------|-----------|-------|--------------|------------|
+| Peticionamento + intimações | LegalMail VIP | **~R$ 997/mês** | Mensal | 2.000 processos. Confirmar volume real antes de contratar. |
+
+---
+
 ## A cotar — Fase 1
 
 | Item | Ferramenta | Estimativa | Observação |
