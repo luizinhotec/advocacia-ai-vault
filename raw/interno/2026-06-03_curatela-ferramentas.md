@@ -27,7 +27,7 @@
 | **LegalMail** | Intimações / petições | Peticionar + capturar intimações | ⚠️ Portal dev em `app.legalmail.com.br/dev/` — verificar acesso | Mapear se automação de intimações é escopo |
 | **Manus** | Agente autônomo | Tarefas gerais com IA | Compatível com MCP — **adquirida pela Meta** | Coexistir; consolidar no Claude |
 | **Adapta** | Agregador de LLMs | Interface unificada Claude/GPT/Gemini | ❌ Sem API de integração externa (só interface web) | Coexistir; cliente migra para Claude direto |
-| **Humanitech** | Avatar / voz clonada | Clone e produção de conteúdo | ❓ Não encontrado publicamente | ⚠️ Build vs buy Output 3 — confirmar com cliente |
+| **Humanitech** | Avatar / voz clonada | Clone e produção de conteúdo | Sem API conhecida | **ELIMINAR** — substituído por HeyGen + ElevenLabs (build próprio) |
 | ChatGPT | LLM | Uso geral | API OpenAI ✅ | Coexistir; consolidar no Claude |
 | Gemini | LLM | Uso geral | API Google ✅ | Coexistir; consolidar no Claude |
 

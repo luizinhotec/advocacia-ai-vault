@@ -170,15 +170,29 @@ sem latência extra de webhook intermediário, e stack unificado no ecossistema 
 
 ---
 
-### [YYYY-MM-DD] Ferramenta de avatar
+### [2026-06-04] Build próprio para avatar e voz — substituir Humanitech
 
-*(a preencher quando a ferramenta for escolhida)*
+**Contexto:** A cliente estava negociando com a Humanitech para o Output 3 (avatar + voz
+clonada). Humanitech não tem API conhecida — modelo de serviço gerenciado, sem automação.
 
----
+**Decisão:** **Build próprio com HeyGen (avatar) + ElevenLabs (voz).** Eliminar Humanitech.
 
-### [YYYY-MM-DD] Ferramenta de clonagem de voz
+**Motivo:** Controle total do pipeline de produção. Ambas as ferramentas têm API, permitem
+automação via n8n e integração com o restante do stack. Sem dependência de terceiro para
+cada vídeo produzido.
 
-*(a preencher quando a ferramenta for escolhida)*
+**Ferramentas escolhidas:**
+- **HeyGen** — geração de avatar em vídeo. API disponível. Plano Creator $29/mês; API a partir de $5.
+- **ElevenLabs** — clonagem de voz + TTS. API disponível. Planos flexíveis por caractere/mês.
+
+**Alternativa descartada:** Humanitech (serviço gerenciado, sem API, custo e controle desconhecidos).
+
+**Consequências:**
+- Provisionar contas HeyGen e ElevenLabs antes da Fase 3.
+- Clonar a voz da Dra. Hyvana no ElevenLabs **somente após** termo formal assinado — ver [[consentimento-voz-clonada]].
+- Roteiro de vídeo segue o template obrigatório — ver [[roteiro-padrao-video]].
+
+**Decidido por:** Consultoria + gestor do projeto (2026-06-04) — confirmar com a cliente
 
 ---
 

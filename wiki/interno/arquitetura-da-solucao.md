@@ -94,10 +94,10 @@ Fase 3. Atenção: a cliente está negociando com a Humanitech justamente isso �
 
 | Decisão | Opções | Status |
 |---------|--------|--------|
-| Ferramenta de avatar | HeyGen / D-ID / Synthesia | A DECIDIR |
-| Ferramenta de voz | ElevenLabs / Play.ht | A DECIDIR |
-| Hospedagem de vídeos | YouTube / Drive | A DECIDIR |
-| Consentimento de voz | Obrigatório explicar e autorizar antes | DECIDIDO (regra) |
+| Ferramenta de avatar | HeyGen | DECIDIDO ✅ | API disponível. Planos a partir de $29/mês (Creator). API a partir de $5. Build próprio — não usar Humanitech. |
+| Ferramenta de voz | ElevenLabs | DECIDIDO ✅ | API TTS + clonagem de voz. Build próprio — não usar Humanitech. |
+| Hospedagem de vídeos | YouTube / Drive | A DECIDIR | |
+| Consentimento de voz | Obrigatório antes de qualquer produção | DECIDIDO (regra) | Ver [[consentimento-voz-clonada]] |
 
 ---
 
