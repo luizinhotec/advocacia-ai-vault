@@ -24,7 +24,17 @@ Documentação do projeto de consultoria de IA. Este conteúdo **nunca** aliment
 | [[estrategia-editorial]] | Calendário, formatos, frequência de publicação | semente |
 | [[decisoes-de-projeto]] | Registro de decisões técnicas e de produto | semente |
 
-## 2. Identidade e produção de conteúdo
+## 2. Arquitetura e operação da solução
+
+| Nota | O que cobre | Status |
+|------|-------------|--------|
+| [[arquitetura-da-solucao]] | Stack técnica completa — agente, conteúdo, avatar, infra, custos | semente |
+| [[fluxo-conversacional]] | Design da conversa do agente: abertura, intenções, escalada, fallback | semente |
+| [[pipeline-conteudo]] | Geração, armazenamento, agendamento e publicação de posts e vídeos | semente |
+| [[gestao-de-leads]] | Funil de novos clientes, CRM, follow-up, fontes de entrada | semente |
+| [[dashboard-advogada]] | Métricas e visibilidade do negócio para a advogada | semente |
+
+## 3. Identidade e produção de conteúdo
 
 | Nota | O que cobre | Status |
 |------|-------------|--------|
@@ -34,12 +44,13 @@ Documentação do projeto de consultoria de IA. Este conteúdo **nunca** aliment
 | [[roteiro-padrao-video]] | Estrutura obrigatória de todo vídeo gerado | semente |
 | [[assets-de-midia]] | Onde vivem arquivos de vídeo/imagem (fora do Git) | semente |
 
-## 3. Governança e aprovação
+## 4. Governança, aprovação e conformidade
 
 | Nota | O que cobre | Status |
 |------|-------------|--------|
 | [[fluxo-de-aprovacao]] | Quem aprova o quê, por canal, antes de publicar | semente |
 | [[checklist-publicacao]] | Lista de verificação pré-publicação (texto, vídeo, avatar) | semente |
+| [[conformidade-lgpd-chatbot]] | LGPD aplicada ao chatbot — aviso de privacidade, DPA, retenção | semente |
 
 ---
 
