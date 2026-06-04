@@ -68,8 +68,8 @@ Estratégia: **integrar → coexistir → substituir, gradualmente.** O orquestr
 
 | Decisão | Escolhido | Status | Observação |
 |---------|-----------|--------|------------|
-| Onde roda o n8n | VPS da consultoria (self-host Docker) | DECIDIDO ✅ | Mesma VPS do PostgreSQL já provisionado. Consultoria opera e mantém. |
-| Banco de dados | PostgreSQL | DECIDIDO ✅ | CRM de substituição ao RaviCRM. Mesma instância do orquestrador (já provisionada). n8n lê/escreve nativamente via node Postgres. |
+| Onde roda o n8n | VPS dedicada da cliente (self-host Docker) | DECIDIDO ✅ | VPS provisionada no momento da implantação, em nome da cliente. Consultoria opera e mantém remotamente. Dados da cliente ficam na infra dela (LGPD — cliente é controladora). |
+| Banco de dados | PostgreSQL | DECIDIDO ✅ | CRM de substituição ao RaviCRM. Roda na VPS dedicada da cliente junto com o n8n. n8n lê/escreve nativamente via node Postgres. |
 | Repositório de código | GitHub, repo SEPARADO deste vault | DECIDIDO | Vault só com conhecimento; código não entra aqui (CLAUDE.md). |
 | Conta(s) Claude | A confirmar com a cliente | A CONFIRMAR (cliente) | Bloco 1B: ela já usa Claude e tem skills prontas. |
 

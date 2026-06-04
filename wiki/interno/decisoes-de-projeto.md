@@ -62,6 +62,9 @@ na Região Serrana/RJ.
 - Assinar termos (DPA, consentimento de voz)
 - Decisões jurídicas e estratégicas do negócio
 
+**Infraestrutura:** VPS dedicada provisionada para a cliente no momento da implantação.
+Dados ficam na infra dela — consultoria opera remotamente. Ver decisão de infra abaixo.
+
 **Decidido por:** Consultoria + confirmado pela cliente no áudio de primeiro contato
 
 ---
