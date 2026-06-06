@@ -19,16 +19,10 @@ formal (ou pauta de reunião).
 
 ## Bloco 1 — Agente de Atendimento (Output 1)
 
-### 1.1 Mecanismo de CTA (conversão)
+### ~~1.1 Mecanismo de CTA (conversão)~~ ✅ RESOLVIDO (2026-06-05)
 
-**Pergunta:** Quando um lead está qualificado e pronto para agendar, o que acontece?
-
-- (a) Enviamos um link de calendário para ele escolher o horário sozinho?
-- (b) O bot transfere a conversa para o número da advogada/secretária?
-- (c) O bot coleta nome e horário preferido e a equipe entra em contato?
-
-**Por que precisamos:** define a última etapa do agente e toda a integração n8n.
-Sem isso o system prompt não pode ser finalizado.
+**Decisão:** O agente oferece os três caminhos e o lead escolhe o que prefere no momento.
+System prompt v1.1 atualizado. Ver [[decisoes-de-projeto]].
 
 ---
 
@@ -56,16 +50,10 @@ antes soubermos o status, antes iniciamos o processo.
 
 ---
 
-### 1.4 Canal de escalada para humano
+### ~~1.4 Canal de escalada para humano~~ ✅ RESOLVIDO (2026-06-05)
 
-**Pergunta:** Quando o agente identifica que precisa transferir para uma pessoa, para
-qual número vai?
-
-- Número pessoal da Dra. Hyvana?
-- Número de uma secretária/assistente?
-- Um grupo do WhatsApp interno?
-
-**Por que precisamos:** é o endereço que o n8n usa para o nó de transferência.
+**Decisão:** WhatsApp da Dra. Hyvana (número principal) + notificação no dashboard do orquestrador.
+Número exato configurado no n8n na implantação. Ver [[decisoes-de-projeto]].
 
 ---
 
@@ -113,6 +101,22 @@ podemos adaptar em vez de criar.
   pode haver plano mais barato.
 
 **Por que precisamos:** definir o plano correto antes de contratar.
+
+---
+
+### 2.3 Acesso à API do LegalMail
+
+**Pergunta:** Pode acessar `app.legalmail.com.br/dev/` com seu login e tirar um print
+da página de documentação da API? Se houver opção de gerar um token de API (chave de
+acesso), pode gerar e compartilhar conosco?
+
+- O LegalMail tem um portal de desenvolvedor acessível após login.
+- Com a chave de API conseguimos integrar ao n8n para: notificar automaticamente
+  quando chega uma intimação nova, e informar o cliente via WhatsApp sobre andamento
+  do processo — sem ela precisar acessar o sistema manualmente.
+
+**Por que precisamos:** a documentação técnica só é visível para usuários autenticados.
+Como ela já usa o LegalMail, é a forma mais rápida de viabilizar a integração.
 
 ---
 
@@ -184,14 +188,15 @@ de abertura do escritório para evitar inconsistência no conteúdo público.
 
 | # | Pergunta | Respondido? | Data | Canal |
 |---|----------|-------------|------|-------|
-| 1.1 | Mecanismo de CTA | ⏳ pendente | — | — |
+| 1.1 | Mecanismo de CTA | ✅ resolvido | 2026-06-05 | Gestor |
 | 1.2 | Status WhatsApp Business | ⏳ pendente | — | — |
 | 1.3 | Horário do agente | ⏳ pendente | — | — |
-| 1.4 | Canal de escalada | ⏳ pendente | — | — |
+| 1.4 | Canal de escalada | ✅ resolvido | 2026-06-05 | Gestor |
 | 1.5 | Retenção de histórico | ⏳ pendente | — | — |
 | 1.6 | Skills Claude existentes | ⏳ pendente | — | — |
 | 2.1 | Conta Claude paga | ⏳ pendente | — | — |
 | 2.2 | Volume de processos (LegalMail) | ⏳ pendente | — | — |
+| 2.3 | Acesso à API do LegalMail | ⏳ pendente | — | — |
 | 3.1 | Arquivos de marca | ⏳ pendente | — | — |
 | 3.2 | Referências de comunicação | ⏳ pendente | — | — |
 | 3.3 | Frequência de publicação | ⏳ pendente | — | — |

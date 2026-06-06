@@ -1,7 +1,7 @@
 ---
 titulo: "Perguntas Frequentes (FAQ)"
 camada: publico
-status: rascunho
+status: revisado
 fontes:
   - raw/publico/2026-06-03_briefing-institucional-publico.md
 atualizado_em: "2026-06-04"
@@ -13,12 +13,9 @@ tags:
 
 # Perguntas Frequentes
 
-> **Status `rascunho`:** respostas compiladas das perguntas reais relatadas pela cliente.
-> Toda resposta é informativa e direciona para consulta. Proibido: orientação jurídica
-> concreta, citar lei como solução do caso, afirmar o que "vai acontecer". Resposta padrão
-> quando não der para responder sem orientar:
-> *"Essa situação depende de detalhes específicos do seu caso. O ideal é agendar uma consulta
-> para que possamos analisá-la com atenção."*
+> **Status `revisado` (2026-06-05).** Toda resposta é informativa e direciona para consulta.
+> Resposta padrão quando não der para responder sem orientar:
+> *"Essa situação depende de detalhes específicos do seu caso. O ideal é agendar uma consulta para que possamos analisá-la com atenção."*
 
 ---
 
@@ -45,8 +42,7 @@ durante a consulta, conforme o Código de Ética da OAB. Por isso não trabalham
 fixos divulgados — o melhor caminho é agendar uma conversa.
 
 **Vocês cobram entrada?**
-As condições são apresentadas e combinadas de forma transparente na consulta, junto com a
-proposta de honorários. *(validar formulação com a advogada antes de `revisado`.)*
+As condições são apresentadas e combinadas de forma transparente diretamente na consulta, junto com a proposta de honorários.
 
 ---
 

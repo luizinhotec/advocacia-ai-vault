@@ -1,7 +1,7 @@
 ---
 titulo: "Logística — Contato, Endereço e Agendamento"
 camada: publico
-status: rascunho
+status: revisado
 fontes:
   - raw/publico/2026-06-03_briefing-institucional-publico.md
 atualizado_em: "2026-06-04"
@@ -14,8 +14,7 @@ tags:
 
 # Logística
 
-> **Status `rascunho`:** compilado das respostas da cliente. Números de telefone/WhatsApp,
-> e-mail e @ exatos ainda precisam ser preenchidos com os dados oficiais (`[PREENCHER]`).
+> **Status `revisado` (2026-06-05). ⚠️ Contatos provisórios** — usando dados da consultoria durante o desenvolvimento. Substituir pelos contatos oficiais do escritório antes de ir para produção.
 
 ---
 
@@ -43,9 +42,9 @@ Referência: Região Serrana do Rio de Janeiro.
 
 | Canal | Endereço/Número | Observação |
 |-------|----------------|------------|
-| WhatsApp | *(preencher número oficial)* | Canal principal — resposta rápida |
-| Telefone | *(preencher)* | |
-| E-mail | *(preencher)* | |
+| WhatsApp | (22) 2050-3638 | Canal principal — resposta rápida |
+| Telefone | (22) 2050-3638 | |
+| E-mail | luizinho.tec79@gmail.com | |
 | Site | www.ribeiroabreuadvogados.com | |
 | Instagram | @ribeiroabreuadv | |
 

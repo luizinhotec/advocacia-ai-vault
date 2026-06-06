@@ -34,7 +34,7 @@ Estratégia: **integrar → coexistir → substituir, gradualmente.** O orquestr
 | Decisão | Escolhido | Status | Justificativa |
 |---------|-----------|--------|---------------|
 | Canal | WhatsApp Business API (oficial) | DECIDIDO | É por onde os contatos chegam; resolve a dor da cliente. |
-| Provedor WhatsApp API | Meta Cloud API (oficial) | DECIDIDO ✅ | Node n8n nativo (`n8n-nodes-base.whatsapp` + WhatsApp Trigger via OAuth2). Setup: Meta for Developers → verificação de negócio → Phone Number ID + Access Token. Guias 2026 disponíveis. |
+| Provedor WhatsApp API | Evolution API (Fase 1) → Meta Cloud API (avaliar no final) | DECIDIDO ✅ | **Fase 1:** Evolution API self-hosted na VPS — sem burocracia Meta, agiliza desenvolvimento. **Final do projeto:** cliente decide se migra para Meta Cloud API oficial (node n8n nativo) ou permanece com Evolution. Migração é reconfiguração de node — sem reescrever fluxos. |
 | Widget no site | Fase posterior | A DECIDIR | Foco inicial é WhatsApp. |
 
 ### Orquestração e LLM
@@ -72,7 +72,7 @@ Estratégia: **integrar → coexistir → substituir, gradualmente.** O orquestr
 | Onde roda o n8n | VPS dedicada da cliente (self-host Docker) | DECIDIDO ✅ | VPS provisionada no momento da implantação, em nome da cliente. Consultoria opera e mantém remotamente. Dados da cliente ficam na infra dela (LGPD — cliente é controladora). |
 | Banco de dados | PostgreSQL | DECIDIDO ✅ | CRM de substituição ao RaviCRM. Roda na VPS dedicada da cliente junto com o n8n. n8n lê/escreve nativamente via node Postgres. |
 | Repositório de código | GitHub, repo SEPARADO deste vault | DECIDIDO | Vault só com conhecimento; código não entra aqui (CLAUDE.md). |
-| Conta(s) Claude | A confirmar com a cliente | A CONFIRMAR (cliente) | Bloco 1B: ela já usa Claude e tem skills prontas. |
+| Conta(s) Claude | Consultoria usa a própria na Fase 1 | DECIDIDO ✅ | Consultoria usa conta própria durante desenvolvimento. Conta da cliente provisionada antes da entrega final. Não é pré-requisito bloqueante. |
 
 ---
 

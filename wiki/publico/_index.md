@@ -29,18 +29,16 @@ Todas as notas listadas aqui devem ter `status: revisado` antes de serem usadas 
 
 ## Status geral
 
-| Nota | Status |
-|------|--------|
-| [[institucional]] | rascunho |
-| [[areas-de-atuacao]] | rascunho |
-| [[faq]] | rascunho |
-| [[fluxo-de-atendimento]] | rascunho |
-| [[logistica]] | rascunho |
-| [[tom-de-voz-e-conteudo]] | rascunho |
+| Nota | Status | Observação |
+|------|--------|------------|
+| [[institucional]] | ✅ revisado | Pendência menor: ano de fundação (Q2 pergunta 4.3) |
+| [[areas-de-atuacao]] | ✅ revisado | |
+| [[faq]] | ✅ revisado | |
+| [[fluxo-de-atendimento]] | ✅ revisado | |
+| [[logistica]] | ✅ revisado | ⚠️ Contatos provisórios da consultoria — substituir antes de produção |
+| [[tom-de-voz-e-conteudo]] | ✅ revisado | |
 
-> Compiladas a partir das respostas da cliente (Jotform 2026-06-03) — fonte:
-> `raw/publico/2026-06-03_briefing-institucional-publico.md`. Nenhuma está `revisado`:
-> aguardam aprovação humana antes de alimentar o agente de atendimento.
+> **6 de 6 notas em `revisado`** — agente tem base completa. `logistica` usa contatos provisórios da consultoria; substituir pelos dados oficiais antes de produção.
 
 ---
 

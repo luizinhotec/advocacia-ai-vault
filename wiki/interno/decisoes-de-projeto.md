@@ -300,6 +300,57 @@ Obter acesso às docs ao contratar o plano.
 
 ---
 
+### [2026-06-05] CTA do agente — três caminhos, lead escolhe
+
+**Contexto:** O system prompt v1 tinha três opções de CTA (link de calendário, transferência para humano, coleta de dados para retorno) mas exigia escolher uma antes de produção.
+
+**Decisão:** Manter os três caminhos. O agente os oferece ao lead e ele escolhe o que prefere no momento da conversa.
+
+**Consequências:** System prompt atualizado para v1.1 — seção Estágio 5 reescrita. Nenhuma opção é descartada em produção.
+
+**Decidido por:** Gestor do projeto (2026-06-05)
+
+---
+
+### [2026-06-05] Canal de escalada para humano
+
+**Contexto:** O system prompt v1 tinha `[PENDENTE 1.4]` para o canal de escalada quando o agente precisa transferir para humano.
+
+**Decisão:** Canal de escalada = **WhatsApp da Dra. Hyvana** (número principal) + **notificação no dashboard do orquestrador**. O n8n pausa o bot, dispara os dois canais e aguarda o humano assumir.
+
+**Consequências:** Sem bloqueio para produção. Dashboard já prevê notificação de escalada. Número exato da Dra. Hyvana a configurar no n8n no momento da implantação.
+
+**Decidido por:** Gestor do projeto (2026-06-05)
+
+---
+
+### [2026-06-05] WhatsApp API — Evolution API na Fase 1, Meta Cloud API avaliada no final
+
+**Contexto:** A Meta Cloud API oficial requer verificação de negócio (processo pode levar semanas) e configuração burocrática. Para a Fase 1, precisamos de agilidade.
+
+**Decisão:** Usar **Evolution API** (self-hosted, conecta WhatsApp sem Meta approval) na Fase 1 para desenvolvimento e testes. Ao final do projeto, a cliente decide se migra para a **Meta Cloud API oficial** ou continua com a Evolution.
+
+**Consequências:**
+- Sem bloqueio por burocracia da Meta na Fase 1.
+- Evolution API roda na mesma VPS do n8n.
+- Migração para Meta Cloud API (se decidida) é feita no encerramento do projeto — requer apenas reconfigurar o node de WhatsApp no n8n.
+
+**Decidido por:** Gestor do projeto (2026-06-05)
+
+---
+
+### [2026-06-05] Conta Claude — consultoria usa a própria, transfere ao final
+
+**Contexto:** A cliente ainda não tem conta Claude paga. Isso estava listado como pré-requisito bloqueante.
+
+**Decisão:** A consultoria usa a **própria conta Claude** durante o desenvolvimento e implantação. Ao final do projeto, a conta (ou uma nova conta da cliente) é configurada com a chave de API dela na VPS.
+
+**Consequências:** Não é mais pré-requisito bloqueante para a Fase 1. Provisionar conta da cliente antes da entrega final.
+
+**Decidido por:** Gestor do projeto (2026-06-05)
+
+---
+
 ## Notas relacionadas
 
 - [[escopo-e-outputs]]

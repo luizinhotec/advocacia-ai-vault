@@ -1,7 +1,7 @@
 ---
 titulo: "Institucional — O Escritório"
 camada: publico
-status: rascunho
+status: revisado
 fontes:
   - raw/publico/2026-06-03_briefing-institucional-publico.md
   - raw/publico/2026-06-04_extracao-site.md
@@ -14,8 +14,7 @@ tags:
 
 # Institucional
 
-> **Status `rascunho`:** conteúdo compilado das respostas da cliente. Aguardando revisão
-> humana antes de virar `revisado` e alimentar o agente de atendimento.
+> **Status `revisado` (2026-06-05).** Pendência menor: ano exato de fundação — pergunta 4.3 do questionário 2. Não bloqueia o agente.
 
 ---
 

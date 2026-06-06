@@ -1,7 +1,7 @@
 ---
 titulo: "Fluxo de Atendimento"
 camada: publico
-status: rascunho
+status: revisado
 fontes:
   - raw/publico/2026-06-03_briefing-institucional-publico.md
 atualizado_em: "2026-06-04"
@@ -14,9 +14,7 @@ tags:
 
 # Fluxo de Atendimento
 
-> **Status `rascunho`:** compilado das respostas da cliente, em linguagem voltada ao cliente.
-> Detalhes operacionais internos (CRM, ferramentas, distribuição interna) ficam em notas da
-> camada interna, não nesta nota pública.
+> **Status `revisado` (2026-06-05)**
 
 ---
 

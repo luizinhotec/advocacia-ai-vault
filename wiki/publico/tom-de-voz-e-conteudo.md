@@ -1,7 +1,7 @@
 ---
 titulo: "Tom de Voz e Conteúdo"
 camada: publico
-status: rascunho
+status: revisado
 fontes:
   - site-ribeiroabreuadvogados.com
   - blog
@@ -19,8 +19,7 @@ tags:
 
 # Tom de Voz e Conteúdo — Ribeiro Abreu Advogados
 
-> Inferido do material público (site, blog, redes) e **confirmado pela cliente** no
-> questionário de descoberta (2026-06-03). Ver bloco "Confirmado pela cliente" abaixo.
+> **Status `revisado` (2026-06-05).** Inferido do material público (site, blog, redes) e confirmado pela cliente no questionário de descoberta (2026-06-03).
 
 ## Tom de voz (consistente em todos os canais)
 - **Didático:** explica o direito ao cidadão comum, "dicas sobre o mundo do Direito".
