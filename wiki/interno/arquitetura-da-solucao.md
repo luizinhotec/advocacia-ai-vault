@@ -77,7 +77,8 @@ Estratégia: **integrar → coexistir → substituir, gradualmente.** O orquestr
 | Workflow n8n webhook verify | `ADV — Meta Webhook Verify` | IMPLEMENTADO ✅ | ID `aAYNgNGzLtHQ3ajo`. Responde ao GET de verificação da Meta com hub.challenge. |
 | Modelo LLM em produção | `claude-sonnet-4-6` | IMPLEMENTADO ✅ | Sonnet 4.6 adotado antes do lançamento com usuários reais (2026-06-07). Haiku descartado por qualidade conversacional insuficiente. Avaliar migração para Opus 4.8 após 30 dias com leads reais. Ver [[decisoes-de-projeto]] ADR 2026-06-07 e [[agente-recepcao-leads]] seção de custo. |
 | Segmentação de leads por área | `adv_leads.area_juridica` | IMPLEMENTADO ✅ | Coluna adicionada via ALTER TABLE. Claude retorna tag `[AREA:xxx]` em cada resposta → n8n extrai via regex → UPDATE na tabela. Novo node `Atualizar Area Lead` inserido no pipeline entre `Processar Resposta` e `Salvar Mensagens`. Ver [[decisoes-de-projeto]] ADR 2026-06-07. |
-| Repositório de código | GitHub, repo SEPARADO deste vault | DECIDIDO | Vault só com conhecimento; código não entra aqui (CLAUDE.md). |
+| Repositório de código | `luizinhotec/advocacia-n8n` (GitHub privado) | DECIDIDO ✅ IMPLEMENTADO | Workflows n8n versionados separados do vault. Colaboradores: `luizinhotec` (owner) + `LimaDevBTC` (write). |
+| Repositório de conhecimento | `luizinhotec/advocacia-ai-vault` (GitHub privado) | DECIDIDO ✅ IMPLEMENTADO | Este vault. Colaboradores: `luizinhotec` (owner) + `LimaDevBTC` (write). |
 | Conta(s) Claude | Consultoria usa a própria na Fase 1 | DECIDIDO ✅ | Consultoria usa conta própria durante desenvolvimento. Conta da cliente provisionada antes da entrega final. Não é pré-requisito bloqueante. |
 
 ---
