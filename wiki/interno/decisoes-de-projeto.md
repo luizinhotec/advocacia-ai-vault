@@ -401,6 +401,54 @@ Obter acesso às docs ao contratar o plano.
 
 ---
 
+### [2026-06-07] Modelo LLM do agente de atendimento — lançar com Sonnet 4.6
+
+**Contexto:** O agente estava usando `claude-haiku-4-5-20251001` por custo-benefício no desenvolvimento. A cliente expressou desejo de qualidade conversacional alta (referência: Claude Opus 4.8). Antes de comprometer o custo do Opus, convém validar com dados reais.
+
+**Decisão:** Migrar para **`claude-sonnet-4-6`** no lançamento com usuários reais.
+
+**Motivo:** Sonnet 4.6 oferece qualidade conversacional muito superior ao Haiku ao custo de ~R$150–400/mês para o volume esperado — muito abaixo do Opus (~R$800–2.000/mês). A diferença de qualidade conversacional entre Haiku e Sonnet justifica a migração antes de ir a produção. Se o Sonnet não satisfizer a cliente após 30 dias de conversas reais, migramos para Opus com uma linha de mudança no n8n.
+
+**O que foi alterado em 2026-06-07:**
+- `Chamar Claude` → `model: "claude-sonnet-4-6"`
+- `Salvar Mensagens` → referência no campo `modelo_llm` atualizada
+- VAULT_CONTEXT enriquecido com todas as 7 áreas jurídicas + palavras-chave
+
+**Alternativas descartadas:** Manter Haiku (qualidade insuficiente para conversa com leads reais); migrar direto para Opus (custo desnecessário antes de validar).
+
+**Consequências:** Custo mensal estimado aumenta de ~R$30–80 (Haiku) para ~R$150–400 (Sonnet). Se a cliente aprovar a qualidade, manter. Se exigir Opus, mudar em uma linha.
+
+**Decidido por:** Gestor do projeto (2026-06-07)
+
+---
+
+### [2026-06-07] Segmentação de leads por área jurídica — tag [AREA:xxx]
+
+**Contexto:** Para criar funis de conversão por especialidade (previdenciário, cível, família, consumidor, imobiliário, trabalhista, tributário), precisamos saber qual área o lead representa. Isso permite encaminhar para o profissional certo, priorizar campanhas por área e analisar volume de demanda por especialidade.
+
+**Decisão:** Claude identifica a área e a comunica via **tag estruturada no final de cada resposta** — `[AREA:xxx]`. O n8n extrai, armazena e limpa a tag antes de enviar ao lead.
+
+**Arquitetura implementada:**
+1. System prompt instrui Claude a incluir `[AREA:previdenciario]` / `[AREA:civel]` / etc. no final de **cada** resposta
+2. `Processar Resposta` (n8n Code node) extrai a tag com regex e limpa da resposta visível ao lead
+3. Novo node `Atualizar Area Lead` (n8n Postgres) salva em `adv_leads.area_juridica` com COALESCE (preserva área já identificada se nova for 'indefinido')
+4. VAULT_CONTEXT enriquecido com palavras-chave por área para orientar o modelo
+
+**Tags disponíveis:** `previdenciario` · `civel` · `familia` · `consumidor` · `imobiliario` · `trabalhista` · `tributario` · `indefinido`
+
+**Migração de banco:** coluna `area_juridica VARCHAR(50)` adicionada à tabela `adv_leads` via `ALTER TABLE` na VPS em 2026-06-07.
+
+**Fora do escopo do escritório:** Direito Penal/Criminal, Militar, Internacional — Claude é instruído a informar gentilmente e oferecer encaminhamento.
+
+**Consequências:**
+- Dashboard pode segmentar leads por área automaticamente
+- Campanhas de marketing podem ser personalizadas por área
+- Escalonamento pode ser direcionado ao profissional da especialidade correta
+
+**Decidido por:** Gestor do projeto (2026-06-07)
+
+---
+
 ## Notas relacionadas
 
 - [[escopo-e-outputs]]

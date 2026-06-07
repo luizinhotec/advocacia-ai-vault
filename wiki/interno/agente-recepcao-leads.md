@@ -70,6 +70,13 @@ O agente deve reconhecer e acolher leads de todas as áreas do escritório:
 | **Imobiliário** | "Problema com imóvel", "contrato de aluguel", "construtora" |
 | **Trabalhista** | "Fui demitido", "não recebi", "horas extras" |
 
+| **Trabalhista** | "Fui demitido", "não recebi", "horas extras", "FGTS", "assédio" |
+| **Tributário** | "Imposto atrasado", "dívida com a Receita", "MEI bloqueado", "CPF irregular" |
+
+**Fora do escopo:** Criminal/Penal, Militar, Internacional. O agente informa gentilmente que não é a especialidade do escritório e oferece encaminhamento mediante consulta.
+
+**Identificação automática de área:** Claude retorna uma tag `[AREA:xxx]` no final de cada resposta, que o n8n extrai e salva em `adv_leads.area_juridica`. O lead nunca vê a tag. Isso alimenta o funil por especialidade. Ver [[decisoes-de-projeto]] ADR 2026-06-07.
+
 **Regra:** o agente não precisa identificar a área para avançar. Entender a situação humana
 é suficiente para conduzir a conversa até o agendamento.
 
@@ -353,10 +360,12 @@ uma conversa típica usa < 5k tokens — sem risco de overflow.
 - [x] Definir mecanismo de CTA — três caminhos, lead escolhe (2026-06-05)
 - [x] Redigir o system prompt v1 — ver [[system-prompt-v1]] (2026-06-05)
 - [x] Configurar n8n + Meta Cloud API — pipeline completo implementado e testado (2026-06-07)
+- [x] Migrar modelo para `claude-sonnet-4-6` — qualidade conversacional adequada para leads reais (2026-06-07)
+- [x] Segmentação por área jurídica — tag `[AREA:xxx]` + coluna `adv_leads.area_juridica` + node `Atualizar Area Lead` (2026-06-07)
 - [ ] Aprovar o tom e os exemplos de resposta com a advogada (primeira reunião pós-implantação)
 - [ ] Registrar número definitivo na Meta (chip pré-pago — ver [[decisoes-de-projeto]])
 - [ ] Configurar System User Token permanente ao registrar número definitivo
-- [ ] Primeira conversa real com lead — avaliar qualidade e decidir entre Haiku / Sonnet / Opus
+- [ ] Primeira conversa real com lead — avaliar qualidade e decidir entre Sonnet / Opus
 
 ---
 
