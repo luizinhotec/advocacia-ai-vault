@@ -6,7 +6,7 @@ fontes:
   - raw/interno/2026-05-30_anuncio-vaga-consultor-ia.md
   - raw/interno/2026-05-30_audio-primeiro-contato.md
   - raw/interno/2026-06-03_respostas-questionario.md
-atualizado_em: "2026-06-04"
+atualizado_em: "2026-06-07"
 tags:
   - decisoes
   - projeto
@@ -348,6 +348,56 @@ Obter acesso às docs ao contratar o plano.
 **Consequências:** Não é mais pré-requisito bloqueante para a Fase 1. Provisionar conta da cliente antes da entrega final.
 
 **Decidido por:** Gestor do projeto (2026-06-05)
+
+---
+
+### [2026-06-07] Evolution API descartada — migração antecipada para Meta Cloud API
+
+**Contexto:** A Evolution API foi a escolha inicial (2026-06-05) por evitar burocracia da Meta. Ao tentar implantá-la na VPS, a Meta bloqueou a conexão com código `401 Unauthorized` — IPs de data center/VPS são rejeitados pela Meta para conexão via protocolo não-oficial. Não há contorno viável sem mudar de provedor de hospedagem.
+
+**Decisão:** Migrar imediatamente para a **Meta Cloud API oficial**. A decisão de "avaliar ao final do projeto" foi antecipada por necessidade operacional.
+
+**Motivo:** Meta Cloud API não requer que o n8n se conecte ao WhatsApp diretamente — os servidores da Meta fazem o trabalho. A VPS recebe webhooks (POST) e envia respostas via HTTPS para `graph.facebook.com`. Sem bloqueio de IP.
+
+**O que foi implementado:**
+- App Meta criado: **advocacia-wp** (App ID: `1322412393370846`)
+- Phone Number ID de teste (sandbox): `1127481100446979`
+- Webhook de verificação GET: workflow n8n `ADV — Meta Webhook Verify` (ID: `aAYNgNGzLtHQ3ajo`)
+- Webhook de recebimento POST: workflow n8n `ADV — Agente de Atendimento WhatsApp` (ID: `m1m57ANtiYdWrCjA`)
+- Túnel HTTPS: **ngrok** rodando na VPS via Docker (obrigatório — Meta exige HTTPS)
+- Credencial n8n para token Meta: `httpHeaderAuth` (ID: `R1e3XKx3Y8w9oxhC`)
+
+**Status do pipeline em 2026-06-07:** pipeline completo testado e funcionando de ponta a ponta. Claude gera respostas. Único bloqueio: número de telefone de produção.
+
+**Alternativas descartadas:** mover VPS para IP residencial (operacionalmente inviável); usar proxy reverso (não resolve o bloqueio de IP de origem).
+
+**Consequências:**
+- ngrok precisa de URL estático ou reinicialização atualiza a URL no painel Meta — prioridade baixa, tratar ao registrar número definitivo.
+- Token Meta de desenvolvimento expira em 24h — usar **System User Token** permanente ao registrar número de produção.
+- Ver [[arquitetura-da-solucao]] seção atualizada.
+
+**Decidido por:** Gestor do projeto (2026-06-07) — forçado por bloqueio técnico
+
+---
+
+### [2026-06-07] Número WhatsApp de produção — chip pré-pago dedicado
+
+**Contexto:** O número de sandbox Meta (+1 555 638-6509) é filtrado pelo WhatsApp no Brasil por ser número de teste compartilhado por milhares de desenvolvedores. O número fixo do escritório (22) 2050-xxxx já está no WhatsApp Business App — migrar para Cloud API desconectaria o app e perderia histórico. O número pessoal do contato do projeto já tem WhatsApp ativo.
+
+**Decisão:** Adquirir um **chip pré-pago físico dedicado** exclusivamente para o bot WhatsApp.
+
+**Motivo:** Chip físico é número real, não compartilhado, não filtrado pelo WhatsApp. Custo único (~R$15) + recarga mínima a cada 180 dias. O chip pode ser entregue ao escritório ao final do projeto — o número segue com eles independentemente da consultoria.
+
+**Para o período de teste (até comprar o chip):** número Twilio americano (+1) — funcional, sem filtro de sandbox, baixo custo mensal (~$1,15/mês descontado do crédito de avaliação).
+
+**Regras:**
+- O chip do bot **nunca** deve ter WhatsApp pessoal — manter exclusivo para Cloud API.
+- Ao registrar o número definitivo na Meta, usar **System User Token permanente** (não token temporário 24h).
+- Recarregar o chip a cada 6 meses para não perder o número.
+
+**Consequências:** Ao registrar o chip na Meta (Etapa 2 — Configuração da produção), atualizar o `phone_number_id` no nó `Enviar WhatsApp` do n8n e na URL da credencial.
+
+**Decidido por:** Gestor do projeto (2026-06-07)
 
 ---
 

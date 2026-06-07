@@ -5,7 +5,7 @@ status: rascunho
 fontes:
   - raw/interno/2026-06-03_respostas-questionario.md
   - raw/interno/2026-05-30_audio-primeiro-contato.md
-atualizado_em: "2026-06-04"
+atualizado_em: "2026-06-07"
 tags:
   - agente
   - leads
@@ -350,11 +350,13 @@ uma conversa típica usa < 5k tokens — sem risco de overflow.
 
 ## Próximos passos para este design
 
-- [ ] Definir mecanismo de CTA com a cliente (calendário / transferência / coleta) — [[decisoes-de-projeto]]
-- [ ] Redigir o system prompt v1 a partir deste design (quando CTA definido)
-- [ ] Aprovar o tom e os exemplos de resposta com a advogada
-- [ ] Configurar n8n + WhatsApp API (após verificação Meta)
-- [ ] Teste em sandbox antes de ir para número real
+- [x] Definir mecanismo de CTA — três caminhos, lead escolhe (2026-06-05)
+- [x] Redigir o system prompt v1 — ver [[system-prompt-v1]] (2026-06-05)
+- [x] Configurar n8n + Meta Cloud API — pipeline completo implementado e testado (2026-06-07)
+- [ ] Aprovar o tom e os exemplos de resposta com a advogada (primeira reunião pós-implantação)
+- [ ] Registrar número definitivo na Meta (chip pré-pago — ver [[decisoes-de-projeto]])
+- [ ] Configurar System User Token permanente ao registrar número definitivo
+- [ ] Primeira conversa real com lead — avaliar qualidade e decidir entre Haiku / Sonnet / Opus
 
 ---
 

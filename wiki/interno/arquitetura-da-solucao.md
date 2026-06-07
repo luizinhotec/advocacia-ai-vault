@@ -6,7 +6,7 @@ fontes:
   - raw/interno/2026-06-03_respostas-questionario.md
   - raw/interno/2026-06-03_curatela-ferramentas.md
   - projeto/plano-curatela-criacao.md
-atualizado_em: "2026-06-04"
+atualizado_em: "2026-06-07"
 tags:
   - arquitetura
   - tecnico
@@ -34,7 +34,9 @@ Estratégia: **integrar → coexistir → substituir, gradualmente.** O orquestr
 | Decisão | Escolhido | Status | Justificativa |
 |---------|-----------|--------|---------------|
 | Canal | WhatsApp Business API (oficial) | DECIDIDO | É por onde os contatos chegam; resolve a dor da cliente. |
-| Provedor WhatsApp API | Evolution API (Fase 1) → Meta Cloud API (avaliar no final) | DECIDIDO ✅ | **Fase 1:** Evolution API self-hosted na VPS — sem burocracia Meta, agiliza desenvolvimento. **Final do projeto:** cliente decide se migra para Meta Cloud API oficial (node n8n nativo) ou permanece com Evolution. Migração é reconfiguração de node — sem reescrever fluxos. |
+| Provedor WhatsApp API | **Meta Cloud API** | DECIDIDO ✅ IMPLEMENTADO | Evolution API descartada: IPs de VPS/data center bloqueados pela Meta. Meta Cloud API adotada antecipadamente — n8n recebe webhooks e envia via HTTPS para `graph.facebook.com`. Ver [[decisoes-de-projeto]] ADR 2026-06-07. |
+| Túnel HTTPS | ngrok (Docker na VPS) | DECIDIDO ✅ IMPLEMENTADO | Meta exige HTTPS para webhooks. ngrok expõe o n8n via túnel TLS. URL atual: `https://constrict-shuffle-helping.ngrok-free.dev` (muda ao reiniciar — estabilizar ao registrar número definitivo). |
+| Número WhatsApp | Chip pré-pago dedicado (a adquirir) | DECIDIDO | Chip físico exclusivo para o bot. Teste atual: número sandbox Meta (bloqueado no BR) e número Twilio +1. Ver [[decisoes-de-projeto]] ADR 2026-06-07. |
 | Widget no site | Fase posterior | A DECIDIR | Foco inicial é WhatsApp. |
 
 ### Orquestração e LLM
@@ -69,8 +71,11 @@ Estratégia: **integrar → coexistir → substituir, gradualmente.** O orquestr
 
 | Decisão | Escolhido | Status | Observação |
 |---------|-----------|--------|------------|
-| Onde roda o n8n | VPS dedicada da cliente (self-host Docker) | DECIDIDO ✅ | VPS provisionada no momento da implantação, em nome da cliente. Consultoria opera e mantém remotamente. Dados da cliente ficam na infra dela (LGPD — cliente é controladora). |
-| Banco de dados | PostgreSQL | DECIDIDO ✅ | CRM de substituição ao RaviCRM. Roda na VPS dedicada da cliente junto com o n8n. n8n lê/escreve nativamente via node Postgres. |
+| Onde roda o n8n | VPS dedicada da cliente (self-host Docker) | DECIDIDO ✅ IMPLEMENTADO | VPS provisionada (IP: interno — não publicar). n8n rodando em Docker. Consultoria opera e mantém remotamente. Dados da cliente ficam na infra dela (LGPD — cliente é controladora). |
+| Banco de dados | PostgreSQL | DECIDIDO ✅ IMPLEMENTADO | Rodando na VPS. Tabelas criadas: `adv_leads`, `adv_mensagens`, `adv_escaladas`. n8n lê/escreve via node Postgres (credencial ID `ghIH8LiX7JjxKTBb`). |
+| Workflow n8n principal | `ADV — Agente de Atendimento WhatsApp` | IMPLEMENTADO ✅ | ID `m1m57ANtiYdWrCjA`. Pipeline completo: webhook → normalizar → upsert lead → histórico → contexto Claude → API Claude → processar → salvar → escalar? → enviar WhatsApp. Testado e funcionando em 2026-06-07. |
+| Workflow n8n webhook verify | `ADV — Meta Webhook Verify` | IMPLEMENTADO ✅ | ID `aAYNgNGzLtHQ3ajo`. Responde ao GET de verificação da Meta com hub.challenge. |
+| Modelo LLM em produção | `claude-haiku-4-5` | IMPLEMENTADO ✅ | Haiku usado no lançamento por custo-benefício. Migrar para Sonnet ou Opus após validação com a cliente. Ver [[agente-recepcao-leads]] seção de custo. |
 | Repositório de código | GitHub, repo SEPARADO deste vault | DECIDIDO | Vault só com conhecimento; código não entra aqui (CLAUDE.md). |
 | Conta(s) Claude | Consultoria usa a própria na Fase 1 | DECIDIDO ✅ | Consultoria usa conta própria durante desenvolvimento. Conta da cliente provisionada antes da entrega final. Não é pré-requisito bloqueante. |
 
