@@ -4,7 +4,7 @@ camada: interno
 status: rascunho
 fontes:
   - raw/interno/2026-06-03_respostas-questionario.md
-atualizado_em: "2026-06-07"
+atualizado_em: "2026-06-08"
 tags:
   - dashboard
   - metricas
@@ -94,9 +94,22 @@ Disparados pelo n8n automaticamente:
 | Fase | O que entra |
 |------|------------|
 | **Agora** | Leads, Funil — estrutura base ✅ |
-| **Fase 1b** | Início redesenhado, ROI (investimento + leads + agenda), alertas de lead |
-| **Fase 2** | Processos + Petições (LegalMail), alertas de prazo judicial |
+| **Fase 1b** | Início redesenhado ✅, ROI (investimento + leads) ✅, alertas de lead ✅, Processos/Petições (stubs fase 2) ✅ |
+| **Fase 2** | Processos + Petições (LegalMail), alertas de prazo judicial, integração agenda |
 | **Fase 3** | Dados de redes sociais e vídeos (Output 2 e 3) |
+
+### Implementado em 2026-06-07
+
+| Tela | Status | Webhook n8n |
+|------|--------|-------------|
+| Início | ✅ online | GET /webhook/advocacia/inicio (ID: UkKU4BQ9EmmqRgjm) |
+| Leads | ✅ online | GET /webhook/advocacia/dashboard |
+| Funil | ✅ online | GET /webhook/advocacia/funil |
+| ROI | ✅ online (investimento hardcoded, receita pendente agenda) | usa /webhook/advocacia/inicio |
+| Processos | ✅ stub fase 2 | — |
+| Petições | ✅ stub fase 2 | — |
+
+**Sidebar final:** Início · Leads · Funil · Processos (fase 2) · Petições (fase 2) · ROI
 
 ---
 
