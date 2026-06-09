@@ -6,7 +6,7 @@ fontes:
   - raw/interno/2026-06-03_respostas-questionario.md
   - raw/interno/2026-06-03_curatela-ferramentas.md
   - projeto/plano-curatela-criacao.md
-atualizado_em: "2026-06-07"
+atualizado_em: "2026-06-09"
 tags:
   - arquitetura
   - tecnico
@@ -36,7 +36,7 @@ Estratégia: **integrar → coexistir → substituir, gradualmente.** O orquestr
 | Canal | WhatsApp Business API (oficial) | DECIDIDO | É por onde os contatos chegam; resolve a dor da cliente. |
 | Provedor WhatsApp API | **Meta Cloud API** | DECIDIDO ✅ IMPLEMENTADO | Evolution API descartada: IPs de VPS/data center bloqueados pela Meta. Meta Cloud API adotada antecipadamente — n8n recebe webhooks e envia via HTTPS para `graph.facebook.com`. Ver [[decisoes-de-projeto]] ADR 2026-06-07. |
 | Túnel HTTPS | ngrok (Docker na VPS) | DECIDIDO ✅ IMPLEMENTADO | Meta exige HTTPS para webhooks. ngrok expõe o n8n via túnel TLS. URL atual: `https://constrict-shuffle-helping.ngrok-free.dev` (muda ao reiniciar — estabilizar ao registrar número definitivo). |
-| Número WhatsApp | Chip pré-pago dedicado (a adquirir) | DECIDIDO | Chip físico exclusivo para o bot. Teste atual: número sandbox Meta (bloqueado no BR) e número Twilio +1. Ver [[decisoes-de-projeto]] ADR 2026-06-07. |
+| Número WhatsApp | Chip Vivo DDD 22 (+5522997883353) | DECIDIDO ✅ REGISTRADO | Chip adquirido e registrado na Meta em 2026-06-09. Phone Number ID: `1222830720902837`. WABA produção: `997580142980256`. Pendente: System User token permanente para habilitar envio via número real. Teste ativo usando número de teste Meta (+1-555) enquanto token de produção não é gerado. |
 | Widget no site | Fase posterior | A DECIDIR | Foco inicial é WhatsApp. |
 
 ### Orquestração e LLM
@@ -73,8 +73,8 @@ Estratégia: **integrar → coexistir → substituir, gradualmente.** O orquestr
 |---------|-----------|--------|------------|
 | Onde roda o n8n | VPS dedicada da cliente (self-host Docker) | DECIDIDO ✅ IMPLEMENTADO | VPS provisionada (IP: interno — não publicar). n8n rodando em Docker. Consultoria opera e mantém remotamente. Dados da cliente ficam na infra dela (LGPD — cliente é controladora). |
 | Banco de dados | PostgreSQL | DECIDIDO ✅ IMPLEMENTADO | Rodando na VPS. Tabelas criadas: `adv_leads`, `adv_mensagens`, `adv_escaladas`. n8n lê/escreve via node Postgres (credencial ID `ghIH8LiX7JjxKTBb`). |
-| Workflow n8n principal | `ADV — Agente de Atendimento WhatsApp` | IMPLEMENTADO ✅ | ID `m1m57ANtiYdWrCjA`. Pipeline completo: webhook → normalizar → upsert lead → histórico → contexto Claude → API Claude → processar → salvar → escalar? → enviar WhatsApp. Testado e funcionando em 2026-06-07. |
-| Workflow n8n webhook verify | `ADV — Meta Webhook Verify` | IMPLEMENTADO ✅ | ID `aAYNgNGzLtHQ3ajo`. Responde ao GET de verificação da Meta com hub.challenge. |
+| Workflow n8n principal | `ADV - Agente WhatsApp` | IMPLEMENTADO ✅ TESTADO | ID `SJ4AE328FgIw71gO`. 11 nós lineares: `Receber WhatsApp → Extrair Dados → Upsert Lead → Check Pausado → Buscar Historico → Montar Prompt → Claude API → Extrair Tags → Salvar Mensagens → Atualizar Lead → Enviar WhatsApp`. Testado com conversas reais em 2026-06-09. Tags extraídas: `[AREA]`, `[URGENCIA]`, `[STATUS]`, `[NOME]`, `[RESUMO]`, `[ESCALAR]`. |
+| Workflow n8n webhook verify | `ADV - WhatsApp Verify` | IMPLEMENTADO ✅ | ID `TQsNNmv0zFSNvbI9`. Responde ao GET de verificação da Meta com hub.challenge. Não valida token (aceita qualquer valor). |
 | Modelo LLM em produção | `claude-sonnet-4-6` | IMPLEMENTADO ✅ | Sonnet 4.6 adotado antes do lançamento com usuários reais (2026-06-07). Haiku descartado por qualidade conversacional insuficiente. Avaliar migração para Opus 4.8 após 30 dias com leads reais. Ver [[decisoes-de-projeto]] ADR 2026-06-07 e [[agente-recepcao-leads]] seção de custo. |
 | Segmentação de leads por área | `adv_leads.area_juridica` | IMPLEMENTADO ✅ | Coluna adicionada via ALTER TABLE. Claude retorna tag `[AREA:xxx]` em cada resposta → n8n extrai via regex → UPDATE na tabela. Novo node `Atualizar Area Lead` inserido no pipeline entre `Processar Resposta` e `Salvar Mensagens`. Ver [[decisoes-de-projeto]] ADR 2026-06-07. |
 | Repositório de código | `luizinhotec/advocacia-n8n` (GitHub privado) | DECIDIDO ✅ IMPLEMENTADO | Workflows n8n versionados separados do vault. Colaboradores: `luizinhotec` (owner) + `LimaDevBTC` (write). |

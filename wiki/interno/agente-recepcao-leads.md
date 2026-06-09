@@ -5,7 +5,7 @@ status: rascunho
 fontes:
   - raw/interno/2026-06-03_respostas-questionario.md
   - raw/interno/2026-05-30_audio-primeiro-contato.md
-atualizado_em: "2026-06-07"
+atualizado_em: "2026-06-09"
 tags:
   - agente
   - leads
@@ -361,11 +361,13 @@ uma conversa típica usa < 5k tokens — sem risco de overflow.
 - [x] Redigir o system prompt v1 — ver [[system-prompt-v1]] (2026-06-05)
 - [x] Configurar n8n + Meta Cloud API — pipeline completo implementado e testado (2026-06-07)
 - [x] Migrar modelo para `claude-sonnet-4-6` — qualidade conversacional adequada para leads reais (2026-06-07)
-- [x] Segmentação por área jurídica — tag `[AREA:xxx]` + coluna `adv_leads.area_juridica` + node `Atualizar Area Lead` (2026-06-07)
-- [ ] Aprovar o tom e os exemplos de resposta com a advogada (primeira reunião pós-implantação)
-- [ ] Registrar número definitivo na Meta (chip pré-pago — ver [[decisoes-de-projeto]])
-- [ ] Configurar System User Token permanente ao registrar número definitivo
-- [ ] Primeira conversa real com lead — avaliar qualidade e decidir entre Sonnet / Opus
+- [x] Segmentação por área jurídica — tag `[AREA:xxx]` + coluna `adv_leads.area_juridica` (2026-06-07)
+- [x] Registrar número definitivo na Meta — chip Vivo DDD 22 +5522997883353, Phone ID `1222830720902837` (2026-06-09)
+- [x] Teste end-to-end com conversas reais — agente respondeu corretamente em cenários trabalhista, família e previdenciário (2026-06-09)
+- [ ] Configurar **System User Token permanente** para o número real `1222830720902837` (atualmente usando número de teste Meta)
+- [ ] Publicar app `advocacia-wp` na Meta para receber mensagens de qualquer usuário (ou configurar como app privado)
+- [ ] Aprovar o tom e os exemplos de resposta com a advogada — decidir sobre emojis (atualmente Claude usa 😊, 🤝, 😔 espontaneamente)
+- [ ] Primeira conversa real com lead de campanha — avaliar qualidade e decidir Sonnet / Opus
 
 ---
 
