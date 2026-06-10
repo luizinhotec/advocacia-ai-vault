@@ -6,7 +6,7 @@ fontes:
   - raw/interno/2026-05-30_anuncio-vaga-consultor-ia.md
   - raw/interno/2026-05-30_audio-primeiro-contato.md
   - raw/interno/2026-06-03_respostas-questionario.md
-atualizado_em: "2026-06-07"
+atualizado_em: "2026-06-10"
 tags:
   - decisoes
   - projeto
@@ -300,7 +300,7 @@ Obter acesso às docs ao contratar o plano.
 
 ---
 
-### [2026-06-05] CTA do agente — três caminhos, lead escolhe
+### [2026-06-05] CTA do agente — três caminhos, lead escolhe ⚠️ SUPERSEDIDA
 
 **Contexto:** O system prompt v1 tinha três opções de CTA (link de calendário, transferência para humano, coleta de dados para retorno) mas exigia escolher uma antes de produção.
 
@@ -309,6 +309,8 @@ Obter acesso às docs ao contratar o plano.
 **Consequências:** System prompt atualizado para v1.1 — seção Estágio 5 reescrita. Nenhuma opção é descartada em produção.
 
 **Decidido por:** Gestor do projeto (2026-06-05)
+
+> ⚠️ **SUPERSEDIDA pela ADR 2026-06-10 "CTA simplificado — encaminhamento direto".** Os três caminhos foram descartados em teste porque nenhum existia na prática (links e equipe não configurados). Agente passou a encaminhar diretamente para especialista via tag [ESCALAR].
 
 ---
 
@@ -446,6 +448,106 @@ Obter acesso às docs ao contratar o plano.
 - Escalonamento pode ser direcionado ao profissional da especialidade correta
 
 **Decidido por:** Gestor do projeto (2026-06-07)
+
+---
+
+---
+
+### [2026-06-09] Número WhatsApp de produção ativo — chip Vivo DDD22
+
+**Contexto:** O chip pré-pago Vivo DDD22 (+5522997883353) foi adquirido e precisava ser registrado na Meta e configurado no n8n.
+
+**Decisão:** Chip registrado na Meta. System User Token permanente gerado e configurado no n8n. O bot agora opera pelo número real, não pelo sandbox.
+
+**O que foi implementado:**
+- Phone Number ID: `1222830720902837`
+- WABA ID: `997580142980256` (Structa Tecnologia)
+- System User Token: permanente, sem expiração (token completo na VPS)
+- App Meta: `advocacia-wp` (ID `1322412393370846`) — Development Mode
+- Webhook configurado em `https://constrict-shuffle-helping.ngrok-free.dev/webhook/whatsapp`
+
+**Limitação Development Mode:** bot só envia para números aprovados como testers. Mensagens business-initiated bloqueadas sem pagamento cadastrado.
+
+**Decidido por:** Gestor do projeto (2026-06-09)
+
+---
+
+### [2026-06-09] Escalação por área jurídica — adv_contatos + roteamento automático
+
+**Contexto:** Quando o agente qualifica um lead com [ESCALAR], precisava de um destino real — um advogado responsável pela área identificada. Sem isso, os leads qualificados ficavam sem notificação.
+
+**Decisão:** Criar tabela `adv_contatos` no PostgreSQL e implementar roteamento automático por área. O n8n busca o advogado da área do lead, registra a escalada em `adv_escaladas` e envia notificação WhatsApp para ele.
+
+**Tabela `adv_contatos` (estado atual):**
+| id | Nome | Número | Áreas |
+|----|------|--------|-------|
+| 1 | Fabricio | +5522988163547 | trabalhista |
+| 2 | Dr. Gustavo | +5521987939454 | trabalhista, familia |
+| 3 | Dr. Edson | +5521979150860 | criminal, civil |
+| 4 | Dra. Hyvana | +5522998994260 | todas (fallback) |
+
+**Tabela `adv_escaladas`:** registra cada escalada com status `pendente` → `aceito` / `rejeitado`.
+
+**Fluxo de escalação (nós n8n):** `Check Escalar` TRUE → `Buscar Advogado Area` → `Registrar Escalada` → `Montar Msg Advogado` → `Enviar WP Advogado`
+
+**Fluxo de resposta do advogado:** advogado responde ACEITAR/OK → n8n detecta, marca escalada como `aceito`, notifica advogado e cliente.
+
+**bot_pausado:** quando escalada registrada, `adv_leads.bot_pausado = true`. O bot não processa mais mensagens do lead — aguarda o advogado assumir. Limpo pelo webhook de reset de testes.
+
+**Decidido por:** Gestor do projeto (2026-06-09)
+
+---
+
+### [2026-06-10] CTA simplificado — encaminhamento direto sem 3 opções
+
+**Contexto:** Teste com lead real revelou que o Estágio 5 com três opções (calendário, equipe, coleta de dados) era fictício — nenhuma das opções tinha implementação real. O agente apresentava links que não existiam, causando experiência ruim.
+
+**Decisão:** Eliminar as três opções. O agente encaminha diretamente: informa o lead que o especialista vai entrar em contato via WhatsApp e inclui [ESCALAR] nas tags. Sem link de calendário, sem "conectar com equipe", sem formulário.
+
+**Mensagem padrão de encaminhamento:**
+> "[Nome], vou registrar sua situação e encaminhar para o nosso especialista em direito [área]. Ele vai entrar em contato com você em breve pelo WhatsApp. 🙏"
+
+**Tags obrigatórias:** `[NOME:X] [AREA:X] [URGENCIA:X] [STATUS:qualificado] [RESUMO:X] [ESCALAR]`
+
+**Consequências:** System prompt atualizado para v2 (ver [[system-prompt-v1]]). A decisão de implementar calendário (Cal.com / Google) permanece em aberto como CTA de fase posterior — não bloqueante para o lançamento.
+
+**Decidido por:** Gestor do projeto (2026-06-10)
+
+---
+
+### [2026-06-10] Prompt máx 3 perguntas — correção de loop conversacional
+
+**Contexto:** Em testes, o agente entrava em loop fazendo variações da mesma pergunta indefinidamente sem avançar para o encaminhamento. Lead tinha que responder 6–8 mensagens para ser qualificado.
+
+**Decisão:** Adicionar regra explícita no system prompt: máximo 3 perguntas de qualificação. Após 3 perguntas OU quando tiver nome + área + situação básica, avançar direto para Etapa 4.
+
+**Gatilhos de CTA imediato adicionados:**
+- Lead diz "quero resolver", "me ajuda", "o que faço", "quero contratar"
+- Mesma informação confirmada 2+ vezes
+- Já tem nome + área + situação básica
+
+**Resultado:** qualificação acontece em 3–4 trocas. Testado com leads de trabalhista, criminal e família.
+
+**Decidido por:** Gestor do projeto (2026-06-10)
+
+---
+
+### [2026-06-10] Resposta bot_pausado dinâmica via Claude
+
+**Contexto:** Quando `bot_pausado = true`, o bot respondia com uma mensagem estática fixa independentemente do que o cliente escrevesse. Resultado: "Seu caso está com o especialista" repetido identicamente para "ola" e para "ainda não me ligaram" — má experiência.
+
+**Decisão:** Substituir o nó estático (nP) por 3 nós que passam a mensagem pelo Claude com um prompt de "espera" contextualizado. O Claude gera respostas únicas por mensagem, reconhecendo o que o lead escreveu.
+
+**Nós implementados:**
+- `nQ` Montar Prompt Pausado (Code): monta system prompt de espera com nome e área do lead
+- `nR` Claude Pausado (HTTP Request): chama Claude Sonnet 4.6 com max_tokens=512
+- `nS` Enviar WP Pausado (HTTP Request): envia resposta ao WhatsApp do lead
+
+**System prompt de espera (essência):** "Lead já qualificado e encaminhado para especialista em [área]. NÃO faça novas perguntas. Reconheça o que o cliente escreveu. Reafirme que o especialista vai entrar em contato. 1–2 frases."
+
+**Resultado observado:** "Ola" → resposta acolhedora. "Ainda não me ligaram" → empatia + reafirmação personalizada. Testado e aprovado em 2026-06-10.
+
+**Decidido por:** Gestor do projeto (2026-06-10)
 
 ---
 

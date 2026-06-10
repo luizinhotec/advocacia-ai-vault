@@ -36,7 +36,7 @@ Estratégia: **integrar → coexistir → substituir, gradualmente.** O orquestr
 | Canal | WhatsApp Business API (oficial) | DECIDIDO | É por onde os contatos chegam; resolve a dor da cliente. |
 | Provedor WhatsApp API | **Meta Cloud API** | DECIDIDO ✅ IMPLEMENTADO | Evolution API descartada: IPs de VPS/data center bloqueados pela Meta. Meta Cloud API adotada antecipadamente — n8n recebe webhooks e envia via HTTPS para `graph.facebook.com`. Ver [[decisoes-de-projeto]] ADR 2026-06-07. |
 | Túnel HTTPS | ngrok (Docker na VPS) | DECIDIDO ✅ IMPLEMENTADO | Meta exige HTTPS para webhooks. ngrok expõe o n8n via túnel TLS. URL atual: `https://constrict-shuffle-helping.ngrok-free.dev` (muda ao reiniciar — estabilizar ao registrar número definitivo). |
-| Número WhatsApp | Chip Vivo DDD 22 (+5522997883353) | DECIDIDO ✅ REGISTRADO | Chip adquirido e registrado na Meta em 2026-06-09. Phone Number ID: `1222830720902837`. WABA produção: `997580142980256`. Pendente: System User token permanente para habilitar envio via número real. Teste ativo usando número de teste Meta (+1-555) enquanto token de produção não é gerado. |
+| Número WhatsApp | Chip Vivo DDD 22 (+5522997883353) | DECIDIDO ✅ ATIVO | Chip registrado na Meta em 2026-06-09. Phone Number ID: `1222830720902837`. WABA: `997580142980256` (Structa Tecnologia). System User Token permanente configurado no n8n. Bot operando pelo número real. App em Development Mode — testers: Dr. Edson (+5521979150860), Dr. Gustavo (+5521987939454). Dra. Hyvana pendente (sem acesso SMS para verificação). |
 | Widget no site | Fase posterior | A DECIDIR | Foco inicial é WhatsApp. |
 
 ### Orquestração e LLM
@@ -73,10 +73,13 @@ Estratégia: **integrar → coexistir → substituir, gradualmente.** O orquestr
 |---------|-----------|--------|------------|
 | Onde roda o n8n | VPS dedicada da cliente (self-host Docker) | DECIDIDO ✅ IMPLEMENTADO | VPS provisionada (IP: interno — não publicar). n8n rodando em Docker. Consultoria opera e mantém remotamente. Dados da cliente ficam na infra dela (LGPD — cliente é controladora). |
 | Banco de dados | PostgreSQL | DECIDIDO ✅ IMPLEMENTADO | Rodando na VPS. Tabelas criadas: `adv_leads`, `adv_mensagens`, `adv_escaladas`. n8n lê/escreve via node Postgres (credencial ID `ghIH8LiX7JjxKTBb`). |
-| Workflow n8n principal | `ADV - Agente WhatsApp` | IMPLEMENTADO ✅ TESTADO | ID `SJ4AE328FgIw71gO`. 11 nós lineares: `Receber WhatsApp → Extrair Dados → Upsert Lead → Check Pausado → Buscar Historico → Montar Prompt → Claude API → Extrair Tags → Salvar Mensagens → Atualizar Lead → Enviar WhatsApp`. Testado com conversas reais em 2026-06-09. Tags extraídas: `[AREA]`, `[URGENCIA]`, `[STATUS]`, `[NOME]`, `[RESUMO]`, `[ESCALAR]`. |
+| Workflow n8n principal | `ADV - Agente WhatsApp` | IMPLEMENTADO ✅ TESTADO | ID `SJ4AE328FgIw71gO`. **28 nós** — dois fluxos paralelos: **cliente** e **advogado**. Ver diagrama abaixo. Testado com leads reais (trabalhista, criminal, família) em 2026-06-09/10. |
 | Workflow n8n webhook verify | `ADV - WhatsApp Verify` | IMPLEMENTADO ✅ | ID `TQsNNmv0zFSNvbI9`. Responde ao GET de verificação da Meta com hub.challenge. Não valida token (aceita qualquer valor). |
 | Modelo LLM em produção | `claude-sonnet-4-6` | IMPLEMENTADO ✅ | Sonnet 4.6 adotado antes do lançamento com usuários reais (2026-06-07). Haiku descartado por qualidade conversacional insuficiente. Avaliar migração para Opus 4.8 após 30 dias com leads reais. Ver [[decisoes-de-projeto]] ADR 2026-06-07 e [[agente-recepcao-leads]] seção de custo. |
-| Segmentação de leads por área | `adv_leads.area_juridica` | IMPLEMENTADO ✅ | Coluna adicionada via ALTER TABLE. Claude retorna tag `[AREA:xxx]` em cada resposta → n8n extrai via regex → UPDATE na tabela. Novo node `Atualizar Area Lead` inserido no pipeline entre `Processar Resposta` e `Salvar Mensagens`. Ver [[decisoes-de-projeto]] ADR 2026-06-07. |
+| Segmentação de leads por área | `adv_leads.area_juridica` | IMPLEMENTADO ✅ | Coluna adicionada via ALTER TABLE. Claude retorna tag `[AREA:xxx]` em cada resposta → n8n extrai via regex → UPDATE na tabela. Ver [[decisoes-de-projeto]] ADR 2026-06-07. |
+| Diagrama do workflow (28 nós) | — | — | **Fluxo cliente:** `Receber WP → Extrair Dados → Check Advogado DB → Check Advogado` [FALSE] `→ Upsert Lead → Check Pausado` [TRUE] `→ Montar Prompt Pausado → Claude Pausado → Enviar WP Pausado` / [FALSE] `→ Buscar Historico → Montar Prompt → Claude API → Extrair Tags → Salvar Mensagens → Atualizar Lead → Enviar WhatsApp → Check Escalar` [TRUE] `→ Buscar Advogado Area → Registrar Escalada → Montar Msg Advogado → Enviar WP Advogado`. **Fluxo advogado:** `Check Advogado` [TRUE] `→ Buscar Escalada Pendente → Check Resposta Adv` [ACEITAR] `→ Aceitar Escalada → Notif Adv Aceite → Notif Cliente Aceite` / [REJEITAR] `→ Rejeitar Redirecionar → Notif Hyvana Rejeicao`. |
+| Escalação por área | `adv_contatos` + `adv_escaladas` | IMPLEMENTADO ✅ | Tabela `adv_contatos`: Fabricio (trabalhista), Dr. Gustavo (trabalhista/família), Dr. Edson (criminal/civil), Dra. Hyvana (fallback). `adv_escaladas` registra cada escalada. `bot_pausado=true` pausa o bot durante atendimento humano. Ver [[decisoes-de-projeto]] ADR 2026-06-09. |
+| Resposta bot_pausado | Claude dinâmico (nQ/nR/nS) | IMPLEMENTADO ✅ | Substituiu mensagem estática. Claude gera resposta contextual por mensagem quando lead está com advogado. Ver [[decisoes-de-projeto]] ADR 2026-06-10. |
 | Repositório de código | `luizinhotec/advocacia-n8n` (GitHub privado) | DECIDIDO ✅ IMPLEMENTADO | Workflows n8n versionados separados do vault. Colaboradores: `luizinhotec` (owner) + `LimaDevBTC` (write). |
 | Repositório de conhecimento | `luizinhotec/advocacia-ai-vault` (GitHub privado) | DECIDIDO ✅ IMPLEMENTADO | Este vault. Colaboradores: `luizinhotec` (owner) + `LimaDevBTC` (write). |
 | Conta(s) Claude | Consultoria usa a própria na Fase 1 | DECIDIDO ✅ | Consultoria usa conta própria durante desenvolvimento. Conta da cliente provisionada antes da entrega final. Não é pré-requisito bloqueante. |
@@ -117,9 +120,17 @@ Ver nota dedicada: [[custos-e-orcamento]]
 
 ## O que falta decidir (resumo)
 
-- Cliente: infra (máquinas/contas Claude), agenda, confirmar Astrea, validar eliminação do Ravi.
-- Fornecedor: API do Astrea (candidato a substituição na Fase 2).
-- Projeto: ferramenta de agendamento, hospedagem do n8n, build vs buy do conteúdo/avatar.
+**Fase 1 (agente WhatsApp) — pendências:**
+- Adicionar Dra. Hyvana como tester Meta (precisa acesso ao cel para SMS de verificação)
+- Cadastrar forma de pagamento na Meta para desbloquear envio proativo de mensagens (atualmente advogados precisam enviar primeiro para abrir janela 24h)
+- Definir solução de agendamento (Cal.com / Google Calendar) para CTA final
+- Migrar app Meta de Development Mode para produção antes de atender clientes reais
+- Estabilizar URL ngrok (plano pago ou domínio fixo) — URL muda ao reiniciar container
+
+**Fases 2/3 — ainda não decidido:**
+- Cliente: contas Claude pagas, agenda, confirmar Astrea, validar eliminação do Ravi
+- Fornecedor: API do Astrea (candidato a substituição na Fase 2)
+- Projeto: build vs buy do conteúdo/avatar
 
 ## Notas relacionadas
 

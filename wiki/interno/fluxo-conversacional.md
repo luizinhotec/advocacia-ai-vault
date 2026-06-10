@@ -4,7 +4,7 @@ camada: interno
 status: rascunho
 fontes:
   - raw/interno/2026-06-03_respostas-questionario.md
-atualizado_em: "2026-06-04"
+atualizado_em: "2026-06-10"
 tags:
   - agente
   - fluxo
@@ -22,37 +22,39 @@ Define como o agente se comporta em cada etapa da conversa — do primeiro conta
 
 ---
 
-## Estrutura geral do fluxo
+## Estrutura geral do fluxo ✅ IMPLEMENTADO
 
 ```
-1. ABERTURA
-   Usuário envia primeira mensagem
+1. ACOLHIMENTO
+   Cumprimento caloroso + pergunta aberta (nunca menu)
         ↓
-2. IDENTIFICAÇÃO DE INTENÇÃO
-   O que o usuário quer? (dúvida / agendamento / informação)
+2. QUALIFICAÇÃO (máx 3 perguntas)
+   Nome + área jurídica + situação básica
+   CRÍTICO: não repetir perguntas. Avançar ao ter nome + área + situação.
         ↓
-3. RESPOSTA
-   Agente responde com base no vault (wiki/publico/ — status: revisado)
+3. VALIDAÇÃO (1 mensagem)
+   Mostrar que o lead veio ao lugar certo, sem prometer resultado
         ↓
 4. ENCAMINHAMENTO
-   Agente direciona para agendamento ou canal de contato
+   "[Nome], vou registrar e encaminhar para o especialista em [área].
+    Ele vai entrar em contato em breve. 🙏"
+   + tags [NOME][AREA][URGENCIA][STATUS:qualificado][RESUMO][ESCALAR]
         ↓
-5. ENCERRAMENTO
-   Agente conclui e registra a interação
+5. bot_pausado = true
+   Bot responde com empatia contextual (via Claude) enquanto advogado atende.
+   Quando advogado responde ACEITAR: notificação ao cliente + escalada marcada como aceita.
 ```
 
 ---
 
-## Abertura
+## Abertura ✅ IMPLEMENTADO
 
-**Mensagem de boas-vindas:** *(a redigir — tom acolhedor, sem promessas)*
+Agente responde 24h. Não há menu de opções — abertura sempre com pergunta aberta.
 
-Elementos obrigatórios:
-- Identificar que é um atendimento automatizado por IA
-- Informar o que o agente pode e não pode fazer
-- Oferecer opções claras de navegação (menu ou linguagem natural)
+Exemplo de resposta para "oi":
+> "Olá! Seja bem-vindo ao *Ribeiro Abreu Advogados* 👋 Pode me contar o que está acontecendo? Estou aqui pra te ajudar."
 
-**Horário de funcionamento do agente:** *(a definir — 24h? Apenas horário comercial?)*
+O agente se identifica como assistente virtual quando perguntado diretamente sobre ser robô.
 
 ---
 
@@ -70,45 +72,56 @@ Elementos obrigatórios:
 
 ---
 
-## Escalada para humano
+## Escalada para humano ✅ IMPLEMENTADO
 
 **Quando escalar:**
-- [ ] Usuário solicita explicitamente falar com humano
-- [ ] Agente não reconhece a intenção após *(a definir — ex: 2 tentativas)*
-- [ ] Assunto envolve urgência explícita (ex: "preciso de socorro", "processo urgente")
-- [ ] *(outros gatilhos a definir)*
+- Lead qualificado após 3 perguntas → tag [ESCALAR] automática
+- Lead preso / em delegacia / situação de crise → imediato, sem qualificação
+- Lead menciona prazo judicial → imediato
+- Lead pede falar com humano → imediato
 
-**Como escalar:**
-- Canal de escalada: *(a definir — WhatsApp pessoal da advogada / outro)*
-- Notificação: *(a definir — aviso automático à advogada?)*
-- O usuário é avisado que um humano irá atender? *(sim/não — a definir)*
+**Como escalar (n8n):**
+1. Claude inclui [ESCALAR] nas tags
+2. n8n busca advogado pela área em `adv_contatos`
+3. Registra em `adv_escaladas` com status `pendente`
+4. Envia notificação WhatsApp para o advogado
+5. Define `bot_pausado = true`
 
----
+**O lead é avisado:** sim — recebe mensagem de encaminhamento antes das tags.
+**Notificação:** automática via WhatsApp para o advogado da área.
+**Advogado responde ACEITAR:** escalada marcada `aceito`, cliente notificado.
 
-## Fallback (quando o agente não sabe responder)
-
-*(a definir — ex: "Não tenho essa informação. Posso te ajudar a agendar uma consulta onde a advogada poderá responder diretamente.")*
-
-**Regra absoluta:** O agente nunca improvisa orientação jurídica. Se não souber, redireciona.
-
----
-
-## Encerramento
-
-**Mensagem de encerramento:** *(a redigir)*
-
-**O agente pergunta se o usuário tem mais dúvidas antes de encerrar?** *(a definir — sim/não)*
+Ver tabela de advogados por área em [[agente-recepcao-leads]].
 
 ---
 
-## Histórico de conversa
+## Fallback (quando o agente não sabe responder) ✅ IMPLEMENTADO
 
-**As conversas são salvas?** *(a definir — sim para análise / não por privacidade)*
+O agente nunca improvisa orientação jurídica. Se a área não for reconhecida ou a situação for ambígua, avança com empatia e encaminha para consulta.
 
-**Se sim:**
-- Onde ficam armazenadas? *(a definir)*
-- Por quanto tempo? *(a definir — LGPD: mínimo necessário)*
-- Quem tem acesso? *(a definir)*
+Regra absoluta: qualquer dúvida sobre o mérito do caso → redirecionar para consulta, nunca responder.
+
+---
+
+## Encerramento ✅ IMPLEMENTADO
+
+Após encaminhamento (`bot_pausado = true`): o agente responde com mensagens contextuais de "seu caso está com o especialista" geradas pelo Claude. Não há encerramento formal — conversa fica aberta para o advogado assumir.
+
+---
+
+## Histórico de conversa ✅ IMPLEMENTADO
+
+**Conversas são salvas:** sim — PostgreSQL na VPS da cliente (controladora dos dados).
+
+| Tabela | Conteúdo | Retenção |
+|--------|----------|----------|
+| `adv_leads` | Perfil do lead: nome, área, resumo, status, bot_pausado | Indefinido (cliente decide) |
+| `adv_mensagens` | Histórico completo: role, conteúdo, timestamp, modelo LLM | Indefinido (cliente decide) |
+| `adv_escaladas` | Registro de escalações: área, advogado, status, timestamps | Indefinido (cliente decide) |
+
+**Quem tem acesso:** Dra. Hyvana (via dashboard) e consultoria (operação). Leads nunca entram no vault Git — LGPD.
+
+**Nova sessão:** inatividade > 24h reinicia a qualificação (lead retorna como `novo`).
 
 ---
 

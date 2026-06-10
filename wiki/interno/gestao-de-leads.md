@@ -4,7 +4,7 @@ camada: interno
 status: rascunho
 fontes:
   - raw/interno/2026-06-03_respostas-questionario.md
-atualizado_em: "2026-06-04"
+atualizado_em: "2026-06-10"
 tags:
   - leads
   - crm
@@ -20,15 +20,14 @@ Define como um lead (contato inicial) é rastreado desde o primeiro contato até
 
 ## Fontes de entrada de leads
 
-| Canal | Ativo hoje? | Vai integrar com o agente? |
-|-------|------------|---------------------------|
-| WhatsApp (número pessoal) | *(a confirmar)* | *(a decidir)* |
-| WhatsApp Business (novo) | *(a implementar)* | Sim |
-| Instagram (DM / comentário) | *(a confirmar)* | *(a decidir)* |
-| LinkedIn | *(a confirmar)* | *(a decidir)* |
-| Site (formulário de contato) | *(a confirmar)* | *(a decidir)* |
-| Indicação (offline) | *(a confirmar)* | Não — entrada manual |
-| Google Meu Negócio | *(a confirmar)* | Não |
+| Canal | Status | Integrado com o agente? |
+|-------|--------|--------------------------|
+| WhatsApp Business +5522997883353 | ✅ ATIVO (Meta Cloud API, Development Mode) | Sim — canal principal |
+| Instagram (DM / comentário) | *(a decidir — Fase 2)* | Não (ainda) |
+| LinkedIn | *(a decidir — Fase 2)* | Não (ainda) |
+| Site (formulário de contato) | *(a decidir — Fase 2)* | Não (ainda) |
+| Indicação (offline) | Manual | Não — entrada manual no DB |
+| Google Meu Negócio | Não integrado | Não |
 
 ---
 
@@ -66,18 +65,28 @@ Contratação
 
 ---
 
-## O que registrar por lead
+## O que registrar por lead ✅ IMPLEMENTADO
 
-*(campos mínimos — a validar com a advogada)*
+Tabela `adv_leads` (PostgreSQL, VPS da cliente):
 
-- [ ] Data do primeiro contato
-- [ ] Canal de origem
-- [ ] Assunto / área jurídica de interesse
-- [ ] Status atual (contato > agendado > consultado > contratado > perdido)
-- [ ] Data da consulta (se agendada)
-- [ ] Motivo de perda (se não converteu)
+| Campo | Tipo | Fonte |
+|-------|------|-------|
+| `id` | serial PK | automático |
+| `telefone` | varchar | Meta Webhook (from) |
+| `primeiro_nome` | varchar | Claude extrai via tag [NOME] |
+| `area_juridica` | varchar | Claude extrai via tag [AREA] |
+| `resumo_situacao` | text | Claude extrai via tag [RESUMO] |
+| `urgencia` | varchar | Claude extrai via tag [URGENCIA] |
+| `status_funil` | varchar | novo → qualificado → agendado / perdido |
+| `bot_pausado` | boolean | true quando advogado assumiu |
+| `criado_em` | timestamp | automático |
+| `atualizado_em` | timestamp | automático |
 
-**O que NÃO registrar:** nome completo, CPF, número de processo, valores de honorários de casos concretos — LGPD.
+Tabela `adv_mensagens`: histórico completo de conversas (role, conteúdo, modelo LLM, timestamp).
+
+Tabela `adv_escaladas`: cada escalação (lead_id, advogado_id, área, resumo, urgência, status, timestamps).
+
+**O que NÃO registrar:** CPF, endereço, número de processo, valores de honorários — LGPD. Esses dados nunca entram no vault Git.
 
 ---
 

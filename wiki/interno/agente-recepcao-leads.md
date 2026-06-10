@@ -5,7 +5,7 @@ status: rascunho
 fontes:
   - raw/interno/2026-06-03_respostas-questionario.md
   - raw/interno/2026-05-30_audio-primeiro-contato.md
-atualizado_em: "2026-06-09"
+atualizado_em: "2026-06-10"
 tags:
   - agente
   - leads
@@ -165,42 +165,27 @@ aplicável à situação descrita.
 
 ---
 
-### Estágio 4 — Ponte para a consulta (1–2 trocas)
+### Estágio 4 — Encaminhamento direto (1 troca) ✅ IMPLEMENTADO
 
-**Objetivo:** tornar o agendamento o próximo passo óbvio, não uma venda.
+**Objetivo:** quando o lead está qualificado (nome + área + situação), encaminhar para o especialista sem oferecer opções.
 
-**Enquadramento correto:**
-> "O próximo passo seria uma conversa rápida com a Dra. Hyvana — ela consegue analisar
-> a situação específica do seu caso e já te dar uma orientação clara sobre como seguir."
+**Mensagem padrão:**
+> "[Nome], vou registrar sua situação e encaminhar para o nosso especialista em direito [área]. Ele vai entrar em contato com você em breve pelo WhatsApp. 🙏"
 
-**Enquadramento errado:**
-> "Gostaria de contratar nossos serviços?" ❌
-> "Deseja agendar uma consulta paga?" ❌
+**O que acontece nos bastidores (n8n):**
+1. Claude inclui `[ESCALAR]` nas tags
+2. n8n detecta a tag, busca advogado com a área em `adv_contatos`
+3. Registra escalada em `adv_escaladas` com status `pendente`
+4. Envia notificação WhatsApp para o advogado responsável
+5. Define `bot_pausado = true` no lead — bot não responde mais até advogado assumir
 
-**Regra:** a consulta é apresentada como **obter clareza**, não como contratar advogado.
+**Mensagem para o advogado:**
+> "📋 Novo caso para você — [Área]: [Resumo]. Lead: [Nome] ([telefone])."
+> Responda ACEITAR para confirmar.
 
----
+**Estado do lead após escalação:** `status_funil = qualificado`, `bot_pausado = true`.
 
-### Estágio 5 — CTA e confirmação (1 troca)
-
-**⚠️ DECISÃO ABERTA** — o mecanismo de conversão ainda não foi definido com a cliente.
-Ver [[decisoes-de-projeto]]. Opções documentadas abaixo.
-
-#### Opção A — Link de calendário
-> "Posso te passar o link de agendamento direto — você escolhe o horário que fica melhor
-> para você. Fica mais prático assim. 😊"
-> [link do calendário]
-
-#### Opção B — Transferência para humano
-> "Deixa eu te passar para a equipe do escritório agora para a gente já verificar um
-> horário disponível. Um segundo!"
-> [n8n transfere a conversa para o número humano]
-
-#### Opção C — Coleta de dados para contato
-> "Para a gente entrar em contato e agendar, preciso só do seu nome e qual o melhor
-> horário para ligar. Como posso te chamar?"
-
-**A opção escolhida define o final do system prompt. Decidir na reunião com a cliente.**
+> **Nota:** A funcionalidade de calendário (Cal.com / Google Calendar) está pendente como evolução. Enquanto não implementada, o encaminhamento direto é o CTA de produção. Ver [[decisoes-de-projeto]] ADR 2026-06-10.
 
 ---
 
@@ -232,22 +217,28 @@ Ver [[decisoes-de-projeto]]. Opções documentadas abaixo.
 
 ---
 
-## Escalada para humano
+## Escalada para humano ✅ IMPLEMENTADO
 
 Escalar **imediatamente** quando:
 
-- [ ] Lead menciona prazo judicial ("tenho X dias", "perco o prazo", "audiência marcada")
-- [ ] Lead menciona situação de saúde grave ligada ao caso ("meu pai está internado", "preciso
-  do benefício para me tratar")
-- [ ] Lead solicita explicitamente falar com pessoa
-- [ ] Agente não consegue entender a situação após 3 trocas
-- [ ] Tom emocional muito elevado (choro, desespero, raiva intensa)
+- [x] Lead menciona prazo judicial ("tenho X dias", "perco o prazo", "audiência marcada") → [URGENCIA:alta]
+- [x] Lead menciona situação de saúde grave ligada ao caso
+- [x] Lead solicita explicitamente falar com pessoa
+- [x] Agente não entende a situação após 3 trocas
+- [x] Tom emocional muito elevado (desespero, raiva intensa)
+- [x] Lead preso, em delegacia, em crise → escalação imediata sem qualificação completa
 
-**Canal de escalada:** *(a preencher — número da advogada ou da secretária)*
+**Canais de escalada (por área):**
+| Área | Advogado | Número |
+|------|----------|--------|
+| trabalhista, família | Dr. Gustavo | +5521987939454 |
+| criminal, civil | Dr. Edson | +5521979150860 |
+| todas (fallback) | Dra. Hyvana | +5522998994260 |
 
 **O que dizer ao escalar:**
-> "Esse assunto merece atenção direta da nossa equipe. Deixa eu te colocar em contato
-> com eles agora — pode aguardar um instante?"
+> "Esse assunto precisa de atenção imediata. Vou te colocar em contato direto com nossa equipe agora. Pode aguardar um instante? 🙏"
+
+**Comportamento do bot após escalação:** `bot_pausado = true` — o bot responde com mensagens dinâmicas de "seu caso está com o especialista" (via Claude, não mensagem estática). Ver [[decisoes-de-projeto]] ADR 2026-06-10.
 
 ---
 
@@ -363,11 +354,17 @@ uma conversa típica usa < 5k tokens — sem risco de overflow.
 - [x] Migrar modelo para `claude-sonnet-4-6` — qualidade conversacional adequada para leads reais (2026-06-07)
 - [x] Segmentação por área jurídica — tag `[AREA:xxx]` + coluna `adv_leads.area_juridica` (2026-06-07)
 - [x] Registrar número definitivo na Meta — chip Vivo DDD 22 +5522997883353, Phone ID `1222830720902837` (2026-06-09)
-- [x] Teste end-to-end com conversas reais — agente respondeu corretamente em cenários trabalhista, família e previdenciário (2026-06-09)
-- [ ] Configurar **System User Token permanente** para o número real `1222830720902837` (atualmente usando número de teste Meta)
-- [ ] Publicar app `advocacia-wp` na Meta para receber mensagens de qualquer usuário (ou configurar como app privado)
-- [ ] Aprovar o tom e os exemplos de resposta com a advogada — decidir sobre emojis (atualmente Claude usa 😊, 🤝, 😔 espontaneamente)
+- [x] Teste end-to-end com conversas reais — trabalhista, criminal, família testados (2026-06-09/10)
+- [x] System User Token permanente configurado (2026-06-09)
+- [x] Escalação por área implementada — adv_contatos, adv_escaladas, bot_pausado (2026-06-09)
+- [x] CTA simplificado — encaminhamento direto sem opções fictícias (2026-06-10)
+- [x] Máx 3 perguntas — loop conversacional corrigido (2026-06-10)
+- [x] bot_pausado com resposta dinâmica via Claude (2026-06-10)
+- [ ] Adicionar Dra. Hyvana como tester Meta (precisa acesso ao cel para SMS)
+- [ ] Publicar app `advocacia-wp` na Meta (sair de Development Mode) antes de atender clientes reais
+- [ ] Aprovar tom e exemplos com a advogada presencialmente
 - [ ] Primeira conversa real com lead de campanha — avaliar qualidade e decidir Sonnet / Opus
+- [ ] Implementar CTA de agendamento (Cal.com / Google Calendar)
 
 ---
 
